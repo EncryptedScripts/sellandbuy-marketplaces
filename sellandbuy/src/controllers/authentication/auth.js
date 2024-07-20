@@ -92,6 +92,8 @@ app.post("/login", async (req, res) => {
     return res.redirect("/login");
   }
 
+  const isPasswordValid = await bcrypt.compare(password, user.password);
+
   if (!isPasswordValid) {
     req.flash("error", "Invalid password!");
     return res.redirect("/login");
@@ -241,9 +243,5 @@ app.get(
     res.redirect("/profile");
   }
 );
-
-app.get("/profile", authenticateSession, (req, res) => {
-  res.render("profile", { user: req.user });
-});
 
 module.exports = app;

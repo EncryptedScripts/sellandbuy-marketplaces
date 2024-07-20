@@ -45,4 +45,18 @@ app.get("/profile", authenticateSession, async (req, res) => {
   }
 });
 
+app.get("/profile/:id", authenticateSession, async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
+    if (!user) {
+      req.flash("error", "User not found");
+      return res.redirect("/profile");
+    }
+    res.render("profile/profil-pengguna-lain", { user });
+  } catch (error) {
+    req.flash("error", "An error occurred");
+    res.redirect("/profile");
+  }
+});
+
 module.exports = app;

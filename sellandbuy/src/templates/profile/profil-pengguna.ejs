@@ -16,6 +16,11 @@
     />
     <link rel="stylesheet" href="css/style.css" />
     <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <script>
+      function enableEdit() {
+        document.getElementById('usernameInput').removeAttribute('readonly');
+      }
+    </script>
   </head>
   <body class="min-h-screen flex flex-col font-saira">
     <div id="nav-wrp">
@@ -160,12 +165,12 @@
           </div>
 
           <div>
-            <h1 class="text-black text-xl mt-12 mb-4">Basic</h1>
+            <h1 class="text-black text-xl mt-12 mb-4 font-thin">Basic</h1>
           </div>
         </div>
         <hr class="h-px bg-black border-0 dark:bg-gray-700">
 
-        <!-- Profile Info -->
+        <!-- Profile Picture -->
         <div class="profile-info flex flex-row mt-8">
           <div class="profile-picture text-center mr-8">
             <img
@@ -179,48 +184,109 @@
               Pilih Foto
             </button>
           </div>
+
+          <!-- Profile Details -->
           <div class="profile-details w-full">
+
+            <!-- Name -->
             <div class="mb-4">
-              <label class="block text-gray-700">Nama Pengguna</label>
-              <input
-                type="text"
-                value="<%= user.username %>"
-                class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-400"
-                readonly
-              />
+              <label class="block text-gray-700 text-2xl font-semibold mb-2">Nama Pengguna</label>
+              <hr class="h-px bg-black border-0 dark:bg-gray-700">
+              <div class="flex justify-between">
+                <div class="flex-initial">
+                  <input
+                    type="text"
+                    value="<%= user.username %>"
+                    class="w-fit py-2 text-2xl font-thin"
+                    readonly
+                  />
+                </div>
+            
+                <div>
+                  <button
+                      id="editButton"
+                      class="ml-4 px-4 py-2 rounded-full bg-gray-200 hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-400"
+                      onclick="enableEdit()"
+                    >
+                    Ubah
+                  </button>
+                </div>
+              </div>
             </div>
+
+            <!-- Birthdate -->
             <div class="mb-4">
-              <label class="block text-gray-700">Tanggal Lahir</label>
-              <input
-                type="text"
-                value="<%= user.birthdate.toDateString() %>"
-                class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-400"
-                readonly
-              />
+              <label class="block text-gray-700 text-2xl font-semibold mb-2">Tanggal Lahir</label>
+              <hr class="h-px bg-black border-0 dark:bg-gray-700">
+              <div class="flex justify-between">
+                <div class="flex-initial">
+                  <input
+                  type="text"
+                  value="<%= user.birthdate.toDateString() %>" text-xl font-semibold
+                  class="w-full py-2 text-2xl font-thin"
+                  readonly
+                  />
+                </div>
+
+                <div>
+                  <button class="py-2 font-semibold">
+                    Ubah
+                  </button>
+                </div>
+              </div> 
             </div>
+
+            <!-- Phone Number -->
             <div class="mb-4">
-              <label class="block text-gray-700">Nomor Telepon</label>
-              <input
-                type="text"
-                value="<%= user.phone %>"
-                class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-400"
-                readonly
-              />
+              <label class="block text-gray-700 text-2xl font-semibold">Nomor Telepon</label>
+              <hr class="h-px bg-black border-0 dark:bg-gray-700">
+              <div class="flex justify-between">
+                <div class="flex-initial">
+                  <input
+                  type="text"
+                  value="<%= user.phone %>"
+                  class="w-full py-2 text-2xl font-thin"
+                  readonly
+                  />
+                </div>
+
+                <div>
+                  <button class="py-2 font-semibold">
+                    Ubah
+                  </button>
+                </div>
+              </div> 
             </div>
+
+            <!-- Email -->
             <div class="mb-4">
-              <label class="block text-gray-700">Email Pengguna</label>
-              <input
-                type="text"
-                value="<%= user.email %>"
-                class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-400"
-                readonly
-              />
+              <label class="block text-gray-700 text-2xl font-semibold">Email Pengguna</label>
+              <hr class="h-px bg-black border-0 dark:bg-gray-700">
+              <div class="flex justify-between">
+                <div class="flex-initial">
+                  <input
+                  type="text"
+                  value="<%= user.email %>"
+                  class="w-full py-2 text-2xl font-thin"
+                  readonly
+                  />
+                </div>
+
+                <div>
+                  <button class="py-2 font-semibold">
+                    Ubah
+                  </button>
+                </div>
+              </div> 
             </div>
           </div>
         </div>
       </section>
+
+      <!-- Products Section -->
       <section class="w-full sm:w-1/2 max-w-5xl mx-auto p-8">
-        <h2 class="text-2xl font-bold text-center mt-8">Etalase Barang Anda</h2>
+        <h1 class="text-3xl font-bold text-left mt-12 mb-4"">Etalase Barang Anda</h2>
+        <hr class="h-px bg-black border-0 dark:bg-gray-700">
         <div class="grid grid-cols-2 gap-4 mt-4">
           <!-- Example item, replace with actual data -->
           <div class="product-card p-4 border rounded-lg">

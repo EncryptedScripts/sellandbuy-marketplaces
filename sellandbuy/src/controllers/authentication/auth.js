@@ -79,6 +79,10 @@ passport.deserializeUser(async (id, done) => {
 
 // Routes
 app.get("/login", (req, res) => {
+  if (req.session.userId) {
+    return res.redirect("/profile");
+  }
+
   const error = req.flash("error");
   res.render("login/login", { error });
 });
@@ -104,6 +108,9 @@ app.post("/login", async (req, res) => {
 });
 
 app.get("/register", (req, res) => {
+  if (req.session.userId) {
+    return res.redirect("/profile");
+  }
   const error = req.flash("error");
   res.render("login/register", { error });
 });

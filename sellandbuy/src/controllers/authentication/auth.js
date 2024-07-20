@@ -2,12 +2,12 @@ require("dotenv").config();
 const express = require("express");
 const path = require("path");
 const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
 const nodemailer = require("nodemailer");
 const bodyParser = require("body-parser");
-const layouts = require("express-ejs-layouts");
 const mongoSanitize = require("express-mongo-sanitize");
-const { User, Session, PasswordResetToken } = require("../../database/auth");
+const session = require("express-session");
+const flash = require("express-flash");
+const { User, PasswordResetToken } = require("../../database/auth");
 const app = express();
 
 const publicDirectoryPath = path.join(__dirname, "../../../public");
@@ -21,17 +21,21 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(mongoSanitize());
 
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: true,
+    cookie: { maxAge: 60000 },
+  })
+);
+
+app.use(flash());
+
 // Middleware to check if user is authenticated
-const authenticateJWT = (req, res, next) => {
-  const token = req.cookies.token;
-  if (token) {
-    jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
-      if (err) {
-        return res.sendStatus(403);
-      }
-      req.user = user;
-      next();
-    });
+const authenticateSession = (req, res, next) => {
+  if (req.session.userId) {
+    next();
   } else {
     res.redirect("/login");
   }
@@ -39,36 +43,71 @@ const authenticateJWT = (req, res, next) => {
 
 // Routes
 app.get("/login", (req, res) => {
-  res.render("login/login");
+  const error = req.flash("error");
+  res.render("login/login", { error });
 });
 
 app.post("/login", async (req, res) => {
   const { email, password } = req.body;
   const user = await User.findOne({ email });
-  if (user && (await bcrypt.compare(password, user.password))) {
-    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
-      expiresIn: "1h",
-    });
-    res.cookie("token", token, { httpOnly: true });
-    res.redirect("/profile");
-  } else {
-    res.status(401).send("Invalid email or password");
+
+  if (!user) {
+    req.flash("error", "User not found!");
+    return res.redirect("/login");
   }
+
+  const isPasswordValid = await bcrypt.compare(password, user.password);
+  console.log("Password:", password);
+  console.log("Hashed Password:", user.password);
+  console.log("Password Valid:", isPasswordValid);
+
+  if (!isPasswordValid) {
+    req.flash("error", "Invalid password!");
+    return res.redirect("/login");
+  }
+
+  req.session.userId = user._id;
+  res.redirect("/profile");
 });
 
 app.get("/register", (req, res) => {
-  res.render("login/register");
+  const error = req.flash("error");
+  res.render("login/register", { error });
 });
 
 app.post("/register", async (req, res) => {
-  const { username, email, password, phone, address, birthdate } = req.body;
-  const user = new User({
+  const {
     username,
     email,
     password,
+    confirm_password,
     phone,
     address,
     birthdate,
+  } = req.body;
+
+  if (password !== confirm_password) {
+    req.flash("error", "Passwords does not match");
+    return res.redirect("/register");
+  }
+
+  const findEmail = await User.findOne({ email });
+
+  if (findEmail) {
+    req.flash("error", "Email already exists");
+    return res.redirect("/register");
+  }
+
+  const hashedPassword = await bcrypt.hash(password, 10);
+
+  const user = new User({
+    username,
+    email,
+    password: hashedPassword,
+    phone,
+    address,
+    birthdate,
+    membership: "none",
   });
   await user.save();
   res.redirect("/login");
@@ -85,9 +124,7 @@ app.post("/forgot-password", async (req, res) => {
     res.status(404).send("User not found");
     return;
   }
-  const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
-    expiresIn: "1h",
-  });
+  const token = Math.random().toString(36).substr(2); // Generate a random token
   const resetToken = new PasswordResetToken({ userId: user._id, token });
   await resetToken.save();
 
@@ -117,11 +154,7 @@ app.post("/forgot-password", async (req, res) => {
 
 app.get("/reset/:token", async (req, res) => {
   const { token } = req.params;
-  const payload = jwt.verify(token, process.env.JWT_SECRET);
-  const resetToken = await PasswordResetToken.findOne({
-    userId: payload.id,
-    token,
-  });
+  const resetToken = await PasswordResetToken.findOne({ token });
   if (!resetToken) {
     res.status(400).send("Invalid token");
     return;
@@ -136,28 +169,30 @@ app.post("/reset/:token", async (req, res) => {
     res.status(400).send("Passwords do not match");
     return;
   }
-  const payload = jwt.verify(token, process.env.JWT_SECRET);
-  const resetToken = await PasswordResetToken.findOne({
-    userId: payload.id,
-    token,
-  });
+  const resetToken = await PasswordResetToken.findOne({ token });
   if (!resetToken) {
     res.status(400).send("Invalid token");
     return;
   }
-  const user = await User.findById(payload.id);
-  user.password = password;
+  const hashedPassword = await bcrypt.hash(password, 10);
+  const user = await User.findById(resetToken.userId);
+  user.password = hashedPassword;
   await user.save();
   await resetToken.delete();
   res.redirect("/login");
 });
 
 app.get("/logout", (req, res) => {
-  res.clearCookie("token");
-  res.redirect("/login");
+  req.session.destroy((err) => {
+    if (err) {
+      return res.redirect("/profile");
+    }
+    res.clearCookie("connect.sid");
+    res.redirect("/login");
+  });
 });
 
-app.get("/profile", authenticateJWT, (req, res) => {
+app.get("/profile", authenticateSession, (req, res) => {
   res.render("profile");
 });
 

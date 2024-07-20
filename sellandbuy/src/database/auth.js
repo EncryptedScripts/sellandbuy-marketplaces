@@ -1,6 +1,14 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-const bcrypt = require("bcrypt");
+
+mongoose
+  .connect("mongodb://127.0.0.1:27017/sellandbuy")
+  .then(() => {
+    console.log("mongoose connected for key model");
+  })
+  .catch((e) => {
+    console.log("failed to connect to MongoDB");
+  });
 
 // User Schema
 const UserSchema = new Schema({
@@ -40,23 +48,6 @@ const UserSchema = new Schema({
     default: Date.now,
   },
 });
-
-// Pre-save hook to hash the password
-UserSchema.pre("save", async function (next) {
-  if (!this.isModified("password")) return next();
-  try {
-    const salt = await bcrypt.genSalt(10);
-    this.password = await bcrypt.hash(this.password, salt);
-    next();
-  } catch (err) {
-    next(err);
-  }
-});
-
-// Method to compare password
-UserSchema.methods.comparePassword = function (candidatePassword) {
-  return bcrypt.compare(candidatePassword, this.password);
-};
 
 // Session Schema
 const SessionSchema = new Schema({

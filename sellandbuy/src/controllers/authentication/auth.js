@@ -7,7 +7,10 @@ const bodyParser = require("body-parser");
 const mongoSanitize = require("express-mongo-sanitize");
 const session = require("express-session");
 const flash = require("express-flash");
+const passport = require("passport");
+const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const { User, PasswordResetToken } = require("../../database/auth");
+const { authenticateSession } = require("../middleware/middleware");
 const app = express();
 
 const publicDirectoryPath = path.join(__dirname, "../../../public");
@@ -32,14 +35,47 @@ app.use(
 
 app.use(flash());
 
-// Middleware to check if user is authenticated
-const authenticateSession = (req, res, next) => {
-  if (req.session.userId) {
-    next();
-  } else {
-    res.redirect("/login");
+app.use(passport.initialize());
+app.use(passport.session());
+
+passport.use(
+  new GoogleStrategy(
+    {
+      clientID: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      callbackURL: process.env.GOOGLE_CALLBACK_URL,
+    },
+    async (accessToken, refreshToken, profile, done) => {
+      try {
+        let user = await User.findOne({ googleId: profile.id });
+        if (!user) {
+          user = new User({
+            googleId: profile.id,
+            username: profile.displayName,
+            email: profile.emails[0].value,
+          });
+          await user.save();
+        }
+        return done(null, user);
+      } catch (error) {
+        return done(error, false);
+      }
+    }
+  )
+);
+
+passport.serializeUser((user, done) => {
+  done(null, user.id);
+});
+
+passport.deserializeUser(async (id, done) => {
+  try {
+    const user = await User.findById(id);
+    done(null, user);
+  } catch (error) {
+    done(error, null);
   }
-};
+});
 
 // Routes
 app.get("/login", (req, res) => {
@@ -55,11 +91,6 @@ app.post("/login", async (req, res) => {
     req.flash("error", "User not found!");
     return res.redirect("/login");
   }
-
-  const isPasswordValid = await bcrypt.compare(password, user.password);
-  console.log("Password:", password);
-  console.log("Hashed Password:", user.password);
-  console.log("Password Valid:", isPasswordValid);
 
   if (!isPasswordValid) {
     req.flash("error", "Invalid password!");
@@ -87,7 +118,7 @@ app.post("/register", async (req, res) => {
   } = req.body;
 
   if (password !== confirm_password) {
-    req.flash("error", "Passwords does not match");
+    req.flash("error", "Passwords do not match");
     return res.redirect("/register");
   }
 
@@ -114,17 +145,19 @@ app.post("/register", async (req, res) => {
 });
 
 app.get("/forgot-password", (req, res) => {
-  res.render("login/forgot-password");
+  const success = req.flash("success");
+  const error = req.flash("error");
+  res.render("login/forgot-password", { success, error });
 });
 
 app.post("/forgot-password", async (req, res) => {
   const { email } = req.body;
   const user = await User.findOne({ email });
   if (!user) {
-    res.status(404).send("User not found");
-    return;
+    req.flash("error", "User not found");
+    return res.redirect("/forgot-password");
   }
-  const token = Math.random().toString(36).substr(2); // Generate a random token
+  const token = Math.random().toString(36).substr(2);
   const resetToken = new PasswordResetToken({ userId: user._id, token });
   await resetToken.save();
 
@@ -146,9 +179,11 @@ app.post("/forgot-password", async (req, res) => {
 
   transporter.sendMail(mailOptions, (error, info) => {
     if (error) {
-      return console.log(error);
+      req.flash("error", "Error sending email. Please try again.");
+      return res.redirect("/forgot-password");
     }
-    res.send("Password reset email sent");
+    req.flash("success", "Password reset email sent");
+    res.redirect("/forgot-password");
   });
 });
 
@@ -192,8 +227,23 @@ app.get("/logout", (req, res) => {
   });
 });
 
+app.get(
+  "/auth/google",
+  passport.authenticate("google", { scope: ["profile", "email"] })
+);
+
+app.get(
+  "/auth/google/callback",
+  passport.authenticate("google", { failureRedirect: "/login" }),
+  (req, res) => {
+    // Successful authentication, redirect to profile.
+    req.session.userId = req.user._id;
+    res.redirect("/profile");
+  }
+);
+
 app.get("/profile", authenticateSession, (req, res) => {
-  res.render("profile");
+  res.render("profile", { user: req.user });
 });
 
 module.exports = app;

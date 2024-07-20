@@ -16,6 +16,7 @@ const viewsPath = path.join(__dirname, "../templates");
 // Controllers and Routes
 const landing = require("../controllers/landing-page/landing");
 const auth = require("../controllers/authentication/auth");
+const profile = require("../controllers/profile/profile");
 
 app.set("view engine", "ejs");
 app.set("views", viewsPath);
@@ -38,6 +39,7 @@ app.use(flash());
 // Routes
 app.use(landing);
 app.use(auth);
+app.use(profile);
 
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);

@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 mongoose
   .connect("mongodb://127.0.0.1:27017/sellandbuy")
   .then(() => {
-    console.log("mongoose connected for key model");
+    console.log("mongoose connected for authentication model");
   })
   .catch((e) => {
     console.log("failed to connect to MongoDB");

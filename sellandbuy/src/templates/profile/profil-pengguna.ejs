@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Profile - <%= user.username %></title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+    />
+  </head>
+  <body class="min-h-screen flex flex-col font-saira bg-gray-100">
+    <header class="bg-white shadow">
+      <div
+        class="container mx-auto px-4 py-4 flex justify-between items-center"
+      >
+        <h1 class="text-2xl font-bold">Sell & Buy</h1>
+        <nav>
+          <ul class="flex space-x-4">
+            <li>
+              <a href="/logout" class="text-blue-500 hover:underline">Logout</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-8 flex-grow">
+      <h1 class="text-3xl font-bold mb-6">Welcome, <%= user.username %>!</h1>
+      <div class="bg-white shadow-md rounded p-6">
+        <p class="mb-4"><strong>Email:</strong> <%= user.email %></p>
+        <p class="mb-4"><strong>Phone:</strong> <%= user.phone %></p>
+        <p class="mb-4"><strong>Address:</strong> <%= user.address %></p>
+        <p class="mb-4">
+          <strong>Birthdate:</strong> <%= user.birthdate.toDateString() %>
+        </p>
+        <p class="mb-4"><strong>Membership:</strong> <%= user.membership %></p>
+      </div>
+    </main>
+
+    <footer class="bg-white shadow mt-auto">
+      <div class="container mx-auto px-4 py-4 text-center">
+        <p>&copy; 2024 Sell & Buy</p>
+      </div>
+    </footer>
+  </body>
+</html>

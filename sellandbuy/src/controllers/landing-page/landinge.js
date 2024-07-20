@@ -6,20 +6,9 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const layouts = require("express-ejs-layouts");
 const mongoSanitize = require("express-mongo-sanitize");
+const publicDirectoryPath = path.join(__dirname, "../../../public");
+const viewsPath = path.join(__dirname, "../../templates");
 const app = express();
-const port = process.env.PORT || 3000;
-const publicDirectoryPath = path.join(__dirname, "../../public");
-const viewsPath = path.join(__dirname, "../templates");
-
-// Database Connection
-
-// Controllers and Routes
-const landing = require("../controllers/landing-page/landinge");
-
-mongoose.connect("mongodb://127.0.0.1:27017/sellandbuy", {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
 
 app.set("view engine", "ejs");
 app.set("views", viewsPath);
@@ -29,8 +18,19 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // Routes
-app.use(landing);
-
-app.listen(port, () => {
-  console.log(`Server running on port ${port}`);
+app.get("/", (req, res) => {
+  res.render("landing-page/index");
 });
+
+app.get("/faq", (req, res) => {
+  res.render("landing-page/faq");
+});
+
+app.get("/privacy", (req, res) => {
+  res.render("landing-page/privacy");
+});
+
+app.get("/tos", (req, res) => {
+  res.render("landing-page/tos");
+});
+module.exports = app;

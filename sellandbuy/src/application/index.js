@@ -15,6 +15,7 @@ const viewsPath = path.join(__dirname, "../templates");
 
 // Controllers and Routes
 const landing = require("../controllers/landing-page/landinge");
+const auth = require("../controllers/authentication/auth");
 
 mongoose.connect("mongodb://127.0.0.1:27017/sellandbuy", {
   useNewUrlParser: true,
@@ -30,6 +31,7 @@ app.use(bodyParser.json());
 
 // Routes
 app.use(landing);
+app.use(auth);
 
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);

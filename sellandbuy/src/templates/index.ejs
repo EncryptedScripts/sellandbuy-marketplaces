@@ -59,33 +59,39 @@
               id="srch-bar"
               class="relative hidden sm:flex px-[10px] rounded-full items-center lg:w-auto hover:bg-slate-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-700"
             >
-              <span class="sr-only">Search</span>
-              <span
-                id="srch-icon"
-                class="absolute left-0 flex items-center pl-5"
+              <form
+                action="/search"
+                method="GET"
+                class="w-full flex items-center"
               >
-                <svg
-                  class="h-5 w-5 fill-black"
-                  data-slot="icon"
-                  fill="currentColor"
-                  viewBox="0 0 16 16"
-                  xmlns="http://www.w3.org/2000/svg"
-                  aria-hidden="true"
+                <span class="sr-only">Search</span>
+                <span
+                  id="srch-icon"
+                  class="absolute left-0 flex items-center pl-5"
                 >
-                  <path
-                    clip-rule="evenodd"
-                    fill-rule="evenodd"
-                    d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
-                  ></path>
-                </svg>
-              </span>
-              <input
-                id="srch-input"
-                class="font-saira placeholder:italic placeholder:text-gray-600 bg-white w-full border-2 border-black rounded-xl py-[1px] pr-3 md:pl-7 shadow-sm focus:outline-none focus:border-black focus:ring-black focus:ring-1 sm:text-sm lg:pl-6"
-                placeholder="Search..."
-                type="text"
-                name="search"
-              />
+                  <svg
+                    class="h-5 w-5 fill-black"
+                    data-slot="icon"
+                    fill="currentColor"
+                    viewBox="0 0 16 16"
+                    xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden="true"
+                  >
+                    <path
+                      clip-rule="evenodd"
+                      fill-rule="evenodd"
+                      d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
+                    ></path>
+                  </svg>
+                </span>
+                <input
+                  id="srch-input"
+                  class="font-saira placeholder:italic placeholder:text-gray-600 bg-white w-full border-2 border-black rounded-xl py-[1px] pr-3 md:pl-7 shadow-sm focus:outline-none focus:border-black focus:ring-black focus:ring-1 sm:text-sm lg:pl-6"
+                  placeholder="Search..."
+                  type="text"
+                  name="search"
+                />
+              </form>
             </div>
           </div>
           <div id="slider" class="flex sm:hidden justify-end items-center">

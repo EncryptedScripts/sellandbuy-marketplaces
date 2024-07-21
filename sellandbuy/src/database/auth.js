@@ -43,6 +43,10 @@ const UserSchema = new Schema({
     enum: ["none", "bronze", "silver", "gold"],
     default: "none",
   },
+  profilePicturePath: {
+    type: String,
+    default: "public/images/pictures/default.png",
+  },
   createdAt: {
     type: Date,
     default: Date.now,

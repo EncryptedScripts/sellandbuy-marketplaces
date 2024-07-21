@@ -43,6 +43,54 @@ app.use(landing);
 app.use(auth);
 app.use(profile);
 
+app.get("/profile/pengguna-lain", (req, res) => {
+  res.render("profile/profil-pengguna-lain");
+});
+
+app.get("/profile/product", (req, res) => {
+  res.render("profile/item/detail-item");
+});
+
+app.get("/profile/product/edit", (req, res) => {
+  res.render("profile/item/edit-item");
+});
+
+app.get("/profile/offer", (req, res) => {
+  res.render("profile/item/penawaran");
+});
+
+app.get("/membership", (req, res) => {
+  res.render("membership/form=awal");
+});
+
+app.get("/membership/payment", (req, res) => {
+  res.render("membership/pembayaran");
+});
+
+app.get("/membership/success", (req, res) => {
+  res.render("membership/invoice");
+});
+
+app.get("marketplace", (req, res) => {
+  res.render("market/katalog");
+});
+
+app.get("/detail-item", (req, res) => {
+  res.render("market/detail-item");
+});
+
+app.get("/form-jual", (req, res) => {
+  res.render("form-jual/form-awal");
+});
+
+app.get("/form-jual/pembayaran", (req, res) => {
+  res.render("form-jual/pembayaran");
+});
+
+app.get("/form-jual/success", (req, res) => {
+  res.render("form-jual/selesai");
+});
+
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });

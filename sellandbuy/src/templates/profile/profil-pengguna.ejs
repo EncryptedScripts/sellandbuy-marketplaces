@@ -15,12 +15,8 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/profile-pengguna.css">
     <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
-    <script>
-      function enableEdit() {
-        document.getElementById('usernameInput').removeAttribute('readonly');
-      }
-    </script>
   </head>
   <body class="min-h-screen flex flex-col font-saira">
     <div id="nav-wrp">
@@ -32,15 +28,36 @@
           id="top-nav"
           class="w-full flex items-center justify-between sm:pt-4 sm:pb-0 px-2 sm:px-5 pt-5 pb-5"
         >
-          <div id="left-part" class="sm:w-1/3 flex justify-start">
-            <a
-              id="user"
-              href="/profile"
-              class="flex w-10 h-10 rounded-full items-center justify-center shadow-sm hover:bg-slate-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-700"
+        <div id="left-part" class="sm:w-1/3 flex justify-start">
+          <div class="relative inline-block text-left">
+            <div>
+              <button
+                type="button"
+                class="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-200"
+                id="menu-button"
+                aria-expanded="false"
+                aria-haspopup="true"
+              >
+                <img class="w-btn-pfl" src="images/pictures/default.png" />
+              </button>
+            </div>
+            <div
+              class="absolute left-0 right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none hidden transition-all duration-300 ease-in-out"
+              role="menu"
+              aria-orientation="vertical"
+              aria-labelledby="menu-button"
+              tabindex="-1"
+              id="menu"
             >
-              <img class="w-btn-pfl" src="images/user.png" />
-            </a>
+              <div class="py-1" role="none">
+                <button class="block px-4 py-2 text-sm text-gray-700 cursor-pointer" role="menuitem" tabindex="-1" id="menu-item-0" onclick="location.href = '/profile'">Profile</button>
+                <form method="POST" action="#" role="none">
+                  <button type="submit" class="w-full px-4 py-2 text-left text-sm text-gray-700 cursor-pointer" role="menuitem" tabindex="-1" id="menu-item-1">Logout</button>
+                </form>
+              </div>
+            </div>
           </div>
+        </div>
           <a
             href="/"
             id="navbar-logo"
@@ -175,7 +192,7 @@
           <div class="profile-picture text-center mr-8">
             <img
               class="rounded-full h-auto w-auto"
-              src="images/user.png"
+              src="images/pictures/default.png"
               alt="User Picture"
             />
             <button
@@ -193,22 +210,29 @@
               <label class="block text-gray-700 text-2xl font-semibold mb-2">Nama Pengguna</label>
               <hr class="h-px bg-black border-0 dark:bg-gray-700">
               <div class="flex justify-between">
-                <div class="flex-initial">
+                <div class="flex-auto mt-1 items-center">
                   <input
                     type="text"
+                    id="usernameInput"
                     value="<%= user.username %>"
-                    class="w-fit py-2 text-2xl font-thin"
+                    class="w-full p-2 py-1 text-2xl font-thin rounded-xl"
                     readonly
                   />
                 </div>
-            
-                <div>
+                <div class="flex-none">
                   <button
-                      id="editButton"
-                      class="ml-4 px-4 py-2 rounded-full bg-gray-200 hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-400"
-                      onclick="enableEdit()"
-                    >
+                    id="editButtonUsername"
+                    class="pl-2 py-3 font-semibold"
+                    onclick="enableEdit('usernameInput', 'editButtonUsername', 'saveButtonUsername')"
+                  >
                     Ubah
+                  </button>
+                  <button
+                    id="saveButtonUsername"
+                    class="px-2 py-3 font-semibold hidden"
+                    onclick="disableEdit('usernameInput', 'editButtonUsername', 'saveButtonUsername')"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"><path d="M10 20A10 10 0 1 0 0 10a10 10 0 0 0 10 10zM8.711 4.3l5.7 5.766L8.7 15.711l-1.4-1.422 4.289-4.242-4.3-4.347z"/></svg>
                   </button>
                 </div>
               </div>
@@ -219,67 +243,100 @@
               <label class="block text-gray-700 text-2xl font-semibold mb-2">Tanggal Lahir</label>
               <hr class="h-px bg-black border-0 dark:bg-gray-700">
               <div class="flex justify-between">
-                <div class="flex-initial">
+                <div class="flex-auto mt-1 items-center">
                   <input
-                  type="text"
-                  value="<%= user.birthdate.toDateString() %>" text-xl font-semibold
-                  class="w-full py-2 text-2xl font-thin"
-                  readonly
+                    type="text"
+                    id="birthdateInput"
+                    value="<%= user.birthdate.toDateString() %>"
+                    class="w-full p-2 py-1 text-2xl font-thin rounded-xl"
+                    readonly
                   />
                 </div>
-
-                <div>
-                  <button class="py-2 font-semibold">
+                <div class="flex-none">
+                  <button
+                    id="editButtonBirthdate"
+                    class="pl-2 py-3 font-semibold"
+                    onclick="enableEdit('birthdateInput', 'editButtonBirthdate', 'saveButtonBirthdate', true)"
+                  >
                     Ubah
+                  </button>
+                  <button
+                    id="saveButtonBirthdate"
+                    class="px-2 py-3 font-semibold hidden"
+                    onclick="disableEdit('birthdateInput', 'editButtonBirthdate', 'saveButtonBirthdate', true)"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"><path d="M10 20A10 10 0 1 0 0 10a10 10 0 0 0 10 10zM8.711 4.3l5.7 5.766L8.7 15.711l-1.4-1.422 4.289-4.242-4.3-4.347z"/></svg>
                   </button>
                 </div>
               </div> 
             </div>
-
+          
             <!-- Phone Number -->
             <div class="mb-4">
-              <label class="block text-gray-700 text-2xl font-semibold">Nomor Telepon</label>
+              <label class="block text-gray-700 text-2xl font-semibold mb-2">Nomor Telepon</label>
               <hr class="h-px bg-black border-0 dark:bg-gray-700">
               <div class="flex justify-between">
-                <div class="flex-initial">
+                <div class="flex-auto mt-1 items-center">
                   <input
-                  type="text"
-                  value="<%= user.phone %>"
-                  class="w-full py-2 text-2xl font-thin"
-                  readonly
+                    type="text"
+                    id="phoneInput"
+                    value="<%= user.phone %>"
+                    class="w-full p-2 py-1 text-2xl font-thin rounded-xl"
+                    readonly
                   />
                 </div>
-
-                <div>
-                  <button class="py-2 font-semibold">
+                <div class="flex-none">
+                  <button
+                    id="editButtonPhone"
+                    class="pl-2 py-3 font-semibold"
+                    onclick="enableEdit('phoneInput', 'editButtonPhone', 'saveButtonPhone')"
+                  >
                     Ubah
+                  </button>
+                  <button
+                    id="saveButtonPhone"
+                    class="px-2 py-3 font-semibold hidden"
+                    onclick="disableEdit('phoneInput', 'editButtonPhone', 'saveButtonPhone')"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"><path d="M10 20A10 10 0 1 0 0 10a10 10 0 0 0 10 10zM8.711 4.3l5.7 5.766L8.7 15.711l-1.4-1.422 4.289-4.242-4.3-4.347z"/></svg>
                   </button>
                 </div>
               </div> 
             </div>
-
+          
             <!-- Email -->
             <div class="mb-4">
-              <label class="block text-gray-700 text-2xl font-semibold">Email Pengguna</label>
+              <label class="block text-gray-700 text-2xl font-semibold mb-2">Email Pengguna</label>
               <hr class="h-px bg-black border-0 dark:bg-gray-700">
               <div class="flex justify-between">
-                <div class="flex-initial">
+                <div class="flex-auto mt-1 items-center">
                   <input
-                  type="text"
-                  value="<%= user.email %>"
-                  class="w-full py-2 text-2xl font-thin"
-                  readonly
+                    type="text"
+                    id="emailInput"
+                    value="<%= user.email %>"
+                    class="w-full p-2 py-1 text-2xl font-thin rounded-xl"
+                    readonly
                   />
                 </div>
-
-                <div>
-                  <button class="py-2 font-semibold">
+                <div class="flex-none">
+                  <button
+                    id="editButtonEmail"
+                    class="pl-2 py-3 font-semibold"
+                    onclick="enableEdit('emailInput', 'editButtonEmail', 'saveButtonEmail')"
+                  >
                     Ubah
+                  </button>
+                  <button
+                    id="saveButtonEmail"
+                    class="px-2 py-3 font-semibold hidden"
+                    onclick="disableEdit('emailInput', 'editButtonEmail', 'saveButtonEmail')"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"><path d="M10 20A10 10 0 1 0 0 10a10 10 0 0 0 10 10zM8.711 4.3l5.7 5.766L8.7 15.711l-1.4-1.422 4.289-4.242-4.3-4.347z"/></svg>
                   </button>
                 </div>
               </div> 
             </div>
-          </div>
+          </div>          
         </div>
       </section>
 
@@ -375,6 +432,64 @@
         </div>
       </div>
     </footer>
+
+    <script>
+    function toggleMenu(event) {
+          const menu = document.getElementById('menu');
+          const isHidden = menu.classList.contains('hidden');
+          menu.classList.toggle('hidden', !isHidden);
+          menu.setAttribute('aria-expanded', !isHidden);
+          event.currentTarget.setAttribute('aria-expanded', !isHidden);
+        }
+      
+        const menuButton = document.getElementById('menu-button');
+        menuButton.addEventListener('click', toggleMenu);
+      
+        document.addEventListener('click', (event) => {
+          const menu = document.getElementById('menu');
+          if (!menuButton.contains(event.target) && !menu.contains(event.target)) {
+            menu.classList.add('hidden');
+            menuButton.setAttribute('aria-expanded', 'false');
+          }
+        });
+      
+      // editable profile fields
+      function enableEdit(inputId, editButtonId, saveButtonId, isDateField = false) {
+        var inputElement = document.getElementById(inputId);
+        var editButton = document.getElementById(editButtonId);
+        var saveButton = document.getElementById(saveButtonId);
+
+        inputElement.removeAttribute('readonly');
+
+        if (isDateField) {
+          inputElement.type = 'date';
+        }
+
+        inputElement.classList.add('edit-mode');
+        editButton.classList.add('hidden');
+        saveButton.classList.remove('hidden');
+
+        inputElement.focus();
+      }
+
+      function disableEdit(inputId, editButtonId, saveButtonId, isDateField = false) {
+        var inputElement = document.getElementById(inputId);
+        var editButton = document.getElementById(editButtonId);
+        var saveButton = document.getElementById(saveButtonId);
+
+        inputElement.setAttribute('readonly', true);
+
+        if (isDateField) {
+          inputElement.type = 'text';
+          inputElement.value = new Date(inputElement.value).toDateString();
+        }
+
+        inputElement.classList.remove('edit-mode');
+
+        editButton.classList.remove('hidden');
+        saveButton.classList.add('hidden');
+      }
+    </script>
 
     <script src="js/script.js"></script>
   </body>

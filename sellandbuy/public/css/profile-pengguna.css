@@ -14,19 +14,6 @@ body {
   margin-bottom: 20px;
 }
 
-.profile-info {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.profile-picture img {
-  border-radius: 50%;
-  height: 150px;
-  width: 150px;
-  object-fit: cover;
-}
-
 .product-card img {
   border-radius: 10px;
   object-fit: cover;
@@ -40,4 +27,9 @@ footer {
 #top-ftr,
 #bot-ftr {
   background-color: #000;
+}
+
+.edit-mode {
+  background-color: #f0f0f0;
+  border: 1px solid #000;
 }

@@ -43,19 +43,19 @@ app.use(landing);
 app.use(auth);
 app.use(profile);
 
-app.get("/profile/pengguna-lain", (req, res) => {
+app.get("/pengguna-lain", (req, res) => {
   res.render("profile/profil-pengguna-lain");
 });
 
-app.get("/profile/product", (req, res) => {
+app.get("/product", (req, res) => {
   res.render("profile/item/detail-item");
 });
 
-app.get("/profile/product/edit", (req, res) => {
+app.get("/product/edit", (req, res) => {
   res.render("profile/item/edit-item");
 });
 
-app.get("/profile/offer", (req, res) => {
+app.get("/offer", (req, res) => {
   res.render("profile/item/penawaran");
 });
 

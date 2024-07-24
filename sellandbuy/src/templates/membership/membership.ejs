@@ -1,11 +1,9 @@
-<!-- Buat template awal EJS lainnya -->
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sell & Buy - Submission Form</title>
+    <title>Sell & Buy - Membership</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -54,6 +52,7 @@
             >
               <div class="py-1" role="none">
                 <button class="block w-full px-4 py-2 text-sm text-left text-gray-700 cursor-pointer" role="menuitem" tabindex="-1" id="menu-item-0" onclick="location.href = '/profile'">Profile</button>
+                <button class="block w-full px-4 py-2 text-left text-sm text-gray-700 cursor-pointer" role="menuitem" tabindex="-1" id="menu-item-0" onclick="location.href = '/membership'">Jadi Member</button>
                 <form method="POST" action="#" role="none">
                   <button type="submit" class="w-full px-4 py-2 text-left text-sm text-gray-700 cursor-pointer" role="menuitem" tabindex="-1" id="menu-item-1">Logout</button>
                 </form>
@@ -178,7 +177,134 @@
       class="flex-grow w-full mt-[101.2px] sm:mt-[96px] mb-10 relative"
     >
 
-    </div>
+
+      <!-- Header -->
+      <section class="w-full sm:w-1/2 max-w-5xl mx-auto p-8">
+        <h1 class="text-5xl font-bold text-left mt-12 mb-4">Join our Membership</h1>
+        <hr class="h-px w-full bg-black border-0 dark:bg-gray-700">
+        <p class="text-2xl text-center mt-12">Ingin bergabung menjadi bagian dari kami? <span class="font-bold">Join membership sekarang</span></p>
+      </section>
+
+
+      <!-- Pricing -->
+          <div class="grid grid-cols-3 md:grid-cols-3 gap-6 mx-52">
+            <!-- Bronze Card -->
+            <div class="bg-white p-6 border-2 border-black rounded-lg shadow-lg">
+              <h2 class="text-2xl font-bold mb-2">Bronze</h2>
+              <p class="text-gray-600 mb-4">Cocok bagi personal seller / buyer yang ingin bertransaksi produk pribadi</p>
+              <p class="text-5xl font-bold text-gray-800 mb-4">Rp. 24.900 <span class="text-base font-normal">/bulan</span></p>
+              <p class="text-sm text-gray-600 mb-4"> <span class="font-bold"> + 1 bulan </span> gratis untuk pembelian pertama</p>
+              <div class="flex flex-col items-center">
+                <div>
+                  <button class="w-56 border-2 border-black font-light py-2 px-4 rounded-full mb-4 hover:bg-gray-100 transition delay-100" onclick="location.href = '/membership/form'">Pilih paket</button>
+                </div>
+                <div>
+                  <a href="#details" class="text-black underline underline-offset-2">Lihat detail benefit selengkapnya</a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Silver Card -->
+            <div class="bg-white p-6 border-2 border-black rounded-lg shadow-lg">
+              <h2 class="text-2xl font-bold mb-2">Silver</h2>
+              <p class="text-gray-600 mb-4">Cocok bagi UMKM baru yang ingin memulai karir dan ingin mengiklankan produk</p>
+              <p class="text-5xl font-bold text-gray-800 mb-4">Rp. 49.900 <span class="text-base font-normal">/bulan</span></p>
+              <p class="text-sm text-gray-600 mb-4"> <span class="font-bold"> + 1 bulan </span> gratis untuk pembelian pertama</p>
+              <div class="flex flex-col items-center">
+                <div>
+                  <button class="w-56 border-2 border-black font-light py-2 px-4 rounded-full mb-4 hover:bg-gray-100 transition delay-100">Pilih paket</button>
+                </div>
+                <div>
+                  <a href="#details" class="text-black underline underline-offset-2">Lihat detail benefit selengkapnya</a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Gold Card -->
+            <div class="bg-white p-6 border-2 border-black rounded-lg shadow-lg">
+              <h2 class="text-2xl font-bold mb-2">Gold</h2>
+              <p class="text-gray-600 mb-4">Cocok bagi UMKM / usaha lain yang ingin mendapatkan exposure lebih terhadap produknya</p>
+              <p class="text-5xl font-bold text-gray-800 mb-4">Rp. 59.900 <span class="text-base font-normal">/bulan</span></p>
+              <p class="text-sm text-gray-600 mb-4"> <span class="font-bold"> + 1 bulan </span> gratis untuk pembelian pertama</p>
+              <div class="flex flex-col items-center">
+                <div>
+                  <button class="w-56 border-2 border-black font-light py-2 px-4 rounded-full mb-4 hover:bg-gray-100 transition delay-100">Pilih paket</button>
+                </div>
+                <div>
+                  <a href="#details" class="text-black underline underline-offset-2">Lihat detail benefit selengkapnya</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Illustration Section -->
+      <section class="py-8">
+        <div class="max-w-7xl mx-auto px-4 flex flex-row items-center">
+          <div>
+            <img src="images/svg/membership-picture.svg" alt="Illustration" class="w-full md:w-1/2 mb-6">
+          </div>
+
+          <div>
+            <p class="text-gray-700 text-justify text-xl  max-w-prose">
+              Dengan berlangganan membership di website kami, anda dapat menikmati banyak benefit yang kami berikan. Tentu, benefit yang kami berikan sangat berguna bagi kemajuan usaha anda, namun, website kami tidak hanya sebatas ini, kami akan selalu mengembangkan fitur dan benefit sehingga pengguna akan mendapatkan pengalaman yang lebih dari biasanya. Manfaatkan kesempatan ini dan bergabunglah bersama kami!
+            </p>
+          </div>
+        </div>
+      </section>
+
+
+       <!-- Detail Benefit Membership Section -->
+       <section id="details" class="py-8 bg-white">
+        <div class="max-w-7xl mx-auto px-4">
+          <h1 class="text-5xl font-bold mb-6">Detail Benefit Membership</h1>
+          <hr class="h-px w-full bg-black border-0 dark:bg-gray-700">
+        </div>
+          <div class="mx-52 grid grid-cols-3 md:grid-cols-3 gap-6 my-5">
+            <!-- Bronze Benefit Card -->
+            <div class="border border-black p-6 rounded-lg shadow-lg">
+              <h2 class="text-2xl font-bold mb-4">Bronze</h2>
+              <p class="text-gray-600 mb-4">Cocok bagi personal seller / buyer yang ingin bertransaksi produk pribadi</p>
+              <h2 class="text-2xl font-bold mb-4">Benefit</h2>
+              <ul class="text-gray-700">
+                <li class="mb-2"><img src="images/svg/filled-checkbox.svg" alt="filled checkmark" class="inline mr-2"> Bebas biaya untuk produk dengan limit 2 produk / hari</li>
+                <li class="mb-2"><img src="images/svg/unfilled-checkbox.svg" alt="unfilled checkmark" class="inline mr-2"> Layanan Customer Service secara inklusif & cepat</li>
+                <li class="mb-2"><img src="images/svg/unfilled-checkbox.svg" alt="checkmark" class="inline mr-2">  Akses prioritas untuk informasi produk terbaru</li>
+                <li class="mb-2"><img src="images/svg/unfilled-checkbox.svg" alt="checkmark" class="inline mr-2">  Eksklusif fitur website & aplikasi Sell&Buy</li>
+                <li class="mb-2"><img src="images/svg/unfilled-checkbox.svg" alt="checkmark" class="inline mr-2"> Eksklusif giveaway dari Sell&Buy bagi member</li>
+              </ul>
+            </div>
+
+            <!-- Silver Benefit Card -->
+            <div class="border border-black p-6 rounded-lg shadow-lg">
+              <h2 class="text-2xl font-bold mb-4">Silver</h2>
+              <p class="text-gray-600 mb-4">Cocok bagi UMKM baru yang ingin memulai karir dan ingin mengiklankan produk</p>
+              <h2 class="text-2xl font-bold mb-4">Benefit</h2>
+              <ul class="text-gray-700">
+                <li class="mb-2"><img src="images/svg/filled-checkbox.svg" alt="filled checkmark" class="inline mr-2"> Bebas biaya untuk produk sepuasnya</li>
+                <li class="mb-2"><img src="images/svg/filled-checkbox.svg" alt="filled checkmark" class="inline mr-2"> Layanan Customer Service secara inklusif & cepat</li>
+                <li class="mb-2"><img src="images/svg/filled-checkbox.svg" alt="filled checkmark" class="inline mr-2"> Akses prioritas untuk informasi produk terbaru</li>
+                <li class="mb-2"><img src="images/svg/unfilled-checkbox.svg" alt="checkmark" class="inline mr-2"> Eksklusif fitur website & aplikasi Sell&Buy</li>
+                <li class="mb-2"><img src="images/svg/unfilled-checkbox.svg" alt="checkmark" class="inline mr-2"> Eksklusif giveaway dari Sell&Buy bagi member</li>
+              </ul>
+            </div>
+
+            <!-- Gold Benefit Card -->
+            <div class="border border-black p-6 rounded-lg shadow-lg">
+              <h2 class="text-2xl font-bold mb-4">Gold</h2>
+              <p class="text-gray-600 mb-4">Cocok bagi UMKM / usaha lain yang ingin mendapatkan exposure lebih terhadap produknya</p>
+              <h2 class="text-2xl font-bold mb-4">Benefit</h2>
+              <ul class="text-gray-700">
+                <li class="mb-2"><img src="images/svg/filled-checkbox.svg" alt="filled checkmark" class="inline mr-2"> Bebas biaya untuk produk sepuasnya</li>
+                <li class="mb-2"><img src="images/svg/filled-checkbox.svg" alt="filled checkmark" class="inline mr-2"> Layanan Customer Service secara inklusif & cepat</li>
+                <li class="mb-2"><img src="images/svg/filled-checkbox.svg" alt="filled checkmark" class="inline mr-2"> Akses prioritas untuk informasi produk terbaru</li>
+                <li class="mb-2"><img src="images/svg/filled-checkbox.svg" alt="filled checkmark" class="inline mr-2"> Eksklusif fitur website & aplikasi Sell&Buy</li>
+                <li class="mb-2"><img src="images/svg/filled-checkbox.svg" alt="filled checkmark" class="inline mr-2"> Eksklusif giveaway dari Sell&Buy bagi member</li>
+              </ul>
+            </div>
+          </div>
+      </section>
 
     <!-- Footer -->
     <footer class="mt-auto">

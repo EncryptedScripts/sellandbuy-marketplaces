@@ -60,7 +60,11 @@ app.get("/offer", (req, res) => {
 });
 
 app.get("/membership", (req, res) => {
-  res.render("membership/form=awal");
+  res.render("membership/membership");
+});
+
+app.get("/membership/form", (req, res) => {
+  res.render("membership/form-awal");
 });
 
 app.get("/membership/payment", (req, res) => {

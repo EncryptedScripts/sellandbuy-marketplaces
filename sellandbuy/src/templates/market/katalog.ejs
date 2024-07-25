@@ -1,9 +1,11 @@
+<!-- Buat template awal EJS lainnya -->
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Your Favorite E-Commerce - Sell and Buy</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sell & Buy - Marketplace</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -11,16 +13,16 @@
       rel="stylesheet"
     />
     <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
     />
-    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="/css/style.css" />
     <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
   </head>
-  <body class="pt-[101.2px] sm:pt-[96px] font-saira">
+  <body class="min-h-screen flex flex-col font-saira">
 
     <!-- Navbar -->
-    <div id="nav-wrp">
+    <div id="nav-wrp" class="mb-20">
       <header
         id="navbar"
         class="bg-white fixed flex items-center justify-center flex-col inset-x-0 top-0 z-50"
@@ -29,40 +31,38 @@
           id="top-nav"
           class="w-full flex items-center justify-between sm:pt-4 sm:pb-0 px-2 sm:px-5 pt-5 pb-5"
         >
-
-        <!-- Left Nav   -->
         <div id="left-part" class="sm:w-1/3 flex justify-start">
           <div class="relative inline-block text-left">
             <div>
               <button
                 type="button"
-                class="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 shadow-sm border-black hover:bg-slate-400"
+                class="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-900"
                 id="menu-button"
                 aria-expanded="false"
                 aria-haspopup="true"
               >
-                <img class="w-btn-pfl" src="images/pictures/default.png" />
+                Kategori
               </button>
             </div>
             <div
-              class="absolute left-0 right-0 z-10 mt-2 min-w-max origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none hidden transition-all duration-300 ease-in-out"
+              class="absolute left-0 right-0 z-10 mt-2 w-56 origin-top-right rounded-xl bg-black shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none hidden transition-all duration-300 ease-in-out"
               role="menu"
               aria-orientation="vertical"
               aria-labelledby="menu-button"
               tabindex="-1"
               id="menu"
             >
-              <div class="py-1" role="none">
-                <button class="block px-4 py-2 text-sm text-gray-700 cursor-pointer" role="menuitem" tabindex="-1" id="menu-item-0" onclick="location.href = '/profile'">Profile</button>
-                <form method="POST" action="#" role="none">
-                  <button type="submit" class="w-full px-4 py-2 text-left text-sm text-gray-700 cursor-pointer" role="menuitem" tabindex="-1" id="menu-item-1">Logout</button>
-                </form>
+              <div class="py-1 bg-black rounded-xl" role="none">
+                <button class="rounded-t-2xl block w-full px-4 py-2 text-sm text-center bg-black text-white cursor-pointer hover:underline hover:underline-offset-4 hover:decoration-white" role="menuitem" tabindex="-1" onclick="location.href = '/#'">Pakaian dan Aksesoris</button>
+                <button class="block w-full px-4 py-2 text-center text-sm bg-black text-white cursor-pointer hover:underline hover:underline-offset-4 hover:decoration-white" role="menuitem" tabindex="-1" onclick="location.href = '/#'">Otomotif</button>
+                <button class="block w-full px-4 py-2 text-center text-sm bg-black text-white cursor-pointer hover:underline hover:underline-offset-4 hover:decoration-white" role="menuitem" tabindex="-1" onclick="location.href = '/#'">Elektronik</button>
+                <button class="block w-full px-4 py-2 text-center text-sm bg-black text-white cursor-pointer hover:underline hover:underline-offset-4 hover:decoration-white" role="menuitem" tabindex="-1" onclick="location.href = '/#'">Rumah Tangga</button>
+                <button class="block w-full px-4 py-2 text-center text-sm bg-black text-white cursor-pointer hover:underline hover:underline-offset-4 hover:decoration-white" role="menuitem" tabindex="-1" onclick="location.href = '/#'">Hobi & Olahraga</button>
+                <button class="rounded-b-2xl block w-full px-4 py-2 text-center text-sm bg-black text-white cursor-pointer hover:underline hover:underline-offset-4 hover:decoration-white" role="menuitem" tabindex="-1" onclick="location.href = '/#'">Lainnya</button>
               </div>
             </div>
           </div>
         </div>
-        
-        <!-- Nav Logo -->
           <a
             href="/"
             id="navbar-logo"
@@ -71,7 +71,7 @@
             <img
               id="logo"
               class="h-5 sm:h-9 sm:w-auto cursor-pointer"
-              src="images/navbar-logo.png"
+              src="/images/navbar-logo.png"
             />
           </a>
           <div id="pfl" class="hidden sm:flex w-1/3 justify-end">
@@ -80,7 +80,7 @@
               href="#"
               class="flex w-10 h-10 rounded-full items-center justify-center shadow-sm hover:bg-slate-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-700"
             >
-              <img class="w-btn-pfl" src="images/tambahkan.png" />
+              <img class="w-btn-pfl" src="/images/tambahkan.png" />
             </a>
             <div
               id="srch-bar"
@@ -137,8 +137,6 @@
             </a>
           </div>
         </div>
-
-        <!-- Right Nav -->
         <div
           id="bot-nav"
           class="w-full flex items-center justify-center pt-2 pb-4 sm:px-[20px]"
@@ -177,42 +175,309 @@
     </div>
 
     <!-- Content -->
-    <div id="content" class="w-full flex flex-col align-middle justify-center">
-    
+    <div
+      id="content"
+      class="flex-grow w-full mt-[101.2px] sm:mt-[96px] mb-10 relative"
+    >
+
+      <div class="container mx-auto py-8">
+        <!-- Sorting and Filters Section -->
+        <div class="flex flex-row md:flex-row">
+          <div class="w-1/6 md:w-1/6 mb-8 md:mb-0 mr-4">
+            <h2 class="text-xl font-bold mb-4">Urutkan menurut:</h2>
+            <select class="w-full mb-32 px-4 py-2 border rounded-lg focus:outline-none focus:border-black">
+              <option selected disabled hidden>Urutkan</option>
+              <option>Pencarian</option>
+              <option>Ulasan Terbaik</option>
+              <option>Harga Terendah</option>
+              <option>Harga Tertinggi</option>
+            </select>
+            <h2 class="text-xl font-bold mb-4">Filters :</h2>
+            <select class="w-full mb-16 px-4 py-2 border rounded-lg focus:outline-none focus:border-black">
+              <option selected disabled hidden>Kondisi Barang</option>
+              <option>Baru</option>
+              <option>Bekas</option>
+            </select>
+            <select class="w-full mb-32 px-4 py-2 border rounded-lg focus:outline-none focus:border-black">
+              <option selected disabled hidden>Harga</option>
+              <option>> Rp.50.000</option>
+              <option>Rp.50.000 - Rp.100.000</option>
+              <option>Rp.100.000 - Rp.150.000</option>
+              <option>< Rp.150.000</option>
+            </select>
+            <select class="w-full mb-4 px-4 py-2 border rounded-lg focus:outline-none focus:border-black5">
+              <option selected disabled hidden>Lokasi</option>
+              <option>Dalam D.I.Yogyakarta</option>
+              <option>Luar D.I.Yogyakarta</option>
+            </select>
+          </div>
+
+          <!-- Product Listing Section -->
+          <div class="w-full ml-4 md:w-3/4">
+            <h1 class="text-4xl font-bold mb-6">OTOMOTIF</h1>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              <!-- Product Card -->
+              <div class="bg-white p-4 rounded-lg shadow-lg cursor-pointer" onclick="location.href='#';">
+                <img src="images/market-images/shirt.png" alt="Product 1" class="w-full h-72 object-cover rounded-lg mb-4">
+                <h2 class="text-xl font-bold mb-2">Polo hitam laki-laki</h2>
+                <p class="mb-2 text-xl font-bold">Rp. 200.000</p>
+                <div class="flex flex-row items-center mb-2 justify-between">
+                  <div class="flex flex-row items-center">
+                    <div>
+                      <img class="w-4 h-auto max-w-10" src="images/svg/location_1.svg" alt="Location Icon">
+                    </div>
+                    <div>
+                      <p class="font-light text-lg ml-1">Yogyakarta</p>
+                    </div>
+                  </div>
+                  <p class="font-light"><i class="fas fa-calendar-alt"></i> 13 Februari 2024</p>
+                </div>
+              </div>
+              <!-- Product Card -->
+              <div class="bg-white p-4 rounded-lg shadow-lg cursor-pointer" onclick="location.href='#';">
+                <img src="images/market-images/cardigan.png" alt="Product 1" class="w-full h-72 object-cover rounded-lg mb-4">
+                <h2 class="text-xl font-bold mb-2">Cardigan Wanita Polos</h2>
+                <p class="mb-2 text-xl font-bold">Rp. 100.000</p>
+                <div class="flex flex-row items-center mb-2 justify-between">
+                  <div class="flex flex-row items-center">
+                    <div>
+                      <img class="w-4 h-auto max-w-10" src="images/svg/location_1.svg" alt="Location Icon">
+                    </div>
+                    <div>
+                      <p class="font-light text-lg ml-1">Yogyakarta</p>
+                    </div>
+                  </div>
+                  <p class="font-light"><i class="fas fa-calendar-alt"></i> 13 Februari 2024</p>
+                </div>
+              </div>
+              <!-- Product Card -->
+              <div class="bg-white p-4 rounded-lg shadow-lg cursor-pointer" onclick="location.href='#';">
+                <img src="images/market-images/jam-tangan.png" alt="Product 1" class="w-full h-72 object-cover rounded-lg mb-4">
+                <h2 class="text-xl font-bold mb-2">Jam Tangan</h2>
+                <p class="mb-2 text-xl font-bold">Rp. 100.000</p>
+                <div class="flex flex-row items-center mb-2 justify-between">
+                  <div class="flex flex-row items-center">
+                    <div>
+                      <img class="w-4 h-auto max-w-10" src="images/svg/location_1.svg" alt="Location Icon">
+                    </div>
+                    <div>
+                      <p class="font-light text-lg ml-1">Yogyakarta</p>
+                    </div>
+                  </div>
+                  <p class="font-light"><i class="fas fa-calendar-alt"></i> 13 Februari 2024</p>
+                </div>
+              </div>
+              <!-- Product Card -->
+              <div class="bg-white p-4 rounded-lg shadow-lg cursor-pointer" onclick="location.href='#';">
+                <img src="images/market-images/ikat-rambut.png" alt="Product 1" class="w-full h-72 object-cover rounded-lg mb-4">
+                <h2 class="text-xl font-bold mb-2">Ikat Rambut</h2>
+                <p class="mb-2 text-xl font-bold">Rp. 100.000</p>
+                <div class="flex flex-row items-center mb-2 justify-between">
+                  <div class="flex flex-row items-center">
+                    <div>
+                      <img class="w-4 h-auto max-w-10" src="images/svg/location_1.svg" alt="Location Icon">
+                    </div>
+                    <div>
+                      <p class="font-light text-lg ml-1">Yogyakarta</p>
+                    </div>
+                  </div>
+                  <p class="font-light"><i class="fas fa-calendar-alt"></i> 13 Februari 2024</p>
+                </div>
+              </div>
+              <!-- Product Card -->
+              <div class="bg-white p-4 rounded-lg shadow-lg cursor-pointer" onclick="location.href='#';">
+                <img src="images/market-images/celana.png" alt="Product 1" class="w-full h-72 object-cover rounded-lg mb-4">
+                <h2 class="text-xl font-bold mb-2">Celana Wanita</h2>
+                <p class="mb-2 text-xl font-bold">Rp. 200.000</p>
+                <div class="flex flex-row items-center mb-2 justify-between">
+                  <div class="flex flex-row items-center">
+                    <div>
+                      <img class="w-4 h-auto max-w-10" src="images/svg/location_1.svg" alt="Location Icon">
+                    </div>
+                    <div>
+                      <p class="font-light text-lg ml-1">Yogyakarta</p>
+                    </div>
+                  </div>
+                  <p class="font-light"><i class="fas fa-calendar-alt"></i> 13 Februari 2024</p>
+                </div>
+              </div>
+              <!-- Product Card -->
+              <div class="bg-white p-4 rounded-lg shadow-lg cursor-pointer" onclick="location.href='#';">
+                <img src="images/market-images/kemeja.png" alt="Product 1" class="w-full h-72 object-cover rounded-lg mb-4">
+                <h2 class="text-xl font-bold mb-2">Kemeja Pria</h2>
+                <p class="mb-2 text-xl font-bold">Rp. 100.000</p>
+                <div class="flex flex-row items-center mb-2 justify-between">
+                  <div class="flex flex-row items-center">
+                    <div>
+                      <img class="w-4 h-auto max-w-10" src="images/svg/location_1.svg" alt="Location Icon">
+                    </div>
+                    <div>
+                      <p class="font-light text-lg ml-1">Yogyakarta</p>
+                    </div>
+                  </div>
+                  <p class="font-light"><i class="fas fa-calendar-alt"></i> 13 Februari 2024</p>
+                </div>
+              </div>
+              <!-- Product Card -->
+              <div class="bg-white p-4 rounded-lg shadow-lg cursor-pointer" onclick="location.href='#';">
+                <img src="images/market-images/sepatu.png" alt="Product 1" class="w-full h-72 object-cover rounded-lg mb-4">
+                <h2 class="text-xl font-bold mb-2">Sepatu Vans</h2>
+                <p class="mb-2 text-xl font-bold">Rp. 100.000</p>
+                <div class="flex flex-row items-center mb-2 justify-between">
+                  <div class="flex flex-row items-center">
+                    <div>
+                      <img class="w-4 h-auto max-w-10" src="images/svg/location_1.svg" alt="Location Icon">
+                    </div>
+                    <div>
+                      <p class="font-light text-lg ml-1">Yogyakarta</p>
+                    </div>
+                  </div>
+                  <p class="font-light"><i class="fas fa-calendar-alt"></i> 13 Februari 2024</p>
+                </div>
+              </div>
+              <!-- Product Card -->
+              <div class="bg-white p-4 rounded-lg shadow-lg cursor-pointer" onclick="location.href='#';">
+                <img src="images/market-images/kalung.png" alt="Product 1" class="w-full h-72 object-cover rounded-lg mb-4">
+                <h2 class="text-xl font-bold mb-2">Kalung Emas</h2>
+                <p class="mb-2 text-xl font-bold">Rp. 100.000</p>
+                <div class="flex flex-row items-center mb-2 justify-between">
+                  <div class="flex flex-row items-center">
+                    <div>
+                      <img class="w-4 h-auto max-w-10" src="images/svg/location_1.svg" alt="Location Icon">
+                    </div>
+                    <div>
+                      <p class="font-light text-lg ml-1">Yogyakarta</p>
+                    </div>
+                  </div>
+                  <p class="font-light"><i class="fas fa-calendar-alt"></i> 13 Februari 2024</p>
+                </div>
+              </div>
+            </div>
+            <!-- Pagination -->
+            <div class="flex justify-center items-center place-content-baseline mt-8">
+              <button class="px-3 py-1 border rounded-lg mx-1">1</button>
+              <button class="px-3 py-1 border rounded-lg mx-1">2</button>
+              <button class="px-3 py-1 border rounded-lg mx-1">3</button>
+              <span class="px-3 py-1">...</span>
+              <button class="px-3 py-1 border rounded-lg mx-1">75</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
 
-    <!-- Scripts -->
+    <!-- Footer -->
+    <footer class="mt-auto">
+      <div id="ftr-wrp">
+        <div
+          id="ftr"
+          class="grid grid-cols-1 grid-rows-1 gap-y-[2px] flex-col items-center bg-white text-white font-saira"
+        >
+          <div
+            id="top-ftr"
+            class="flex flex-row items-center justify-between pt-[15px] pb-3 px-2 sm:px-16 bg-black text-[10px] sm:text-[20px]"
+          >
+            <div
+              id="cstmr-srvc"
+              class="w-fit flex flex-row items-center justify-start"
+            >
+              <a href="/faq" class="leading-6">FAQ</a>
+              <h1 id="divider" class="mx-3 text-sm">|</h1>
+              <a href="/privacy" class="leading-6">Privacy Policy</a>
+              <h1 id="divider" class="mx-3 text-sm">|</h1>
+              <a href="/tos" class="leading-6">Terms & Condition</a>
+            </div>
+            <div id="c-right" class="w-auto flex justify-end items-center">
+              <h1>CopyRight © 2024 Sell&Buy</h1>
+            </div>
+          </div>
+          <div
+            id="bot-ftr"
+            class="flex flex-col sm:flex-row bg-black px-2 sm:px-16 py-3.5 sm:py-7 justify-between"
+          >
+            <div
+              id="cmpny"
+              class="w-1/2 sm:w-2/3 flex flex-col sm:flex-row justify-between sm:justify-start"
+            >
+              <img
+                src="/images/footer-logo.png"
+                class="w-[150px] sm:w-[300px] mr-[5px]"
+              />
+              <span
+                class="flex flex-col justify-between items-start text-[10px] sm:text-[15px]"
+              >
+                <h1 class="flex align-top justify-start text-left">
+                  Alamat: Jl. Komojoyo No.16, Caturtunggal, Daerah Istimewa
+                  Yogyakarta
+                </h1>
+                <h1 class="flex align-top justify-start text-left">
+                  Phone: 0822-4671-3849
+                </h1>
+                <h1 class="flex align-top justify-start text-left">
+                  Email: sellandbuy@gmail.com
+                </h1>
+              </span>
+            </div>
+            <div
+              id="social"
+              class="w-1/2 sm:w-1/3 flex flex-row justify-between items-center"
+            >
+              <a href="#" class="flex items-center"
+                ><img src="/images/instagram.png"
+              /></a>
+              <a href="#" class="flex items-center"
+                ><img src="/images/whatsapp.png"
+              /></a>
+              <a href="#" class="flex items-center"
+                ><img src="/images/linkedin.png"
+              /></a>
+              <a href="#" class="flex items-center"
+                ><img src="/images/email.png"
+              /></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-          function toggleMenu(event) {
-            const menu = document.getElementById('menu');
-            const isHidden = menu.classList.contains('hidden');
-            menu.classList.toggle('hidden', !isHidden);
-            menu.setAttribute('aria-expanded', !isHidden);
-            event.currentTarget.setAttribute('aria-expanded', !isHidden);
+    function toggleMenu(event) {
+          const menu = document.getElementById('menu');
+          const isHidden = menu.classList.contains('hidden');
+          menu.classList.toggle('hidden', !isHidden);
+          menu.setAttribute('aria-expanded', !isHidden);
+          event.currentTarget.setAttribute('aria-expanded', !isHidden);
+        }
+      
+        const menuButton = document.getElementById('menu-button');
+        menuButton.addEventListener('click', toggleMenu);
+      
+        document.addEventListener('click', (event) => {
+          const menu = document.getElementById('menu');
+          if (!menuButton.contains(event.target) && !menu.contains(event.target)) {
+            menu.classList.add('hidden');
+            menuButton.setAttribute('aria-expanded', 'false');
           }
-        
-          const menuButton = document.getElementById('menu-button');
-          menuButton.addEventListener('click', toggleMenu);
-        
-          document.addEventListener('click', (event) => {
-            const menu = document.getElementById('menu');
-            if (!menuButton.contains(event.target) && !menu.contains(event.target)) {
-              menu.classList.add('hidden');
-              menuButton.setAttribute('aria-expanded', 'false');
-            }
-          });
-        
-          const profileLink = document.getElementById('menu-item-0');
-          if (profileLink) {
-            profileLink.addEventListener('click', () => {
-              console.log('Profile link clicked');
-            });
-          }
-        });   
-      </script>
-  
-      <script src="js/script.js"></script>
-    </body>
-  </html>
-  
+        });
+
+    function readMoreFunction() {
+      var dots = document.getElementById("dots");
+      var moreText = document.getElementById("more");
+      var btnText = document.getElementById("myBtn");
+
+      if (dots.style.display === "none") {
+        dots.style.display = "inline";
+        btnText.innerHTML = "Lihat Selengkapnya";
+        moreText.style.display = "none";
+      } else {
+        dots.style.display = "none";
+        btnText.innerHTML = "Lihat Lebih Sedikt";
+        moreText.style.display = "inline";
+      }
+    }
+    </script>
+
+    <script src="/js/script.js"></script>
+  </body>
+</html>

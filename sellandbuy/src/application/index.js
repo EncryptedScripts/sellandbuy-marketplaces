@@ -75,7 +75,7 @@ app.get("/membership/success", (req, res) => {
   res.render("membership/invoice");
 });
 
-app.get("marketplace", (req, res) => {
+app.get("/marketplace", (req, res) => {
   res.render("market/katalog");
 });
 

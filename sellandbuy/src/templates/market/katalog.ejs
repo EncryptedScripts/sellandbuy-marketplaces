@@ -17,6 +17,7 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/katalog.css">
     <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
   </head>
   <body class="min-h-screen flex flex-col font-saira">
@@ -63,116 +64,101 @@
             </div>
           </div>
         </div>
-          <a
-            href="/"
-            id="navbar-logo"
-            class="w-auto sm:w-1/3 flex items-center justify-center"
-          >
-            <img
-              id="logo"
-              class="h-5 sm:h-9 sm:w-auto cursor-pointer"
-              src="/images/navbar-logo.png"
-            />
-          </a>
-          <div id="pfl" class="hidden sm:flex w-1/3 justify-end">
-            <a
-              id="sell"
-              href="#"
-              class="flex w-10 h-10 rounded-full items-center justify-center shadow-sm hover:bg-slate-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-700"
-            >
-              <img class="w-btn-pfl" src="/images/tambahkan.png" />
-            </a>
-            <div
-              id="srch-bar"
-              class="relative hidden sm:flex px-[10px] rounded-full items-center lg:w-auto hover:bg-slate-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-700"
-            >
-              <form
-                action="/search"
-                method="GET"
-                class="w-full flex items-center"
-              >
-                <span class="sr-only">Search</span>
-                <span
-                  id="srch-icon"
-                  class="absolute left-0 flex items-center pl-5"
-                >
-                  <svg
-                    class="h-5 w-5 fill-black"
-                    data-slot="icon"
-                    fill="currentColor"
-                    viewBox="0 0 16 16"
-                    xmlns="http://www.w3.org/2000/svg"
-                    aria-hidden="true"
-                  >
-                    <path
-                      clip-rule="evenodd"
-                      fill-rule="evenodd"
-                      d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
-                    ></path>
-                  </svg>
-                </span>
-                <input
-                  id="srch-input"
-                  class="font-saira placeholder:italic placeholder:text-gray-600 bg-white w-full border-2 border-black rounded-xl py-[1px] pr-3 md:pl-7 shadow-sm focus:outline-none focus:border-black focus:ring-black focus:ring-1 sm:text-sm lg:pl-6"
-                  placeholder="Search..."
-                  type="text"
-                  name="search"
-                />
-              </form>
-            </div>
-          </div>
-          <div id="slider" class="flex sm:hidden justify-end items-center">
-            <a id="menu" href="#">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                height="24px"
-                viewBox="0 -960 960 960"
-                width="24px"
-                fill="#000000"
-              >
-                <path
-                  d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z"
-                ></path>
-              </svg>
-            </a>
-          </div>
-        </div>
-        <div
-          id="bot-nav"
-          class="w-full flex items-center justify-center pt-2 pb-4 sm:px-[20px]"
+        <a
+        href="/"
+        id="navbar-logo"
+        class="w-auto mx-auto sm:w-1/3 flex items-center justify-center"
+      >
+        <img
+          id="logo"
+          class="h-5 sm:h-9 sm:w-auto cursor-pointer"
+          src="/images/navbar-logo.png"
+        />
+      </a>
+      <div id="pfl" class="hidden sm:flex w-1/3 justify-end">
+        <a
+          id="sell"
+          href="#"
+          class="flex w-10 h-10 rounded-full items-center justify-center shadow-sm hover:bg-slate-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-700"
         >
+          <img class="w-btn-pfl" src="/images/tambahkan.png" />
+          </a>
           <div
             id="srch-bar"
-            class="relative flex sm:hidden w-full px-[10px] rounded-full items-center hover:bg-slate-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-700"
+            class="relative hidden sm:flex px-[10px] rounded-full items-center lg:w-auto hover:bg-slate-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-700"
           >
-            <span class="sr-only">Search</span>
-            <span id="srch-icon" class="absolute left-0 flex items-center pl-5">
-              <svg
-                class="h-5 w-5 fill-black"
-                data-slot="icon"
-                fill="currentColor"
-                viewBox="0 0 16 16"
-                xmlns="http://www.w3.org/2000/svg"
-                aria-hidden="true"
+            <form
+              action="/search"
+              method="GET"
+              class="w-full flex items-center"
+            >
+              <span class="sr-only">Search</span>
+              <span
+                id="srch-icon"
+                class="absolute left-0 flex items-center pl-5"
               >
-                <path
-                  clip-rule="evenodd"
-                  fill-rule="evenodd"
-                  d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
-                ></path>
-              </svg>
-            </span>
-            <input
-              id="srch-input"
-              class="font-saira placeholder:italic placeholder:text-gray-600 bg-white w-full border-2 border-black rounded-xl py-[1px] pr-3 md:pl-7 shadow-sm focus:outline-none focus:border-black focus:ring-black focus:ring-1 text-sm pl-6"
-              placeholder="Search..."
-              type="text"
-              name="search"
-            />
+                <svg
+                  class="h-5 w-5 fill-black"
+                  data-slot="icon"
+                  fill="currentColor"
+                  viewBox="0 0 16 16"
+                  xmlns="http://www.w3.org/2000/svg"
+                  aria-hidden="true"
+                >
+                  <path
+                    clip-rule="evenodd"
+                    fill-rule="evenodd"
+                    d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
+                  ></path>
+                </svg>
+              </span>
+              <input
+                id="srch-input"
+                class="font-saira placeholder:italic placeholder:text-gray-600 bg-white w-full border-2 border-black rounded-xl py-[1px] pr-3 md:pl-7 shadow-sm focus:outline-none focus:border-black focus:ring-black focus:ring-1 sm:text-sm lg:pl-6"
+                placeholder="Search..."
+                type="text"
+                name="search"
+              />
+            </form>
           </div>
         </div>
-      </header>
-    </div>
+      </div>
+      <div
+        id="bot-nav"
+        class="w-full flex items-center justify-center pt-2 pb-4 sm:px-[20px]"
+      >
+        <div
+          id="srch-bar"
+          class="relative flex sm:hidden w-full mr-3 px-[10px] rounded-full items-center hover:bg-slate-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-700"
+        >
+          <span class="sr-only">Search</span>
+          <span id="srch-icon" class="absolute left-0 flex items-center pl-5">
+            <svg
+              class="h-5 w-5 fill-black"
+              data-slot="icon"
+              fill="currentColor"
+              viewBox="0 0 16 16"
+              xmlns="http://www.w3.org/2000/svg"
+              aria-hidden="true"
+            >
+              <path
+                clip-rule="evenodd"
+                fill-rule="evenodd"
+                d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
+              ></path>
+            </svg>
+          </span>
+          <input
+            id="srch-input"
+            class="font-saira placeholder:italic placeholder:text-gray-600 bg-white w-full border-2 border-black rounded-xl py-[1px] pr-3 md:pl-7 shadow-sm focus:outline-none focus:border-black focus:ring-black focus:ring-1 text-sm pl-6"
+            placeholder="Search..."
+            type="text"
+            name="search"
+          />
+        </div>
+      </div>
+    </header>
+  </div>
 
     <!-- Content -->
     <div
@@ -180,42 +166,55 @@
       class="flex-grow w-full mt-[101.2px] sm:mt-[96px] mb-10 relative"
     >
 
-      <div class="container mx-auto py-8">
+      <div class="content-wraper flex flex-col xl:flex-row container mx-auto py-8 xl:divide-solid xl:divide-x-2">
         <!-- Sorting and Filters Section -->
-        <div class="flex flex-row md:flex-row">
-          <div class="w-1/6 md:w-1/6 mb-8 md:mb-0 mr-4">
-            <h2 class="text-xl font-bold mb-4">Urutkan menurut:</h2>
-            <select class="w-full mb-32 px-4 py-2 border rounded-lg focus:outline-none focus:border-black">
-              <option selected disabled hidden>Urutkan</option>
-              <option>Pencarian</option>
-              <option>Ulasan Terbaik</option>
-              <option>Harga Terendah</option>
-              <option>Harga Tertinggi</option>
-            </select>
-            <h2 class="text-xl font-bold mb-4">Filters :</h2>
-            <select class="w-full mb-16 px-4 py-2 border rounded-lg focus:outline-none focus:border-black">
-              <option selected disabled hidden>Kondisi Barang</option>
-              <option>Baru</option>
-              <option>Bekas</option>
-            </select>
-            <select class="w-full mb-32 px-4 py-2 border rounded-lg focus:outline-none focus:border-black">
-              <option selected disabled hidden>Harga</option>
-              <option>> Rp.50.000</option>
-              <option>Rp.50.000 - Rp.100.000</option>
-              <option>Rp.100.000 - Rp.150.000</option>
-              <option>< Rp.150.000</option>
-            </select>
-            <select class="w-full mb-4 px-4 py-2 border rounded-lg focus:outline-none focus:border-black5">
-              <option selected disabled hidden>Lokasi</option>
-              <option>Dalam D.I.Yogyakarta</option>
-              <option>Luar D.I.Yogyakarta</option>
-            </select>
+        <div>
+          <div class="filter-section grid-cols-2 gap-6 mb-8 xl:mb-0 md:grid-cols-3 xl:grid-cols-1 mx-4 xl:mx-0">
+            <div class="grid grid-cols-subgrid col-span-2 sm:col-span-3">
+              <h2 class="text-xl font-bold mb-4">Urutkan menurut:</h2>
+              <select class="w-full xl:mb-32 px-4 py-2 border rounded-lg focus:outline-none focus:border-black">
+                <option selected disabled hidden>Urutkan</option>
+                <option>Pencarian</option>
+                <option>Ulasan Terbaik</option>
+                <option>Harga Terendah</option>
+                <option>Harga Tertinggi</option>
+              </select>
+            </div>
+            <div class="grid grid-cols-subgrid col-span-2 sm:col-span-3">
+              <h2 class="text-xl font-bold xl:mb-4">Filters :</h2>
+            </div>
+            <div>
+              <select class="w-full xl:mb-16 px-4 py-2 border rounded-lg focus:outline-none focus:border-black">
+                <option selected disabled hidden>Kondisi Barang</option>
+                <option>Baru</option>
+                <option>Bekas</option>
+              </select>
+            </div>
+            <div>
+              <select class="w-full xl:mb-32 px-4 py-2 border rounded-lg focus:outline-none focus:border-black">
+                <option selected disabled hidden>Harga</option>
+                <option>> Rp.50.000</option>
+                <option>Rp.50.000 - Rp.100.000</option>
+                <option>Rp.100.000 - Rp.150.000</option>
+                <option>< Rp.150.000</option>
+              </select>
+            </div>
+            <div>
+              <select class="w-full xl:mb-4 px-4 py-2 border rounded-lg focus:outline-none focus:border-black">
+                <option selected disabled hidden>Lokasi</option>
+                <option>Dalam D.I.Yogyakarta</option>
+                <option>Luar D.I.Yogyakarta</option>
+              </select>
+            </div>
           </div>
+        </div>
+                
 
           <!-- Product Listing Section -->
-          <div class="w-full ml-4 md:w-3/4">
-            <h1 class="text-4xl font-bold mb-6">OTOMOTIF</h1>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div class="w-full ml-4 md:w-3/4 xl:pl-4">
+            <h1 class="text-4xl font-bold mb-2">OTOMOTIF</h1>
+            <hr class="line h-px w-full bg-black border-0 dark:bg-gray-700">
+            <div class=" mt-4 mr-8 cl:mr-0 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               <!-- Product Card -->
               <div class="bg-white p-4 rounded-lg shadow-lg cursor-pointer" onclick="location.href='#';">
                 <img src="images/market-images/shirt.png" alt="Product 1" class="w-full h-72 object-cover rounded-lg mb-4">
@@ -364,7 +363,6 @@
           </div>
         </div>
       </div>
-
     </div>
 
     <!-- Footer -->

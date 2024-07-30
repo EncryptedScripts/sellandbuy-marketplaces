@@ -15,161 +15,147 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="/css/style.css"/>
+    <link rel="stylesheet" href="/css/form-awal.css"/>
     <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
   </head>
   <body class="min-h-screen flex flex-col font-saira">
 
-    <!-- Navbar -->
-    <div id="nav-wrp" class="mb-20">
-      <header
-        id="navbar"
-        class="bg-white fixed flex items-center justify-center flex-col inset-x-0 top-0 z-50"
+  <!-- Navbar -->
+  <div id="nav-wrp" class="mb-20">
+    <header
+      id="navbar"
+      class="bg-white fixed flex items-center justify-center flex-col inset-x-0 top-0 z-50"
+    >
+      <div
+        id="top-nav"
+        class="w-full flex items-center justify-between sm:pt-4 sm:pb-0 px-2 sm:px-5 pt-5 pb-5"
       >
-        <div
-          id="top-nav"
-          class="w-full flex items-center justify-between sm:pt-4 sm:pb-0 px-2 sm:px-5 pt-5 pb-5"
-        >
-        <div id="left-part" class="sm:w-1/3 flex justify-start">
-          <div class="relative inline-block text-left">
-            <div>
-              <button
-                type="button"
-                class="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-200"
-                id="menu-button"
-                aria-expanded="false"
-                aria-haspopup="true"
-              >
-                <img class="w-btn-pfl" src="/images/pictures/default.png" />
-              </button>
-            </div>
-            <div
-              class="absolute left-0 right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none hidden transition-all duration-300 ease-in-out"
-              role="menu"
-              aria-orientation="vertical"
-              aria-labelledby="menu-button"
-              tabindex="-1"
-              id="menu"
+      <div id="left-part" class="sm:w-1/3 flex justify-start">
+        <div class="relative inline-block text-left">
+          <div>
+            <button
+              type="button"
+              class="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-200 transition"
+              id="menu-button"
+              aria-expanded="false"
+              aria-haspopup="true"
             >
-              <div class="py-1" role="none">
-                <button class="block w-full px-4 py-2 text-sm text-left text-gray-700 cursor-pointer" role="menuitem" tabindex="-1" id="menu-item-0" onclick="location.href = '/profile'">Profile</button>
-                <button class="block w-full px-4 py-2 text-left text-sm text-gray-700 cursor-pointer" role="menuitem" tabindex="-1" id="menu-item-0" onclick="location.href = '/membership'">Jadi Member</button>
-                <form method="POST" action="#" role="none">
-                  <button type="submit" class="w-full px-4 py-2 text-left text-sm text-gray-700 cursor-pointer" role="menuitem" tabindex="-1" id="menu-item-1">Logout</button>
-                </form>
-              </div>
-            </div>
+              <img class="w-btn-pfl" src="/images/pictures/default.png" />
+            </button>
           </div>
-        </div>
-          <a
-            href="/"
-            id="navbar-logo"
-            class="w-auto sm:w-1/3 flex items-center justify-center"
+          <div
+            class="absolute left-0 right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none hidden transition-all duration-300 ease-in-out"
+            role="menu"
+            aria-orientation="vertical"
+            aria-labelledby="menu-button"
+            tabindex="-1"
+            id="menu"
           >
-            <img
-              id="logo"
-              class="h-5 sm:h-9 sm:w-auto cursor-pointer"
-              src="/images/navbar-logo.png"
-            />
-          </a>
-          <div id="pfl" class="hidden sm:flex w-1/3 justify-end">
-            <a
-              id="sell"
-              href="#"
-              class="flex w-10 h-10 rounded-full items-center justify-center shadow-sm hover:bg-slate-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-700"
-            >
-              <img class="w-btn-pfl" src="/images/tambahkan.png" />
-            </a>
-            <div
-              id="srch-bar"
-              class="relative hidden sm:flex px-[10px] rounded-full items-center lg:w-auto hover:bg-slate-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-700"
-            >
-              <form
-                action="/search"
-                method="GET"
-                class="w-full flex items-center"
-              >
-                <span class="sr-only">Search</span>
-                <span
-                  id="srch-icon"
-                  class="absolute left-0 flex items-center pl-5"
-                >
-                  <svg
-                    class="h-5 w-5 fill-black"
-                    data-slot="icon"
-                    fill="currentColor"
-                    viewBox="0 0 16 16"
-                    xmlns="http://www.w3.org/2000/svg"
-                    aria-hidden="true"
-                  >
-                    <path
-                      clip-rule="evenodd"
-                      fill-rule="evenodd"
-                      d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
-                    ></path>
-                  </svg>
-                </span>
-                <input
-                  id="srch-input"
-                  class="font-saira placeholder:italic placeholder:text-gray-600 bg-white w-full border-2 border-black rounded-xl py-[1px] pr-3 md:pl-7 shadow-sm focus:outline-none focus:border-black focus:ring-black focus:ring-1 sm:text-sm lg:pl-6"
-                  placeholder="Search..."
-                  type="text"
-                  name="search"
-                />
+            <div class="py-1" role="none">
+              <button class="block w-full px-4 py-2 text-sm text-left text-gray-700 cursor-pointer" role="menuitem" tabindex="-1" id="menu-item-0" onclick="location.href = '/profile'">Profile</button>
+              <button class="block w-full px-4 py-2 text-left text-sm text-gray-700 cursor-pointer" role="menuitem" tabindex="-1" id="menu-item-0" onclick="location.href = '/membership'">Jadi Member</button>
+              <form method="POST" action="#" role="none">
+                <button type="submit" class="w-full px-4 py-2 text-left text-sm text-gray-700 cursor-pointer" role="menuitem" tabindex="-1" id="menu-item-1">Logout</button>
               </form>
             </div>
           </div>
-          <div id="slider" class="flex sm:hidden justify-end items-center">
-            <a id="menu" href="#">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                height="24px"
-                viewBox="0 -960 960 960"
-                width="24px"
-                fill="#000000"
-              >
-                <path
-                  d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z"
-                ></path>
-              </svg>
-            </a>
-          </div>
         </div>
-        <div
-          id="bot-nav"
-          class="w-full flex items-center justify-center pt-2 pb-4 sm:px-[20px]"
+      </div>
+        <a
+          href="/"
+          id="navbar-logo"
+          class="w-auto mx-auto sm:w-1/3 flex items-center justify-center"
         >
+          <img
+            id="logo"
+            class="h-5 sm:h-9 sm:w-auto cursor-pointer"
+            src="/images/navbar-logo.png"
+          />
+        </a>
+        <div id="pfl" class="hidden sm:flex w-1/3 justify-end">
+          <a
+            id="sell"
+            href="#"
+            class="flex w-10 h-10 rounded-full items-center justify-center shadow-sm hover:bg-slate-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-700"
+          >
+            <img class="w-btn-pfl" src="/images/tambahkan.png" />
+          </a>
           <div
             id="srch-bar"
-            class="relative flex sm:hidden w-full px-[10px] rounded-full items-center hover:bg-slate-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-700"
+            class="relative hidden sm:flex px-[10px] rounded-full items-center lg:w-auto hover:bg-slate-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-700"
           >
-            <span class="sr-only">Search</span>
-            <span id="srch-icon" class="absolute left-0 flex items-center pl-5">
-              <svg
-                class="h-5 w-5 fill-black"
-                data-slot="icon"
-                fill="currentColor"
-                viewBox="0 0 16 16"
-                xmlns="http://www.w3.org/2000/svg"
-                aria-hidden="true"
+            <form
+              action="/search"
+              method="GET"
+              class="w-full flex items-center"
+            >
+              <span class="sr-only">Search</span>
+              <span
+                id="srch-icon"
+                class="absolute left-0 flex items-center pl-5"
               >
-                <path
-                  clip-rule="evenodd"
-                  fill-rule="evenodd"
-                  d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
-                ></path>
-              </svg>
-            </span>
-            <input
-              id="srch-input"
-              class="font-saira placeholder:italic placeholder:text-gray-600 bg-white w-full border-2 border-black rounded-xl py-[1px] pr-3 md:pl-7 shadow-sm focus:outline-none focus:border-black focus:ring-black focus:ring-1 text-sm pl-6"
-              placeholder="Search..."
-              type="text"
-              name="search"
-            />
+                <svg
+                  class="h-5 w-5 fill-black"
+                  data-slot="icon"
+                  fill="currentColor"
+                  viewBox="0 0 16 16"
+                  xmlns="http://www.w3.org/2000/svg"
+                  aria-hidden="true"
+                >
+                  <path
+                    clip-rule="evenodd"
+                    fill-rule="evenodd"
+                    d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
+                  ></path>
+                </svg>
+              </span>
+              <input
+                id="srch-input"
+                class="font-saira placeholder:italic placeholder:text-gray-600 bg-white w-full border-2 border-black rounded-xl py-[1px] pr-3 md:pl-7 shadow-sm focus:outline-none focus:border-black focus:ring-black focus:ring-1 sm:text-sm lg:pl-6"
+                placeholder="Search..."
+                type="text"
+                name="search"
+              />
+            </form>
           </div>
         </div>
-      </header>
-    </div>
+      </div>
+      <div
+        id="bot-nav"
+        class="w-full flex items-center justify-center pt-2 pb-4 sm:px-[20px]"
+      >
+        <div
+          id="srch-bar"
+          class="relative flex sm:hidden w-full px-[10px] rounded-full items-center hover:bg-slate-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-700"
+        >
+          <span class="sr-only">Search</span>
+          <span id="srch-icon" class="absolute left-0 flex items-center pl-5">
+            <svg
+              class="h-5 w-5 fill-black"
+              data-slot="icon"
+              fill="currentColor"
+              viewBox="0 0 16 16"
+              xmlns="http://www.w3.org/2000/svg"
+              aria-hidden="true"
+            >
+              <path
+                clip-rule="evenodd"
+                fill-rule="evenodd"
+                d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
+              ></path>
+            </svg>
+          </span>
+          <input
+            id="srch-input"
+            class="font-saira placeholder:italic placeholder:text-gray-600 bg-white w-full border-2 border-black rounded-xl py-[1px] pr-3 md:pl-7 shadow-sm focus:outline-none focus:border-black focus:ring-black focus:ring-1 text-sm pl-6"
+            placeholder="Search..."
+            type="text"
+            name="search"
+          />
+        </div>
+      </div>
+    </header>
+  </div>
 
     <!-- Content -->
     <div
@@ -180,26 +166,26 @@
 
       <!-- Header -->
       <section class="w-full sm:w-1/2 max-w-7xl mx-auto p-8">
-        <h1 class="text-5xl font-bold text-left mt-12 mb-4">Let's finish the payment</h1>
+        <h1 class="header text-5xl font-bold text-center xl:text-left mt-12 mb-4">Let's finish the payment</h1>
         <hr class="h-px w-full bg-black border-0 dark:bg-gray-700">
       </section>
 
         <!-- Payment Section -->
         <section class="py-8">
           <div class="max-w-7xl mx-auto px-4">
-            <div class="grid grid-cols-2 md:grid-cols-2 gap-6">
+            <div class="form-container grid grid-cols-1 md:grid-cols-2 gap-6">
               <!-- Payment Form -->
               <div class="border-2 border-black p-6 rounded-lg shadow-lg">
                 <h2 class="text-3xl font-bold mb-1">Bronze <span class="text-sm text-gray-700 font-normal">1 bulan + 1 bulan</span> <span class="float-right">Rp24.900</span></h2>
                 <hr class="h-px w-full bg-black border-0 dark:bg-gray-700">
                 <form>
-                  <div class="my-4 mr-4 inline-block">
+                  <div class="my-4 lg:mr-4 lg:inline-block">
                     <label class="block text-gray-700">Nama depan<span class="text-red-500">*</span></label>
-                    <input type="text" class="w-64 px-4 py-2 border rounded-2xl focus:outline-none focus:border-black transition delay-75" placeholder="Nama depan" required>
+                    <input type="text" class="nama-depan w-full lg:w-64 px-4 py-2 border rounded-2xl focus:outline-none focus:border-black transition delay-75" placeholder="Nama depan" required>
                   </div>
-                  <div class="mb-4 inline-block">
+                  <div class="mb-4 lg:inline-block">
                     <label class="block text-gray-700">Nama belakang<span class="text-red-500">*</span></label>
-                    <input type="text" class="w-64 px-4 py-2 border rounded-2xl focus:outline-none focus:border-black transition delay-75" placeholder="Nama belakang" required>
+                    <input type="text" class="nama-belakang w-full lg:w-64 px-4 py-2 border rounded-2xl focus:outline-none focus:border-black transition delay-75" placeholder="Nama belakang" required>
                   </div>
                   <div class="mb-4">
                     <label class="block text-gray-700">Nomor telepon<span class="text-red-500">*</span></label>
@@ -232,7 +218,7 @@
                   </div>
                   <hr class="h-px w-full bg-black border-0 dark:bg-gray-700">
                   <div>
-                  <button class="bg-black text-white py-2 px-12 mt-4 rounded-xl hover:bg-gray-900" type="submit">Buat Tagihan Pembayaran</button>
+                  <button class="ml-auto sm:ml-0 bg-black text-white py-2 px-12 mt-4 rounded-xl hover:bg-gray-900" type="submit">Buat Tagihan Pembayaran</button>
                     <p class="mt-2"> Dengan checkout, Anda setuju dengan <strong>Kebijakan Privasi</strong> Penggunaan kami dan mengonfirmasi bahwa Anda telah membaca 
                       <strong>Kebijakan Privasi</strong> kami. Anda dapat membatalkan biaya perpanjangan layanan kapan saja.</p>
                   </div>
@@ -244,7 +230,7 @@
               </div>
 
               <!-- Illustration -->
-              <div class="flex justify-center items-center">
+              <div class="illustration flex justify-center items-center">
                 <img src="/images//svg/post-office.svg" alt="Illustration" class="w-full md:w-3/4">
               </div>
             </div>

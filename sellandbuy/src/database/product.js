@@ -37,6 +37,14 @@ const ProductSchema = new Schema({
     type: String,
     required: true,
   },
+  location: {
+    type: String,
+    required: true,
+  },
+  fullAddress: {
+    type: String,
+    required: true,
+  },
   images: {
     type: [String],
     validate: {
@@ -54,6 +62,13 @@ const ProductSchema = new Schema({
   updatedAt: {
     type: Date,
     default: Date.now,
+  },
+  isVerified: {
+    type: Boolean,
+    default: false,
+  },
+  paymentProof: {
+    type: String,
   },
 });
 

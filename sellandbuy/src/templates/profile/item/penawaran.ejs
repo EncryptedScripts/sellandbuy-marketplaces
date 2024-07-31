@@ -17,11 +17,10 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="/css/penawaran.css">
+    <link rel="stylesheet" href="/css/penawaran.css" />
     <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
   </head>
   <body class="min-h-screen flex flex-col font-saira">
-
     <!-- Navbar -->
     <div id="nav-wrp" class="mb-20">
       <header
@@ -32,37 +31,61 @@
           id="top-nav"
           class="w-full flex items-center justify-between sm:pt-4 sm:pb-0 px-2 sm:px-5 pt-5 pb-5"
         >
-        <div id="left-part" class="sm:w-1/3 flex justify-start">
-          <div class="relative inline-block text-left">
-            <div>
-              <button
-                type="button"
-                class="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-200"
-                id="menu-button"
-                aria-expanded="false"
-                aria-haspopup="true"
+          <div id="left-part" class="sm:w-1/3 flex justify-start">
+            <div class="relative inline-block text-left">
+              <div>
+                <button
+                  type="button"
+                  class="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-200"
+                  id="menu-button"
+                  aria-expanded="false"
+                  aria-haspopup="true"
+                >
+                  <img class="w-btn-pfl" src="/images/pictures/default.png" />
+                </button>
+              </div>
+              <div
+                class="absolute left-0 right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none hidden transition-all duration-300 ease-in-out"
+                role="menu"
+                aria-orientation="vertical"
+                aria-labelledby="menu-button"
+                tabindex="-1"
+                id="menu"
               >
-                <img class="w-btn-pfl" src="/images/pictures/default.png" />
-              </button>
-            </div>
-            <div
-              class="absolute left-0 right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none hidden transition-all duration-300 ease-in-out"
-              role="menu"
-              aria-orientation="vertical"
-              aria-labelledby="menu-button"
-              tabindex="-1"
-              id="menu"
-            >
-              <div class="py-1" role="none">
-                <button class="block w-full px-4 py-2 text-sm text-left text-gray-700 cursor-pointer" role="menuitem" tabindex="-1" id="menu-item-0" onclick="location.href = '/profile'">Profile</button>
-                <button class="block w-full px-4 py-2 text-left text-sm text-gray-700 cursor-pointer" role="menuitem" tabindex="-1" id="menu-item-0" onclick="location.href = '/membership'">Jadi Member</button>
-                <form method="POST" action="#" role="none">
-                  <button type="submit" class="w-full px-4 py-2 text-left text-sm text-gray-700 cursor-pointer" role="menuitem" tabindex="-1" id="menu-item-1">Logout</button>
-                </form>
+                <div class="py-1" role="none">
+                  <button
+                    class="block w-full px-4 py-2 text-sm text-left text-gray-700 cursor-pointer"
+                    role="menuitem"
+                    tabindex="-1"
+                    id="menu-item-0"
+                    onclick="location.href = '/profile'"
+                  >
+                    Profile
+                  </button>
+                  <button
+                    class="block w-full px-4 py-2 text-left text-sm text-gray-700 cursor-pointer"
+                    role="menuitem"
+                    tabindex="-1"
+                    id="menu-item-0"
+                    onclick="location.href = '/membership'"
+                  >
+                    Jadi Member
+                  </button>
+                  <form method="POST" action="#" role="none">
+                    <button
+                      type="submit"
+                      class="w-full px-4 py-2 text-left text-sm text-gray-700 cursor-pointer"
+                      role="menuitem"
+                      tabindex="-1"
+                      id="menu-item-1"
+                    >
+                      Logout
+                    </button>
+                  </form>
+                </div>
               </div>
             </div>
           </div>
-        </div>
           <a
             href="/"
             id="navbar-logo"
@@ -77,7 +100,7 @@
           <div id="pfl" class="hidden sm:flex w-1/3 justify-end">
             <a
               id="sell"
-              href="#"
+              href="/jual"
               class="flex w-10 h-10 rounded-full items-center justify-center shadow-sm hover:bg-slate-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-700"
             >
               <img class="w-btn-pfl" src="/images/tambahkan.png" />
@@ -179,93 +202,132 @@
       id="content"
       class="flex-grow w-full mt-[101.2px] sm:mt-[96px] mb-10 relative"
     >
-    <div class="container mx-auto p-4">
-        <h2 class="mt-8 text-3xl lg:mt-0 lg:text-5xl font-bold mb-4">Daftar Penawaran Barang</h2>
-        <hr class="h-px w-full bg-black border-0 dark:bg-gray-700 mb-4">
-        
+      <div class="container mx-auto p-4">
+        <h2 class="mt-8 text-3xl lg:mt-0 lg:text-5xl font-bold mb-4">
+          Daftar Penawaran Barang
+        </h2>
+        <hr class="h-px w-full bg-black border-0 dark:bg-gray-700 mb-4" />
+
         <!-- Offer List -->
         <div id="offer-list" class="space-y-4">
-        <!-- Offer example -->
-        <div class="bg-white px-4 space-y-4">
-          <div class="flex items-center justify-between">
-            <div class="flex items-center">
-              <img class="w-12 h-12 rounded-full" src="/images/pictures/ex-img.png" alt="Profile Picture">
-              <div class="ml-4">
-                <div class="text-lg font-semibold">Jack Resti</div>
-                <div class="text-xs text-gray-600">Menawar Rp. 125.000</div>
+          <!-- Offer example -->
+          <div class="bg-white px-4 space-y-4">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center">
+                <img
+                  class="w-12 h-12 rounded-full"
+                  src="/images/pictures/ex-img.png"
+                  alt="Profile Picture"
+                />
+                <div class="ml-4">
+                  <div class="text-lg font-semibold">Jack Resti</div>
+                  <div class="text-xs text-gray-600">Menawar Rp. 125.000</div>
+                </div>
+              </div>
+              <div>
+                <a href="#" class="text-sm text-black font-semibold"
+                  >hubungi sekarang</a
+                >
               </div>
             </div>
-            <div>
-              <a href="#" class="text-sm text-black font-semibold">hubungi sekarang</a>
-            </div>
-          </div>
-          
-          <hr class="h-px w-full bg-gray-300 border-0">
-          
-          <!-- Repeat the above block for each offer -->
-          <div class="flex items-center justify-between">
-            <div class="flex items-center">
-              <img class="w-12 h-12 rounded-full" src="/images/pictures/ex-img.png" alt="Profile Picture">
-              <div class="ml-4">
-                <div class="text-lg font-semibold">Jack Resti</div>
-                <div class="text-xs text-gray-600">Menawar Rp. 125.000</div>
+
+            <hr class="h-px w-full bg-gray-300 border-0" />
+
+            <!-- Repeat the above block for each offer -->
+            <div class="flex items-center justify-between">
+              <div class="flex items-center">
+                <img
+                  class="w-12 h-12 rounded-full"
+                  src="/images/pictures/ex-img.png"
+                  alt="Profile Picture"
+                />
+                <div class="ml-4">
+                  <div class="text-lg font-semibold">Jack Resti</div>
+                  <div class="text-xs text-gray-600">Menawar Rp. 125.000</div>
+                </div>
+              </div>
+              <div>
+                <a href="#" class="text-sm text-black font-semibold"
+                  >hubungi sekarang</a
+                >
               </div>
             </div>
-            <div>
-              <a href="#" class="text-sm text-black font-semibold">hubungi sekarang</a>
-            </div>
-          </div>
-          
-          <hr class="h-px w-full bg-gray-300 border-0">
-          
-          <div class="flex items-center justify-between">
-            <div class="flex items-center">
-              <img class="w-12 h-12 rounded-full" src="/images/pictures/ex-img.png" alt="Profile Picture">
-              <div class="ml-4">
-                <div class="text-lg font-semibold">Jack Resti</div>
-                <div class="text-xs text-gray-600">Menawar Rp. 125.000</div>
+
+            <hr class="h-px w-full bg-gray-300 border-0" />
+
+            <div class="flex items-center justify-between">
+              <div class="flex items-center">
+                <img
+                  class="w-12 h-12 rounded-full"
+                  src="/images/pictures/ex-img.png"
+                  alt="Profile Picture"
+                />
+                <div class="ml-4">
+                  <div class="text-lg font-semibold">Jack Resti</div>
+                  <div class="text-xs text-gray-600">Menawar Rp. 125.000</div>
+                </div>
+              </div>
+              <div>
+                <a href="#" class="text-sm text-black font-semibold"
+                  >hubungi sekarang</a
+                >
               </div>
             </div>
-            <div>
-              <a href="#" class="text-sm text-black font-semibold">hubungi sekarang</a>
-            </div>
-          </div>
-          
-          <hr class="h-px w-full bg-gray-300 border-0">
-          
-          <div class="flex items-center justify-between">
-            <div class="flex items-center">
-              <img class="w-12 h-12 rounded-full" src="/images/pictures/ex-img.png" alt="Profile Picture">
-              <div class="ml-4">
-                <div class="text-lg font-semibold">Jack Resti</div>
-                <div class="text-xs text-gray-600">Menawar Rp. 125.000</div>
+
+            <hr class="h-px w-full bg-gray-300 border-0" />
+
+            <div class="flex items-center justify-between">
+              <div class="flex items-center">
+                <img
+                  class="w-12 h-12 rounded-full"
+                  src="/images/pictures/ex-img.png"
+                  alt="Profile Picture"
+                />
+                <div class="ml-4">
+                  <div class="text-lg font-semibold">Jack Resti</div>
+                  <div class="text-xs text-gray-600">Menawar Rp. 125.000</div>
+                </div>
+              </div>
+              <div>
+                <a
+                  href="/pengguna-lain"
+                  class="text-sm text-black font-semibold"
+                  >hubungi sekarang</a
+                >
               </div>
             </div>
-            <div>
-              <a href="/pengguna-lain" class="text-sm text-black font-semibold">hubungi sekarang</a>
-            </div>
-          </div>
-          
-          <hr class="h-px w-full bg-gray-300 border-0">
-          
-          <div class="flex items-center justify-between">
-            <div class="flex items-center">
-              <img class="w-12 h-12 rounded-full" src="/images/pictures/ex-img.png" alt="Profile Picture">
-              <div class="ml-4">
-                <div class="text-lg font-semibold">Jack Resti</div>
-                <div class="text-xs text-gray-600">Menawar Rp. 125.000</div>
+
+            <hr class="h-px w-full bg-gray-300 border-0" />
+
+            <div class="flex items-center justify-between">
+              <div class="flex items-center">
+                <img
+                  class="w-12 h-12 rounded-full"
+                  src="/images/pictures/ex-img.png"
+                  alt="Profile Picture"
+                />
+                <div class="ml-4">
+                  <div class="text-lg font-semibold">Jack Resti</div>
+                  <div class="text-xs text-gray-600">Menawar Rp. 125.000</div>
+                </div>
+              </div>
+              <div>
+                <a href="#" class="text-sm text-black font-semibold"
+                  >hubungi sekarang</a
+                >
               </div>
             </div>
-            <div>
-              <a href="#" class="text-sm text-black font-semibold">hubungi sekarang</a>
-            </div>
+            <hr class="h-px w-full bg-gray-300 border-0" />
           </div>
-          <hr class="h-px w-full bg-gray-300 border-0">
         </div>
-        </div>
-        
+
         <div class="text-center mt-4">
-          <button onclick="loadMoreFunction()" class="text-gray-500 font-semibold">Lihat banyak</button>
+          <button
+            onclick="loadMoreFunction()"
+            class="text-gray-500 font-semibold"
+          >
+            Lihat banyak
+          </button>
         </div>
       </div>
     </div>
@@ -345,47 +407,50 @@
     </footer>
 
     <script>
-    function toggleMenu(event) {
-          const menu = document.getElementById('menu');
-          const isHidden = menu.classList.contains('hidden');
-          menu.classList.toggle('hidden', !isHidden);
-          menu.setAttribute('aria-expanded', !isHidden);
-          event.currentTarget.setAttribute('aria-expanded', !isHidden);
-        }
-      
-        const menuButton = document.getElementById('menu-button');
-        menuButton.addEventListener('click', toggleMenu);
-      
-        document.addEventListener('click', (event) => {
-          const menu = document.getElementById('menu');
-          if (!menuButton.contains(event.target) && !menu.contains(event.target)) {
-            menu.classList.add('hidden');
-            menuButton.setAttribute('aria-expanded', 'false');
-          }
-        });
-
-    function readMoreFunction() {
-      var dots = document.getElementById("dots");
-      var moreText = document.getElementById("more");
-      var btnText = document.getElementById("myBtn");
-
-      if (dots.style.display === "none") {
-        dots.style.display = "inline";
-        btnText.innerHTML = "Lihat Selengkapnya";
-        moreText.style.display = "none";
-      } else {
-        dots.style.display = "none";
-        btnText.innerHTML = "Lihat Lebih Sedikt";
-        moreText.style.display = "inline";
+      function toggleMenu(event) {
+        const menu = document.getElementById("menu");
+        const isHidden = menu.classList.contains("hidden");
+        menu.classList.toggle("hidden", !isHidden);
+        menu.setAttribute("aria-expanded", !isHidden);
+        event.currentTarget.setAttribute("aria-expanded", !isHidden);
       }
-    }
-      
-    // Show more function
-    function loadMoreFunction() {
-      const offerList = document.getElementById('offer-list');
 
-      // Example profile to be added
-      const newProfile = `
+      const menuButton = document.getElementById("menu-button");
+      menuButton.addEventListener("click", toggleMenu);
+
+      document.addEventListener("click", (event) => {
+        const menu = document.getElementById("menu");
+        if (
+          !menuButton.contains(event.target) &&
+          !menu.contains(event.target)
+        ) {
+          menu.classList.add("hidden");
+          menuButton.setAttribute("aria-expanded", "false");
+        }
+      });
+
+      function readMoreFunction() {
+        var dots = document.getElementById("dots");
+        var moreText = document.getElementById("more");
+        var btnText = document.getElementById("myBtn");
+
+        if (dots.style.display === "none") {
+          dots.style.display = "inline";
+          btnText.innerHTML = "Lihat Selengkapnya";
+          moreText.style.display = "none";
+        } else {
+          dots.style.display = "none";
+          btnText.innerHTML = "Lihat Lebih Sedikt";
+          moreText.style.display = "inline";
+        }
+      }
+
+      // Show more function
+      function loadMoreFunction() {
+        const offerList = document.getElementById("offer-list");
+
+        // Example profile to be added
+        const newProfile = `
       <div class="bg-white px-4">
           <div class="flex items-center justify-between">
             <div class="flex items-center">
@@ -404,12 +469,11 @@
       </div>
       `;
 
-      // Add the new profile multiple times (e.g., 5 times)
-      for (let i = 0; i < 5; i++) {
-        offerList.insertAdjacentHTML('beforeend', newProfile);
+        // Add the new profile multiple times (e.g., 5 times)
+        for (let i = 0; i < 5; i++) {
+          offerList.insertAdjacentHTML("beforeend", newProfile);
+        }
       }
-    };
-
     </script>
 
     <script src="/js/script.js"></script>

@@ -14,8 +14,8 @@
       href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="css/style.css" />
-    <link rel="stylesheet" href="css/profile-pengguna.css">
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/profile-pengguna.css">
     <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
   </head>
   <body class="min-h-screen flex flex-col font-saira">
@@ -30,37 +30,37 @@
           id="top-nav"
           class="w-full flex items-center sm:justify-between sm:pt-4 sm:pb-0 px-2 sm:px-5 pt-5 pb-5"
         >
-        <div id="left-part" class="sm:w-1/3 flex justify-start">
-          <div class="relative inline-block text-left">
-            <div>
-              <button
-                type="button"
-                class="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-200 transition delay-100"
-                id="menu-button"
-                aria-expanded="false"
-                aria-haspopup="true"
+          <div id="left-part" class="sm:w-1/3 flex justify-start">
+            <div class="relative inline-block text-left">
+              <div>
+                <button
+                  type="button"
+                  class="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-200 transition delay-100"
+                  id="menu-button"
+                  aria-expanded="false"
+                  aria-haspopup="true"
+                >
+                  <img class="w-btn-pfl" src="/images/pictures/default.png" />
+                </button>
+              </div>
+              <div
+                class="absolute left-0 right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none hidden transition-all duration-300 ease-in-out"
+                role="menu"
+                aria-orientation="vertical"
+                aria-labelledby="menu-button"
+                tabindex="-1"
+                id="menu"
               >
-                <img class="w-btn-pfl" src="images/pictures/default.png" />
-              </button>
-            </div>
-            <div
-              class="absolute left-0 right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none hidden transition-all duration-300 ease-in-out"
-              role="menu"
-              aria-orientation="vertical"
-              aria-labelledby="menu-button"
-              tabindex="-1"
-              id="menu"
-            >
-              <div class="py-1" role="none">
-                <button class="block w-full px-4 py-2 text-sm text-left text-gray-700 cursor-pointer" role="menuitem" tabindex="-1" id="menu-item-0" onclick="location.href = '/profile'">Profile</button>
-                <button class="block w-full px-4 py-2 text-left text-sm text-gray-700 cursor-pointer" role="menuitem" tabindex="-1" id="menu-item-0" onclick="location.href = '/membership'">Jadi Member</button>
-                <form method="POST" action="#" role="none">
-                  <button type="submit" class="w-full px-4 py-2 text-left text-sm text-gray-700 cursor-pointer" role="menuitem" tabindex="-1" id="menu-item-1">Logout</button>
-                </form>
+                <div class="py-1" role="none">
+                  <button class="block w-full px-4 py-2 text-sm text-left text-gray-700 cursor-pointer" role="menuitem" tabindex="-1" id="menu-item-0" onclick="location.href = '/profile'">Profile</button>
+                  <button class="block w-full px-4 py-2 text-left text-sm text-gray-700 cursor-pointer" role="menuitem" tabindex="-1" id="menu-item-0" onclick="location.href = '/membership'">Jadi Member</button>
+                  <form method="POST" action="#" role="none">
+                    <button type="submit" class="w-full px-4 py-2 text-left text-sm text-gray-700 cursor-pointer" role="menuitem" tabindex="-1" id="menu-item-1">Logout</button>
+                  </form>
+                </div>
               </div>
             </div>
           </div>
-        </div>
           <a
             href="/"
             id="navbar-logo"
@@ -69,16 +69,16 @@
             <img
               id="logo"
               class="h-5 sm:h-9 sm:w-auto cursor-pointer"
-              src="images/navbar-logo.png"
+              src="/images/navbar-logo.png"
             />
           </a>
           <div id="pfl" class="hidden sm:flex w-1/3 justify-end">
             <a
               id="sell"
-              href="#"
+              href="/jual"
               class="flex w-10 h-10 rounded-full items-center justify-center shadow-sm hover:bg-slate-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-700"
             >
-              <img class="w-btn-pfl" src="images/tambahkan.png" />
+              <img class="w-btn-pfl" src="/images/tambahkan.png" />
             </a>
             <div
               id="srch-bar"
@@ -179,152 +179,160 @@
         <!-- Profile Picture -->
         <div class="profile-info flex flex-col sm:flex-row mb-4 sm:mb-0 mt-8">
           <div class="profile-picture mb-4 text-center sm:mr-8 sm:ml-0">
-            <img
-              class="rounded-full h-64 sm:h-auto w-auto mx-auto sm:mx-0"
-              src="images/pictures/default.png"
-              alt="User Picture"
-            />
-            <button
-              class="mt-4 px-4 py-2 rounded-full bg-gray-200 hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-400"
-            >
-              Pilih Foto
-            </button>
-          </div>
+            <form action="/profile/update-picture" method="POST" enctype="multipart/form-data">
+              <img
+                class="rounded-full h-48 w-48 mx-auto sm:mx-0 object-cover"
+                src="<%= user.profilePicturePath %>"
+                alt="User Picture" 
+              />
+              <input type="file" name="profilePicture" accept="image/*" class="mt-4 px-4 py-2 rounded-full bg-gray-200 hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-400" />
+              <button type="submit" class="mt-4 px-4 py-2 rounded-full bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400">Pilih Foto</button>
+            </form>
+          </div>        
 
           <!-- Profile Details -->
           <div class="profile-details w-full">
-
-            <!-- Name -->
-            <div class="mb-4">
-              <label class="block text-gray-700 text-2xl font-semibold mb-2">Nama Pengguna</label>
-              <hr class="h-px bg-black border-0 dark:bg-gray-700">
-              <div class="flex justify-between">
-                <div class="flex-auto mt-1 items-center">
-                  <input
-                    type="text"
-                    id="usernameInput"
-                    value="<%= user.username %>"
-                    class="w-full p-2 py-1 text-2xl font-thin rounded-xl"
-                    readonly
-                  />
-                </div>
-                <div class="flex-none">
-                  <button
-                    id="editButtonUsername"
-                    class="pl-2 py-3 font-semibold"
-                    onclick="enableEdit('usernameInput', 'editButtonUsername', 'saveButtonUsername')"
-                  >
-                    Ubah
-                  </button>
-                  <button
-                    id="saveButtonUsername"
-                    class="px-2 py-3 font-semibold hidden"
-                    onclick="disableEdit('usernameInput', 'editButtonUsername', 'saveButtonUsername')"
-                  >
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"><path d="M10 20A10 10 0 1 0 0 10a10 10 0 0 0 10 10zM8.711 4.3l5.7 5.766L8.7 15.711l-1.4-1.422 4.289-4.242-4.3-4.347z"/></svg>
-                  </button>
+            <form action="/profile/update" method="POST">
+              <!-- Name -->
+              <div class="mb-4">
+                <label class="block text-gray-700 text-2xl font-semibold mb-2">Nama Pengguna</label>
+                <hr class="h-px bg-black border-0 dark:bg-gray-700">
+                <div class="flex justify-between">
+                  <div class="flex-auto mt-1 items-center">
+                    <input
+                      type="text"
+                      id="usernameInput"
+                      name="username"
+                      value="<%= user.username %>"
+                      class="w-full p-2 py-1 text-2xl font-thin rounded-xl"
+                      readonly
+                    />
+                  </div>
+                  <div class="flex-none">
+                    <button
+                      id="editButtonUsername"
+                      class="pl-2 py-3 font-semibold"
+                      type="button"
+                      onclick="enableEdit('usernameInput', 'editButtonUsername', 'saveButtonUsername')"
+                    >
+                      Ubah
+                    </button>
+                    <button
+                      id="saveButtonUsername"
+                      class="px-2 py-3 font-semibold hidden"
+                      type="submit"
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"><path d="M10 20A10 10 0 1 0 0 10a10 10 0 0 0 10 10zM8.711 4.3l5.7 5.766L8.7 15.711l-1.4-1.422 4.289-4.242-4.3-4.347z"/></svg>
+                    </button>
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <!-- Birthdate -->
-            <div class="mb-4">
-              <label class="block text-gray-700 text-2xl font-semibold mb-2">Tanggal Lahir</label>
-              <hr class="h-px bg-black border-0 dark:bg-gray-700">
-              <div class="flex justify-between">
-                <div class="flex-auto mt-1 items-center">
-                  <input
-                    type="text"
-                    id="birthdateInput"
-                    value="<%= user.birthdate.toDateString() %>"
-                    class="w-full p-2 py-1 text-2xl font-thin rounded-xl"
-                    readonly
-                  />
-                </div>
-                <div class="flex-none">
-                  <button
-                    id="editButtonBirthdate"
-                    class="pl-2 py-3 font-semibold"
-                    onclick="enableEdit('birthdateInput', 'editButtonBirthdate', 'saveButtonBirthdate', true)"
-                  >
-                    Ubah
-                  </button>
-                  <button
-                    id="saveButtonBirthdate"
-                    class="px-2 py-3 font-semibold hidden"
-                    onclick="disableEdit('birthdateInput', 'editButtonBirthdate', 'saveButtonBirthdate', true)"
-                  >
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"><path d="M10 20A10 10 0 1 0 0 10a10 10 0 0 0 10 10zM8.711 4.3l5.7 5.766L8.7 15.711l-1.4-1.422 4.289-4.242-4.3-4.347z"/></svg>
-                  </button>
-                </div>
-              </div> 
-            </div>
-          
-            <!-- Phone Number -->
-            <div class="mb-4">
-              <label class="block text-gray-700 text-2xl font-semibold mb-2">Nomor Telepon</label>
-              <hr class="h-px bg-black border-0 dark:bg-gray-700">
-              <div class="flex justify-between">
-                <div class="flex-auto mt-1 items-center">
-                  <input
-                    type="text"
-                    id="phoneInput"
-                    value="<%= user.phone %>"
-                    class="w-full p-2 py-1 text-2xl font-thin rounded-xl"
-                    readonly
-                  />
-                </div>
-                <div class="flex-none">
-                  <button
-                    id="editButtonPhone"
-                    class="pl-2 py-3 font-semibold"
-                    onclick="enableEdit('phoneInput', 'editButtonPhone', 'saveButtonPhone')"
-                  >
-                    Ubah
-                  </button>
-                  <button
-                    id="saveButtonPhone"
-                    class="px-2 py-3 font-semibold hidden"
-                    onclick="disableEdit('phoneInput', 'editButtonPhone', 'saveButtonPhone')"
-                  >
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"><path d="M10 20A10 10 0 1 0 0 10a10 10 0 0 0 10 10zM8.711 4.3l5.7 5.766L8.7 15.711l-1.4-1.422 4.289-4.242-4.3-4.347z"/></svg>
-                  </button>
-                </div>
-              </div> 
-            </div>
-          
-            <!-- Email -->
-            <div class="mb-4">
-              <label class="block text-gray-700 text-2xl font-semibold mb-2">Email Pengguna</label>
-              <hr class="h-px bg-black border-0 dark:bg-gray-700">
-              <div class="flex justify-between">
-                <div class="flex-auto mt-1 items-center">
-                  <input
-                    type="text"
-                    id="emailInput"
-                    value="<%= user.email %>"
-                    class="w-full p-2 py-1 text-2xl font-thin rounded-xl"
-                    readonly
-                  />
-                </div>
-                <div class="flex-none">
-                  <button
-                    id="editButtonEmail"
-                    class="pl-2 py-3 font-semibold"
-                    onclick="enableEdit('emailInput', 'editButtonEmail', 'saveButtonEmail')"
-                  >
-                    Ubah
-                  </button>
-                  <button
-                    id="saveButtonEmail"
-                    class="px-2 py-3 font-semibold hidden"
-                    onclick="disableEdit('emailInput', 'editButtonEmail', 'saveButtonEmail')"
-                  >
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"><path d="M10 20A10 10 0 1 0 0 10a10 10 0 0 0 10 10zM8.711 4.3l5.7 5.766L8.7 15.711l-1.4-1.422 4.289-4.242-4.3-4.347z"/></svg>
-                  </button>
-                </div>
-              </div> 
-            </div>
+              <!-- Birthdate -->
+              <div class="mb-4">
+                <label class="block text-gray-700 text-2xl font-semibold mb-2">Tanggal Lahir</label>
+                <hr class="h-px bg-black border-0 dark:bg-gray-700">
+                <div class="flex justify-between">
+                  <div class="flex-auto mt-1 items-center">
+                    <input
+                      type="text"
+                      id="birthdateInput"
+                      name="birthdate"
+                      value="<%= user.birthdate.toDateString() %>"
+                      class="w-full p-2 py-1 text-2xl font-thin rounded-xl"
+                      readonly
+                    />
+                  </div>
+                  <div class="flex-none">
+                    <button
+                      id="editButtonBirthdate"
+                      class="pl-2 py-3 font-semibold"
+                      type="button"
+                      onclick="enableEdit('birthdateInput', 'editButtonBirthdate', 'saveButtonBirthdate', true)"
+                    >
+                      Ubah
+                    </button>
+                    <button
+                      id="saveButtonBirthdate"
+                      class="px-2 py-3 font-semibold hidden"
+                      type="submit"
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"><path d="M10 20A10 10 0 1 0 0 10a10 10 0 0 0 10 10zM8.711 4.3l5.7 5.766L8.7 15.711l-1.4-1.422 4.289-4.242-4.3-4.347z"/></svg>
+                    </button>
+                  </div>
+                </div> 
+              </div>
+            
+              <!-- Phone Number -->
+              <div class="mb-4">
+                <label class="block text-gray-700 text-2xl font-semibold mb-2">Nomor Telepon</label>
+                <hr class="h-px bg-black border-0 dark:bg-gray-700">
+                <div class="flex justify-between">
+                  <div class="flex-auto mt-1 items-center">
+                    <input
+                      type="text"
+                      id="phoneInput"
+                      name="phone"
+                      value="<%= user.phone %>"
+                      class="w-full p-2 py-1 text-2xl font-thin rounded-xl"
+                      readonly
+                    />
+                  </div>
+                  <div class="flex-none">
+                    <button
+                      id="editButtonPhone"
+                      class="pl-2 py-3 font-semibold"
+                      type="button"
+                      onclick="enableEdit('phoneInput', 'editButtonPhone', 'saveButtonPhone')"
+                    >
+                      Ubah
+                    </button>
+                    <button
+                      id="saveButtonPhone"
+                      class="px-2 py-3 font-semibold hidden"
+                      type="submit"
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"><path d="M10 20A10 10 0 1 0 0 10a10 10 0 0 0 10 10zM8.711 4.3l5.7 5.766L8.7 15.711l-1.4-1.422 4.289-4.242-4.3-4.347z"/></svg>
+                    </button>
+                  </div>
+                </div> 
+              </div>
+            
+              <!-- Email -->
+              <div class="mb-4">
+                <label class="block text-gray-700 text-2xl font-semibold mb-2">Email Pengguna</label>
+                <hr class="h-px bg-black border-0 dark:bg-gray-700">
+                <div class="flex justify-between">
+                  <div class="flex-auto mt-1 items-center">
+                    <input
+                      type="text"
+                      id="emailInput"
+                      name="email"
+                      value="<%= user.email %>"
+                      class="w-full p-2 py-1 text-2xl font-thin rounded-xl"
+                      readonly
+                    />
+                  </div>
+                  <div class="flex-none">
+                    <button
+                      id="editButtonEmail"
+                      class="pl-2 py-3 font-semibold"
+                      type="button"
+                      onclick="enableEdit('emailInput', 'editButtonEmail', 'saveButtonEmail')"
+                    >
+                      Ubah
+                    </button>
+                    <button
+                      id="saveButtonEmail"
+                      class="px-2 py-3 font-semibold hidden"
+                      type="submit"
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"><path d="M10 20A10 10 0 1 0 0 10a10 10 0 0 0 10 10zM8.711 4.3l5.7 5.766L8.7 15.711l-1.4-1.422 4.289-4.242-4.3-4.347z"/></svg>
+                    </button>
+                  </div>
+                </div> 
+              </div>
+            </form>
           </div>          
         </div>
       </section>
@@ -334,90 +342,28 @@
         <h1 class="text-3xl font-bold text-left mt-12 mb-4"">Etalase Barang Anda</h2>
         <hr class="h-px bg-black border-0 dark:bg-gray-700">
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
-          <!-- Example item, replace with actual data -->
-          <div class="product-card p-4 border rounded-lg cursor-pointer hover:bg-gray-100 transition delay-100" onclick="location.href='/product'">
-            <img
-              src="images/produk-pakaian1.png"
-              alt="Product Image"
-              class="w-full h-64 object-cover rounded-lg"
-            />
-            <h3 class="text-lg font-semibold mt-2">Pakaian Laki-laki</h3>
-            <p class="text-sm text-gray-600">Rp. 200.000</p>
-            <div class="flex flex-row justify-between">
-              <div class="text-sm">
-                <div class="flex flex-row">
-                  <div><img src = "images/svg/location_1.svg" alt="Location Icon"></div>
-                  <div><p> Jakarta </p></div>
+          <% products.forEach(product => { %>
+            <div class="product-card p-4 border rounded-lg cursor-pointer hover:bg-gray-100 transition delay-100" onclick="location.href='/profile/product/<%= product._id %>'">
+              <img
+                src="/<%= product.images[0] %>"
+                alt="Product Image"
+                class="w-full h-64 object-cover rounded-lg"
+              />
+              <h3 class="text-lg font-semibold mt-2"><%= product.productName %></h3>
+              <p class="text-sm text-gray-600">Rp. <%= product.price %></p>
+              <div class="flex flex-row justify-between">
+                <div class="text-sm">
+                  <div class="flex flex-row">
+                    <div><img src = "/images/svg/location_1.svg" alt="Location Icon"></div>
+                    <div><p> <%= product.location.length > 10 ? product.location.substring(0, 10) + "..." : product.location %> </p></div>
+                  </div>
+                </div>
+                <div class="text-sm">
+                  <%= product.createdAt.toDateString() %>
                 </div>
               </div>
-              <div class="text-sm">
-                13 Februari 2024
-              </div>
             </div>
-          </div>
-
-          <div class="product-card p-4 border rounded-lg cursor-pointer hover:bg-gray-100 transition delay-100" onclick="location.href='/product'">
-            <img
-              src="images/produk-pakaian1.png"
-              alt="Product Image"
-              class="w-full h-64 object-cover rounded-lg"
-            />
-            <h3 class="text-lg font-semibold mt-2">Pakaian Laki-laki</h3>
-            <p class="text-sm text-gray-600">Rp. 200.000</p>
-            <div class="flex flex-row justify-between">
-              <div class="text-sm">
-                <div class="flex flex-row">
-                  <div><img src = "images/svg/location_1.svg" alt="Location Icon"></div>
-                  <div><p> Jakarta </p></div>
-                </div>
-              </div>
-              <div class="text-sm">
-                13 Februari 2024
-              </div>
-            </div>
-          </div>
-
-          <div class="product-card p-4 border rounded-lg cursor-pointer hover:bg-gray-100 transition delay-100" onclick="location.href='/product'">
-            <img
-              src="images/produk-pakaian1.png"
-              alt="Product Image"
-              class="w-full h-64 object-cover rounded-lg"
-            />
-            <h3 class="text-lg font-semibold mt-2">Pakaian Laki-laki</h3>
-            <p class="text-sm text-gray-600">Rp. 200.000</p>
-            <div class="flex flex-row justify-between">
-              <div class="text-sm">
-                <div class="flex flex-row">
-                  <div><img src = "images/svg/location_1.svg" alt="Location Icon"></div>
-                  <div><p> Jakarta </p></div>
-                </div>
-              </div>
-              <div class="text-sm">
-                13 Februari 2024
-              </div>
-            </div>
-          </div>
-
-          <div class="product-card p-4 border rounded-lg cursor-pointer hover:bg-gray-100 transition delay-100" onclick="location.href='/product'">
-            <img
-              src="images/produk-pakaian1.png"
-              alt="Product Image"
-              class="w-full h-64 object-cover rounded-lg"
-            />
-            <h3 class="text-lg font-semibold mt-2">Pakaian Laki-laki</h3>
-            <p class="text-sm text-gray-600">Rp. 200.000</p>
-            <div class="flex flex-row justify-between">
-              <div class="text-sm">
-                <div class="flex flex-row">
-                  <div><img src = "images/svg/location_1.svg" alt="Location Icon"></div>
-                  <div><p> Jakarta </p></div>
-                </div>
-              </div>
-              <div class="text-sm">
-                13 Februari 2024
-              </div>
-            </div>
-          </div>
+          <% }) %>
         </div>
       </section>
     </div>
@@ -456,7 +402,7 @@
               class="w-1/2 sm:w-2/3 flex flex-col sm:flex-row justify-between sm:justify-start"
             >
               <img
-                src="images/footer-logo.png"
+                src="/images/footer-logo.png"
                 class="w-[150px] sm:w-[300px] mr-[5px]"
               />
               <span
@@ -479,16 +425,16 @@
               class="w-1/2 sm:w-1/3 flex flex-row justify-between items-center"
             >
               <a href="#" class="flex items-center"
-                ><img src="images/instagram.png"
+                ><img src="/images/instagram.png"
               /></a>
               <a href="#" class="flex items-center"
-                ><img src="images/whatsapp.png"
+                ><img src="/images/whatsapp.png"
               /></a>
               <a href="#" class="flex items-center"
-                ><img src="images/linkedin.png"
+                ><img src="/images/linkedin.png"
               /></a>
               <a href="#" class="flex items-center"
-                ><img src="images/email.png"
+                ><img src="/images/email.png"
               /></a>
             </div>
           </div>
@@ -497,26 +443,25 @@
     </footer>
 
     <script>
-    function toggleMenu(event) {
-          const menu = document.getElementById('menu');
-          const isHidden = menu.classList.contains('hidden');
-          menu.classList.toggle('hidden', !isHidden);
-          menu.setAttribute('aria-expanded', !isHidden);
-          event.currentTarget.setAttribute('aria-expanded', !isHidden);
+      function toggleMenu(event) {
+        const menu = document.getElementById('menu');
+        const isHidden = menu.classList.contains('hidden');
+        menu.classList.toggle('hidden', !isHidden);
+        menu.setAttribute('aria-expanded', !isHidden);
+        event.currentTarget.setAttribute('aria-expanded', !isHidden);
+      }
+      
+      const menuButton = document.getElementById('menu-button');
+      menuButton.addEventListener('click', toggleMenu);
+      
+      document.addEventListener('click', (event) => {
+        const menu = document.getElementById('menu');
+        if (!menuButton.contains(event.target) && !menu.contains(event.target)) {
+          menu.classList.add('hidden');
+          menuButton.setAttribute('aria-expanded', 'false');
         }
+      });
       
-        const menuButton = document.getElementById('menu-button');
-        menuButton.addEventListener('click', toggleMenu);
-      
-        document.addEventListener('click', (event) => {
-          const menu = document.getElementById('menu');
-          if (!menuButton.contains(event.target) && !menu.contains(event.target)) {
-            menu.classList.add('hidden');
-            menuButton.setAttribute('aria-expanded', 'false');
-          }
-        });
-      
-      // editable profile fields
       function enableEdit(inputId, editButtonId, saveButtonId, isDateField = false) {
         var inputElement = document.getElementById(inputId);
         var editButton = document.getElementById(editButtonId);
@@ -554,6 +499,6 @@
       }
     </script>
 
-    <script src="js/script.js"></script>
+    <script src="/js/script.js"></script>
   </body>
 </html>

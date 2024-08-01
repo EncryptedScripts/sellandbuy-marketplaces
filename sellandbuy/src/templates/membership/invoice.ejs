@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sell & Buy - Membership Form</title>
+    <title>Sell & Buy - Membership Invoice</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -69,17 +69,16 @@
                   >
                     Jadi Member
                   </button>
-                  <form method="POST" action="#" role="none">
-                    <button
-                      type="submit"
-                      class="w-full px-4 py-2 text-left text-sm text-gray-700 cursor-pointer"
-                      role="menuitem"
-                      tabindex="-1"
-                      id="menu-item-1"
-                    >
-                      Logout
-                    </button>
-                  </form>
+                  <button
+                    type="submit"
+                    class="w-full px-4 py-2 text-left text-sm text-gray-700 cursor-pointer"
+                    role="menuitem"
+                    tabindex="-1"
+                    id="menu-item-logout"
+                    onclick="location.href = '/logout'"
+                  >
+                    Logout
+                  </button>
                 </div>
               </div>
             </div>
@@ -190,7 +189,7 @@
         <h1
           class="header text-5xl font-bold text-center lg:text-left mt-12 mb-4"
         >
-          Let's finish the payment
+          Your Payment is Successful!
         </h1>
         <hr class="h-px w-full bg-black border-0 dark:bg-gray-700" />
       </section>
@@ -199,10 +198,10 @@
       <section class="py-8">
         <div class="max-w-7xl mx-auto px-4">
           <div class="form-container grid grid-cols-1 md:grid-cols-2 gap-6">
-            <!-- Payment Form -->
+            <!-- Payment Confirmation -->
             <div class="border-2 my-auto border-black p-6 rounded-lg shadow-lg">
               <h2 class="text-4xl font-semibold my-1 text-center">
-                Selamat pembayaran anda berhasil!
+                Payment Successful!
               </h2>
               <hr class="h-px w-full bg-black border-0 dark:bg-gray-700" />
               <img
@@ -214,18 +213,20 @@
                 <h2 class="text-3xl font-semibold my-10">Success!</h2>
                 <p class="mb-10 mx-2 xl:mx-28">
                   Selamat! anda telah menyelesaikan pembayaran. Saat ini anda
-                  resmi menjadi member dari Sell&Buy, selamat menikmati benefit
-                  dari kami!
+                  resmi menjadi member dari Sell&Buy namun menunggu verifikasi
+                  pembayaran dari admin terlebih dahulu, selamat menikmati
+                  benefit dari kami!
                 </p>
               </div>
               <hr class="h-px w-full bg-black border-0 dark:bg-gray-700" />
               <div class="text-center">
-                <button
-                  class="bg-black text-white py-2 px-12 mt-4 rounded-xl hover:bg-gray-900"
-                  type="submit"
+                <a
+                  href="<%= payment.paymentProof %>"
+                  class="bg-black text-white py-2 px-12 mt-4 rounded-xl hover:bg-gray-900 inline-block"
+                  download
                 >
                   Unduh invoice di sini
-                </button>
+                </a>
               </div>
             </div>
 

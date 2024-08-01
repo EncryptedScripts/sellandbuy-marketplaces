@@ -69,17 +69,16 @@
                   >
                     Jadi Member
                   </button>
-                  <form method="POST" action="#" role="none">
-                    <button
-                      type="submit"
-                      class="w-full px-4 py-2 text-left text-sm text-gray-700 cursor-pointer"
-                      role="menuitem"
-                      tabindex="-1"
-                      id="menu-item-1"
-                    >
-                      Logout
-                    </button>
-                  </form>
+                  <button
+                    type="submit"
+                    class="w-full px-4 py-2 text-left text-sm text-gray-700 cursor-pointer"
+                    role="menuitem"
+                    tabindex="-1"
+                    id="menu-item-logout"
+                    onclick="location.href = '/logout'"
+                  >
+                    Logout
+                  </button>
                 </div>
               </div>
             </div>
@@ -202,20 +201,24 @@
             <!-- Payment Form -->
             <div class="border-2 border-black p-6 rounded-lg shadow-lg">
               <h2 class="text-3xl font-bold mb-1">
-                Bronze
+                <%= badges %>
                 <span class="text-sm text-gray-700 font-normal"
                   >1 bulan + 1 bulan</span
                 >
-                <span class="float-right">Rp24.900</span>
+                <span class="float-right"><%= price %></span>
               </h2>
               <hr class="h-px w-full bg-black border-0 dark:bg-gray-700" />
-              <form>
+              <form
+                action="/membership/<%= badges.toLowerCase() %>"
+                method="POST"
+              >
                 <div class="my-4 lg:mr-4 lg:inline-block">
                   <label class="block text-gray-700"
                     >Nama depan<span class="text-red-500">*</span></label
                   >
                   <input
                     type="text"
+                    name="namaDepan"
                     class="nama-depan w-full lg:w-64 px-4 py-2 border rounded-2xl focus:outline-none focus:border-black transition delay-75"
                     placeholder="Nama depan"
                     required
@@ -227,6 +230,7 @@
                   >
                   <input
                     type="text"
+                    name="namaBelakang"
                     class="nama-belakang w-full lg:w-64 px-4 py-2 border rounded-2xl focus:outline-none focus:border-black transition delay-75"
                     placeholder="Nama belakang"
                     required
@@ -238,6 +242,7 @@
                   >
                   <input
                     type="text"
+                    name="nomorTelepon"
                     class="w-full px-4 py-2 border rounded-2xl focus:outline-none focus:border-black transition delay-75"
                     placeholder="Nomor telepon"
                     required
@@ -249,6 +254,7 @@
                   >
                   <input
                     type="text"
+                    name="alamatDomisili"
                     class="w-full px-4 py-2 border rounded-2xl focus:outline-none focus:border-black transition delay-75"
                     placeholder="Alamat domisili (opsional)"
                   />
@@ -259,6 +265,7 @@
                   >
                   <input
                     type="text"
+                    name="provinsiDomisili"
                     class="w-full px-4 py-2 border rounded-2xl focus:outline-none focus:border-black transition delay-75"
                     placeholder="Provinsi domisili"
                     required
@@ -272,6 +279,7 @@
                   >
                   <input
                     type="text"
+                    name="kotaKabupatenDomisili"
                     class="w-full px-4 py-2 border rounded-2xl focus:outline-none focus:border-black transition delay-75"
                     placeholder="Kota / Kabupaten domisili"
                     required
@@ -285,6 +293,7 @@
                   >
                   <input
                     type="text"
+                    name="kecamatanDomisili"
                     class="w-full px-4 py-2 border rounded-2xl focus:outline-none focus:border-black transition delay-75"
                     placeholder="Kecamatan domisili"
                     required
@@ -294,6 +303,7 @@
                   <label class="block text-gray-700">Kode pos (opsional)</label>
                   <input
                     type="text"
+                    name="kodePosDomisili"
                     class="w-full px-4 py-2 border rounded-2xl focus:outline-none focus:border-black transition delay-75"
                     placeholder="Kode pos (opsional)"
                   />
@@ -301,7 +311,7 @@
                 <hr class="h-px w-full bg-black border-0 dark:bg-gray-700" />
                 <div class="flex justify-between items-center my-2">
                   <p class="text-2xl font-bold">Total</p>
-                  <p class="text-2xl font-bold">Rp24.900</p>
+                  <p class="text-2xl font-bold"><%= price %></p>
                 </div>
                 <hr class="h-px w-full bg-black border-0 dark:bg-gray-700" />
                 <div>

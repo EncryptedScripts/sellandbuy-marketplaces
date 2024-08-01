@@ -51,37 +51,46 @@
                 tabindex="-1"
                 id="menu"
               >
-                <div class="py-1" role="none">
-                  <button
-                    class="block w-full px-4 py-2 text-left text-sm text-gray-700 cursor-pointer"
-                    role="menuitem"
-                    tabindex="-1"
-                    id="menu-item-0"
-                    onclick="location.href = '/profile'"
-                  >
-                    Profile
-                  </button>
-                  <button
-                    class="block w-full px-4 py-2 text-left text-sm text-gray-700 cursor-pointer"
-                    role="menuitem"
-                    tabindex="-1"
-                    id="menu-item-0"
-                    onclick="location.href = '/membership'"
-                  >
-                    Jadi Member
-                  </button>
-                  <form method="POST" action="#" role="none">
-                    <button
-                      type="submit"
-                      class="w-full px-4 py-2 text-left text-sm text-gray-700 cursor-pointer"
-                      role="menuitem"
-                      tabindex="-1"
-                      id="menu-item-1"
-                    >
-                      Logout
-                    </button>
-                  </form>
-                </div>
+                <% if (isLoggedIn) { %>
+                <button
+                  class="block w-full px-4 py-2 text-left text-sm text-gray-700 cursor-pointer"
+                  role="menuitem"
+                  tabindex="-1"
+                  id="menu-item-profile"
+                  onclick="location.href = '/profile'"
+                >
+                  Profile
+                </button>
+                <button
+                  class="block w-full px-4 py-2 text-left text-sm text-gray-700 cursor-pointer"
+                  role="menuitem"
+                  tabindex="-1"
+                  id="menu-item-membership"
+                  onclick="location.href = '/membership'"
+                >
+                  Jadi Member
+                </button>
+                <button
+                  type="button"
+                  class="block w-full px-4 py-2 text-left text-sm text-gray-700 cursor-pointer"
+                  role="menuitem"
+                  tabindex="-1"
+                  id="menu-item-logout"
+                  onclick="location.href = '/logout'"
+                >
+                  Logout
+                </button>
+                <% } else { %>
+                <button
+                  class="block w-full px-4 py-2 text-left text-sm text-gray-700 cursor-pointer"
+                  role="menuitem"
+                  tabindex="-1"
+                  id="menu-item-login"
+                  onclick="location.href = '/login'"
+                >
+                  Login
+                </button>
+                <% } %>
               </div>
             </div>
           </div>

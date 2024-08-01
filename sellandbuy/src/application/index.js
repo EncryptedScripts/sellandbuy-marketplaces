@@ -18,6 +18,7 @@ const landing = require("../controllers/landing-page/landing");
 const auth = require("../controllers/authentication/auth");
 const profile = require("../controllers/profile/profile");
 const formJual = require("../controllers/form-jual/jual");
+const membership = require("../controllers/membership/member");
 
 app.set("view engine", "ejs");
 app.set("views", viewsPath);
@@ -44,6 +45,7 @@ app.use(landing);
 app.use(auth);
 app.use(profile);
 app.use(formJual);
+app.use(membership);
 
 // app.get("/pengguna-lain", (req, res) => {
 //   res.render("profile/profil-pengguna-lain");

@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sell & Buy - Submission Form</title>
+    <title>Sell & Buy - Edit Item Details</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -77,7 +77,7 @@
           <a
             href="/"
             id="navbar-logo"
-            class="w-auto sm:w-1/3 flex items-center justify-center"
+            class="w-auto mx-auto sm:w-1/3 flex items-center justify-center"
           >
             <img
               id="logo"
@@ -132,21 +132,6 @@
               </form>
             </div>
           </div>
-          <div id="slider" class="flex sm:hidden justify-end items-center">
-            <a id="menu" href="#">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                height="24px"
-                viewBox="0 -960 960 960"
-                width="24px"
-                fill="#000000"
-              >
-                <path
-                  d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z"
-                ></path>
-              </svg>
-            </a>
-          </div>
         </div>
         <div
           id="bot-nav"
@@ -186,167 +171,108 @@
     </div>
 
     <!-- Content -->
-    <div id="content" class="w-full flex flex-col align-middle justify-center">
-      <form
-        action="/jual"
-        method="POST"
-        enctype="multipart/form-data"
-        class="w-full max-w-7xl mx-auto p-8"
-      >
-        <h1 class="text-3xl font-bold mb-6">Isi Detail Produk</h1>
-        <hr class="h-px w-full bg-black border-0 mb-6" />
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div>
-            <h2 class="text-2xl font-bold mb-4">Detail Produk</h2>
-            <div class="mb-4">
-              <label
-                for="productName"
-                class="block text-gray-700 text-lg font-semibold mb-2"
-                >Nama Produk</label
-              >
-              <input
-                type="text"
-                id="productName"
-                name="productName"
-                required
-                class="w-full p-2 border border-gray-300 rounded"
-              />
+    <div
+      id="content"
+      class="flex-grow w-full mt-[101.2px] sm:mt-[96px] mb-10 relative"
+    >
+    <div class="container mx-auto mt-10 sm:my-0 p-4">
+      <h1 class="text-5xl font-bold mb-2">Isi Detail Produk</h1>
+      <hr class="h-px w-full bg-black border-0 dark:bg-gray-700">
+          
+          <!-- Form Section -->
+          <form>
+            <div class="flex flex-col sm:flex-row mt-7">
+              <div class="lg:w-1/2 lg:mr-7">
+                <h2 class="text-3xl font-bold mb-1">Detail Produk</h2>
+                <hr class="h-px w-full bg-black border-0 dark:bg-gray-700">
+                <div class="grid grid-cols-2 md:grid-cols-2 gap-6 mt-2">
+                  <div class="col-span-2">
+                    <label class="block text-sm font-medium text-gray-700">Nama produk<span class="text-red-500">*</span></label>
+                    <input type="text" class="mt-1 block w-full border border-gray-500 rounded-md shadow-sm px-1" required>
+                  </div>
+                  <div>
+                    <label class="block text-sm font-medium text-gray-700">Kategori produk<span class="text-red-500">*</span></label>
+                    <input type="text" class="mt-1 block w-full border border-gray-500 rounded-md shadow-sm" required>
+                  </div>
+                  <div>
+                    <label class="block text-sm font-medium text-gray-700">Harga produk<span class="text-red-500">*</span></label>
+                    <input type="text" class="mt-1 block w-full border border-gray-500 rounded-md shadow-sm" required>
+                  </div>
+                  <div class="col-span-2">
+                    <label class="block text-sm font-medium text-gray-700">Alasan menjual produk</label>
+                    <input type="text" class="mt-1 block w-full border border-gray-500 rounded-md shadow-sm">
+                  </div>
+                  <div class="col-span-2">
+                    <label class="block text-sm font-medium text-gray-700">Deskripsi Produk</label>
+                    <textarea class="mt-1 block w-full border border-gray-500 rounded-md shadow-sm" rows="4"></textarea>
+                  </div>
+                </div>
+              </div>
+            
+              
+              <!-- Image Section -->
+                <div class="mt-6 sm:w-1/2">
+                  <!-- Image Container -->
+                  <div class="border-2 border-gray-500 rounded-xl p-7">
+                    <h2 class="text-3xl font-bold mb-1">Tambahkan Gambar / Foto Produk</h2>
+                    <hr class="h-px w-full bg-black border-0 dark:bg-gray-700">
+                    <div class="grid grid-cols-4 md:grid-cols-4 gap-4 mt-4">
+                      <label>
+                        <div class="border-2 border-dashed border-gray-300 rounded-lg py-10 px-0 flex items-center justify-center text-gray-400 cursor-pointer">
+                          <span class="text-3xl">+</span>
+                        </div>
+                        <input type="file" class="hidden"/>
+                      </label>
+                      <label>
+                        <div class="border-2 border-dashed border-gray-300 rounded-lg py-10 px-0 flex items-center justify-center text-gray-400 cursor-pointer">
+                          <span class="text-3xl">+</span>
+                        </div>
+                        <input type="file" class="hidden"/>
+                      </label>
+                      <label>
+                        <div class="border-2 border-dashed border-gray-300 rounded-lg py-10 px-0 flex items-center justify-center text-gray-400 cursor-pointer">
+                          <span class="text-3xl">+</span>
+                        </div>
+                        <input type="file" class="hidden"/>
+                      </label>
+                      <label>
+                        <div class="border-2 border-dashed border-gray-300 rounded-lg py-10 px-0 flex items-center justify-center text-gray-400 cursor-pointer">
+                          <span class="text-3xl">+</span>
+                        </div>
+                        <input type="file" class="hidden"/>
+                      </label>
+                    </div>
+                  </div>
+
+                    <!-- Checkbox -->
+                    <div class="mt-6">
+                    <label class="inline-flex items-center">
+                      <input type="checkbox" class="form-checkbox cursor-pointer" required>
+                      <span class="ml-2 text-sm text-gray-700">Dengan menggunakan layanan kami, Anda memercayakan informasi Anda kepada kami. 
+                        Kami paham bahwa melindungi informasi Anda dan memberikan kontrol kepada Anda adalah tanggung jawab yang besar dan memerlukan 
+                        kerja keras.</span>
+                    </label>
+                    <label class="inline-flex items-center mt-4">
+                      <input type="checkbox" class="form-checkbox cursor-pointer" required>
+                      <span class="ml-2 text-sm text-gray-700">Saya dengan ini menyatakan bahwa saya telah membaca dan memahami semua ketentuan dan 
+                        kebijakan yang terkait dengan penggunaan aplikasi/website ini. Saya sepenuhnya setuju dan bersedia mematuhi semua aturan yang telah ditetapkan. 
+                        Saya menyadari bahwa ketidakpatuhan terhadap kebijakan ini dapat mengakibatkan tindakan penghentian akses atau tindakan lain sesuai ketentuan yang 
+                        berlaku.</span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+            <!-- Button -->
+            <div class="mt-10 mx-auto text-center">
+              <p>Untuk pengiklanan produk akan dikenakan biaya sebesar <span class="font-bold"> RP2.500 / produk </span></p>
             </div>
-            <div class="mb-4">
-              <label
-                for="category"
-                class="block text-gray-700 text-lg font-semibold mb-2"
-                >Kategori Produk</label
-              >
-              <input
-                type="text"
-                id="category"
-                name="category"
-                required
-                class="w-full p-2 border border-gray-300 rounded"
-              />
-            </div>
-            <div class="mb-4">
-              <label
-                for="price"
-                class="block text-gray-700 text-lg font-semibold mb-2"
-                >Harga Produk</label
-              >
-              <input
-                type="number"
-                id="price"
-                name="price"
-                required
-                class="w-full p-2 border border-gray-300 rounded"
-              />
-            </div>
-            <div class="mb-4">
-              <label
-                for="reasonForSelling"
-                class="block text-gray-700 text-lg font-semibold mb-2"
-                >Alasan Menjual Produk</label
-              >
-              <input
-                type="text"
-                id="reasonForSelling"
-                name="reasonForSelling"
-                required
-                class="w-full p-2 border border-gray-300 rounded"
-              />
-            </div>
-            <div class="mb-4">
-              <label
-                for="description"
-                class="block text-gray-700 text-lg font-semibold mb-2"
-                >Deskripsi Produk</label
-              >
-              <textarea
-                id="description"
-                name="description"
-                required
-                class="w-full p-2 border border-gray-300 rounded"
-              ></textarea>
-            </div>
-            <div class="mb-4">
-              <label
-                for="location"
-                class="block text-gray-700 text-lg font-semibold mb-2"
-                >Lokasi Kota</label
-              >
-              <input
-                type="text"
-                id="location"
-                name="location"
-                required
-                class="w-full p-2 border border-gray-300 rounded"
-              />
-            </div>
-            <div class="mb-4">
-              <label
-                for="fullAddress"
-                class="block text-gray-700 text-lg font-semibold mb-2"
-                >Alamat Lengkap</label
-              >
-              <input
-                type="text"
-                id="fullAddress"
-                name="fullAddress"
-                required
-                class="w-full p-2 border border-gray-300 rounded"
-              />
+            <div class="mt-6 lg:w-1/4 mx-auto shadow-md">
+              <button type="submit" class="w-full bg-black text-xl text-white font-bold py-2 rounded-md">Selesaikan Pembayaran</button>
             </div>
           </div>
-          <div>
-            <h2 class="text-2xl font-bold mb-4">
-              Tambahkan Gambar / Foto Produk
-            </h2>
-            <input
-              type="file"
-              id="productImages"
-              name="productImages"
-              accept="image/*"
-              multiple
-              required
-              class="w-full p-2 border border-gray-300 rounded mb-5"
-            />
-            <div class="mb-4">
-              <label class="inline-flex items-center">
-                <input type="checkbox" required class="form-checkbox" />
-                <span class="ml-2"
-                  >Dengan menggunakan layanan kami, Anda menyerahkan informasi
-                  Anda kepada kami. Kami paham bahwa melindungi informasi Anda
-                  dan memberikan kontrol kepada Anda adalah tanggung jawab yang
-                  besar dan memerlukan kerja keras.</span
-                >
-              </label>
-            </div>
-            <div class="mb-4">
-              <label class="inline-flex items-center">
-                <input type="checkbox" required class="form-checkbox" />
-                <span class="ml-2"
-                  >Saya dengan ini menyatakan bahwa saya telah membaca dan
-                  memahami semua ketentuan dan kebijakan yang terkait dengan
-                  penggunaan aplikasi/website ini. Saya sepenuhnya setuju dan
-                  bersedia mematuhi semua aturan yang telah ditetapkan. Saya
-                  mengerti bahwa ketidakpatuhan terhadap kebijakan ini dapat
-                  mengakibatkan tindakan penghentian akses atau tindakan lain
-                  sesuai ketentuan yang berlaku.</span
-                >
-              </label>
-            </div>
-            <p class="text-gray-500 mb-4">
-              Untuk pengiklanan produk akan dikenakan biaya sebesar RP2.500 /
-              produk
-            </p>
-            <button
-              type="submit"
-              class="w-full bg-black text-white py-2 rounded"
-            >
-              Selesaikan Pembayaran
-            </button>
-          </div>
-        </div>
-      </form>
+        </form>
+      </div>
     </div>
 
     <!-- Footer -->
@@ -457,6 +383,6 @@
       });
     </script>
 
-    <script src="js/script.js"></script>
+    <script src="/js/script.js"></script>
   </body>
 </html>

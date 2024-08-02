@@ -19,6 +19,7 @@ const auth = require("../controllers/authentication/auth");
 const profile = require("../controllers/profile/profile");
 const formJual = require("../controllers/form-jual/jual");
 const membership = require("../controllers/membership/member");
+const katalog = require("../controllers/market/katalog");
 
 app.set("view engine", "ejs");
 app.set("views", viewsPath);
@@ -46,58 +47,7 @@ app.use(auth);
 app.use(profile);
 app.use(formJual);
 app.use(membership);
-
-// app.get("/pengguna-lain", (req, res) => {
-//   res.render("profile/profil-pengguna-lain");
-// });
-
-// app.get("/product", (req, res) => {
-//   res.render("profile/item/detail-item");
-// });
-
-// app.get("/product/edit", (req, res) => {
-//   res.render("profile/item/edit-item");
-// });
-
-// app.get("/offer", (req, res) => {
-//   res.render("profile/item/penawaran");
-// });
-
-// app.get("/membership", (req, res) => {
-//   res.render("membership/membership");
-// });
-
-// app.get("/membership/form", (req, res) => {
-//   res.render("membership/form-awal");
-// });
-
-// app.get("/membership/payment", (req, res) => {
-//   res.render("membership/pembayaran");
-// });
-
-// app.get("/membership/success", (req, res) => {
-//   res.render("membership/invoice");
-// });
-
-// app.get("/marketplace", (req, res) => {
-//   res.render("market/katalog");
-// });
-
-// app.get("/detail-item", (req, res) => {
-//   res.render("market/detail-item");
-// });
-
-// app.get("/form-jual", (req, res) => {
-//   res.render("form-jual/form-awal");
-// });
-
-// app.get("/form-jual/pembayaran", (req, res) => {
-//   res.render("form-jual/pembayaran");
-// });
-
-// app.get("/form-jual/success", (req, res) => {
-//   res.render("form-jual/selesai");
-// });
+app.use(katalog);
 
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);

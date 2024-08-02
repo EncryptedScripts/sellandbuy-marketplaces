@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sell & Buy - Edit Item Details</title>
+    <title>Sell & Buy - Product Form</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -49,7 +49,9 @@
                 tabindex="-1"
                 id="menu"
               >
-                <div class="py-1" role="none">
+                <div class="py-1" role="none" id="menu-items">
+                  <% if (user) { %>
+                  <!-- Check if user is logged in -->
                   <button
                     class="block w-full px-4 py-2 text-sm text-left text-gray-700 cursor-pointer"
                     role="menuitem"
@@ -78,6 +80,17 @@
                   >
                     Logout
                   </button>
+                  <% } else { %>
+                  <button
+                    class="block w-full px-4 py-2 text-left text-sm text-gray-700 cursor-pointer"
+                    role="menuitem"
+                    tabindex="-1"
+                    id="menu-item-login"
+                    onclick="location.href = '/login'"
+                  >
+                    Login
+                  </button>
+                  <% } %>
                 </div>
               </div>
             </div>
@@ -216,13 +229,18 @@
                   >
                     Kategori produk<span class="text-red-500">*</span>
                   </label>
-                  <input
-                    type="text"
+                  <select
                     class="mt-1 block w-full border border-gray-500 rounded-md shadow-sm"
                     id="category"
                     name="category"
                     required
-                  />
+                  >
+                    <% categories.forEach((category) => { %>
+                    <option value="<%= category._id %>">
+                      <%= category.name %>
+                    </option>
+                    <% }) %>
+                  </select>
                 </div>
                 <div>
                   <label
@@ -476,7 +494,7 @@
           }
         });
 
-        const profileLink = document.getElementById("menu-item-0");
+        const profileLink = document.getElementById("menu-item-profile");
         if (profileLink) {
           profileLink.addEventListener("click", () => {
             console.log("Profile link clicked");

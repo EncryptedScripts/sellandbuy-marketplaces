@@ -9,6 +9,7 @@ const multer = require("multer");
 const fs = require("fs");
 const { User } = require("../../database/auth");
 const { Product } = require("../../database/product");
+const { Category } = require("../../database/category");
 const { authenticateSession } = require("../middleware/middleware");
 const app = express();
 
@@ -28,7 +29,7 @@ app.use(
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: true,
-    cookie: { maxAge: 7 * 24 * 60 * 60 * 1000 }, // 1 week
+    cookie: { maxAge: 7 * 24 * 60 * 60 * 1000 },
   })
 );
 
@@ -37,9 +38,9 @@ app.use(flash());
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     if (file.fieldname === "productImages") {
-      cb(null, "public/images/products");
+      cb(null, path.join(publicDirectoryPath, "images/products"));
     } else if (file.fieldname === "paymentProof") {
-      cb(null, "public/images/payments");
+      cb(null, path.join(publicDirectoryPath, "images/payments"));
     }
   },
   filename: function (req, file, cb) {
@@ -49,8 +50,24 @@ const storage = multer.diskStorage({
 
 const upload = multer({
   storage: storage,
-  limits: { fileSize: 10 * 1024 * 1024 }, // 10MB
+  limits: { fileSize: 10 * 1024 * 1024 },
 });
+
+// app.get("/create-category", async (req, res) => {
+//   try {
+//     const name = "Testing1";
+//     if (!name) {
+//       return res.status(400).send("Category name is required.");
+//     }
+
+//     const newCategory = new Category({ name });
+//     await newCategory.save();
+//     res.status(201).send(`Category "${name}" created successfully.`);
+//   } catch (error) {
+//     console.error("Error creating category:", error);
+//     res.status(500).send("An error occurred while creating the category.");
+//   }
+// });
 
 app.get("/jual", authenticateSession, async (req, res) => {
   try {
@@ -60,8 +77,11 @@ app.get("/jual", authenticateSession, async (req, res) => {
       return res.redirect("/login");
     }
 
-    res.render("form-jual/form-awal", { user });
+    const categories = await Category.find();
+
+    res.render("form-jual/form-awal", { user, categories });
   } catch (error) {
+    console.error("Error loading jual page:", error);
     req.flash("error", "An error occurred");
     res.redirect("/jual");
   }
@@ -79,6 +99,11 @@ app.post(
         return res.redirect("/login");
       }
 
+      // Remove 'public/' from file path
+      const imagePaths = req.files.map(
+        (file) => `images/products/${file.filename}`
+      );
+
       const newProduct = new Product({
         userId: user._id,
         productName: req.body.productName,
@@ -88,7 +113,7 @@ app.post(
         description: req.body.description,
         location: req.body.location,
         fullAddress: req.body.fullAddress,
-        images: req.files.map((file) => file.path),
+        images: imagePaths,
       });
 
       await newProduct.save();
@@ -96,6 +121,7 @@ app.post(
       req.flash("success", "Product added successfully");
       res.redirect("/finish-payment/" + newProduct._id);
     } catch (error) {
+      console.error("Error adding product:", error);
       req.flash("error", "An error occurred");
       res.redirect("/jual");
     }
@@ -112,6 +138,7 @@ app.get("/finish-payment/:productId", authenticateSession, async (req, res) => {
 
     res.render("form-jual/pembayaran", { product });
   } catch (error) {
+    console.error("Error loading payment page:", error);
     req.flash("error", "An error occurred");
     res.redirect("/jual");
   }
@@ -129,12 +156,14 @@ app.post(
         return res.redirect("/jual");
       }
 
-      product.paymentProof = req.file.path;
+      // Remove 'public/' from payment proof path
+      product.paymentProof = `images/payments/${req.file.filename}`;
       await product.save();
 
       req.flash("success", "Payment proof uploaded successfully");
       res.redirect("/selesai/" + product._id);
     } catch (error) {
+      console.error("Error uploading payment proof:", error);
       req.flash("error", "An error occurred");
       res.redirect("/finish-payment/" + req.params.productId);
     }
@@ -151,6 +180,7 @@ app.get("/selesai/:productId", authenticateSession, async (req, res) => {
 
     res.render("form-jual/selesai", { product });
   } catch (error) {
+    console.error("Error loading selesai page:", error);
     req.flash("error", "An error occurred");
     res.redirect("/jual");
   }

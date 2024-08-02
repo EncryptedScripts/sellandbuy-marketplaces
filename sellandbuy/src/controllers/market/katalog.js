@@ -128,6 +128,10 @@ app.get("/katalog/:id", authenticateSession, async (req, res) => {
 
     const seller = await User.findById(product.userId).exec();
 
+    if (req.session.userId === seller._id.toString()) {
+      return res.redirect("/profile/product/" + req.params.id);
+    }
+
     res.render("market/detail-item", { product, seller });
   } catch (error) {
     console.error("Error fetching product details:", error);

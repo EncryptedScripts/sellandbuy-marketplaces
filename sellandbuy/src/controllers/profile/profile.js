@@ -92,6 +92,11 @@ app.get("/profile/:id", authenticateSession, async (req, res) => {
       return res.redirect("/profile");
     }
     const products = await Product.find({ userId: user._id });
+
+    if (req.session.userId === user._id) {
+      res.redirect("/profile");
+    }
+
     res.render("profile/profil-pengguna-lain", {
       user,
       products,

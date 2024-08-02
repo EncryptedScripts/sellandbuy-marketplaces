@@ -8,6 +8,7 @@ const flash = require("express-flash");
 const { User } = require("../../database/auth");
 const { Product } = require("../../database/product");
 const { Category } = require("../../database/category");
+const { Offer } = require("../../database/offer");
 const { authenticateSession } = require("../middleware/middleware");
 const app = express();
 
@@ -119,15 +120,46 @@ app.get("/katalog/:id", authenticateSession, async (req, res) => {
     const product = await Product.findById(req.params.id)
       .populate("category userId")
       .exec();
+
     if (!product) {
       req.flash("error", "Product not found.");
       return res.redirect("/katalog");
     }
 
-    res.render("market/detail-item", { product });
+    const seller = await User.findById(product.userId).exec();
+
+    res.render("market/detail-item", { product, seller });
   } catch (error) {
+    console.error("Error fetching product details:", error);
     req.flash("error", "An error occurred while fetching the product.");
     res.redirect("/katalog");
+  }
+});
+
+app.post("/katalog/:id/make-offer", authenticateSession, async (req, res) => {
+  try {
+    const { offerPrice } = req.body;
+    const productId = req.params.id;
+    const userId = req.session.userId;
+
+    if (!offerPrice || isNaN(offerPrice) || offerPrice <= 0) {
+      req.flash("error", "Invalid offer price.");
+      return res.redirect(`/katalog/${productId}`);
+    }
+
+    const offer = new Offer({
+      user: userId,
+      product: productId,
+      offerPrice,
+    });
+
+    await offer.save();
+    req.flash("success", "Offer made successfully.");
+    res.redirect(`/katalog/${productId}`);
+  } catch (error) {
+    console.error("Error making offer:", error);
+    req.flash("error", "An error occurred while making the offer.");
+    res.redirect(`/katalog/${req.params.id}`);
   }
 });
 

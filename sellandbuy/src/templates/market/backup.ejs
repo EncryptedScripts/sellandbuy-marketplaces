@@ -17,33 +17,7 @@
     <link rel="stylesheet" href="/css/style.css" />
     <link rel="stylesheet" href="/css/detail-item.css" />
     <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
-    <style>
-      .slider-container {
-        width: 100%;
-        max-width: 100%;
-      }
-
-      .slides {
-        display: flex;
-        width: 100%;
-        height: 100%;
-        transition: transform 0.3s ease-in-out;
-      }
-
-      .slide {
-        width: 100%;
-        height: 100%;
-        flex: none;
-      }
-
-      .slide img {
-        max-width: 100%;
-        height: auto;
-        transition: transform 0.3s ease;
-      }
-    </style>
   </head>
-
   <body class="min-h-screen flex flex-col font-saira">
     <!-- Navbar -->
     <div id="nav-wrp" class="mb-20">
@@ -216,64 +190,18 @@
         >
           <!-- Images Section -->
           <div class="w-full lg:w-1/2 mr-5 mb-4 sm:mb-0 md:my-auto">
-            <div class="relative max-w-2xl mx-auto">
-              <div class="slider-container overflow-hidden relative">
-                <div
-                  class="slides flex transition-transform duration-300 ease-in-out"
-                  style="transform: translateX(0%)"
-                >
-                  <% product.images.forEach((image, index) => { %>
-                  <div class="slide w-full flex-none">
-                    <img
-                      src="/<%= image %>"
-                      alt="Product Image <%= index + 1 %>"
-                      class="object-cover rounded-lg w-full h-[300px] sm:h-[400px] lg:h-[500px]"
-                    />
-                  </div>
-                  <% }) %>
-                </div>
-              </div>
-              <button
-                id="prevBtn"
-                class="absolute top-1/2 left-2 transform -translate-y-1/2 bg-white bg-opacity-70 hover:bg-opacity-100 transition p-3 rounded-full focus:outline-none"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke-width="2"
-                  stroke="currentColor"
-                  class="w-8 h-8 text-gray-800"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M15 19l-7-7 7-7"
-                  />
-                </svg>
-              </button>
-              <button
-                id="nextBtn"
-                class="absolute top-1/2 right-2 transform -translate-y-1/2 bg-white bg-opacity-70 hover:bg-opacity-100 transition p-3 rounded-full focus:outline-none"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke-width="2"
-                  stroke="currentColor"
-                  class="w-8 h-8 text-gray-800"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M9 5l7 7-7 7"
-                  />
-                </svg>
-              </button>
+            <div
+              class="grid grid-rows-2 lg:grid-rows-3 grid-flow-col gap-4 justify-center items-center"
+            >
+              <% product.images.forEach((image, index) => { %>
+              <img
+                src="/<%= image %>"
+                alt="Product Image <%= index + 1 %>"
+                class="h-48 w-48 sm:w-auto sm:h-auto"
+              />
+              <% }) %>
             </div>
           </div>
-
           <!-- Details Section -->
           <div class="w-full lg:w-1/2 p-5">
             <h1 class="text-3xl font-bold mb-4 sm:text-4xl lg:text-5xl">
@@ -536,34 +464,6 @@
           moreText.style.display = "inline";
         }
       }
-
-      // Custom slider JavaScript
-      document.addEventListener("DOMContentLoaded", function () {
-        const slides = document.querySelector(".slides");
-        const slideItems = document.querySelectorAll(".slide");
-        let currentIndex = 0;
-
-        const updateSlidePosition = () => {
-          const slideWidth = slideItems[0].offsetWidth;
-          slides.style.transform = `translateX(-${
-            currentIndex * slideWidth
-          }px)`;
-        };
-
-        document.getElementById("prevBtn").addEventListener("click", () => {
-          currentIndex =
-            currentIndex > 0 ? currentIndex - 1 : slideItems.length - 1;
-          updateSlidePosition();
-        });
-
-        document.getElementById("nextBtn").addEventListener("click", () => {
-          currentIndex =
-            currentIndex < slideItems.length - 1 ? currentIndex + 1 : 0;
-          updateSlidePosition();
-        });
-
-        window.addEventListener("resize", updateSlidePosition);
-      });
     </script>
 
     <script src="/js/script.js"></script>

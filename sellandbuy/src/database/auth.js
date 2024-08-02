@@ -26,6 +26,10 @@ const UserSchema = new Schema({
     type: String,
     required: true,
   },
+  isAdmin: {
+    type: Boolean,
+    default: false,
+  },
   phone: {
     type: String,
     required: true,
@@ -42,6 +46,10 @@ const UserSchema = new Schema({
     type: String,
     enum: ["none", "bronze", "silver", "gold"],
     default: "none",
+  },
+  membershipExpiresAt: {
+    type: Date,
+    default: null,
   },
   profilePicturePath: {
     type: String,

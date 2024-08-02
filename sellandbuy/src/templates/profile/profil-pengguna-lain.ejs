@@ -14,12 +14,11 @@
       href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="css/style.css" />
-    <link rel="stylesheet" href="css/profile-pengguna.css">
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/profile-pengguna.css" />
     <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
   </head>
   <body class="min-h-screen flex flex-col font-saira">
-
     <!-- Navbar -->
     <div id="nav-wrp">
       <header
@@ -30,34 +29,60 @@
           id="top-nav"
           class="w-full flex items-center justify-between sm:pt-4 sm:pb-0 px-2 sm:px-5 pt-5 pb-5"
         >
-        <div id="left-part" class="sm:w-1/3 flex justify-start">
-          <div class="relative inline-block text-left">
-            <div>
-              <button
-                type="button"
-                class="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-200"
-                id="menu-button"
-                aria-expanded="false"
-                aria-haspopup="true"
+          <div id="left-part" class="sm:w-1/3 flex justify-start">
+            <div class="relative inline-block text-left">
+              <div>
+                <button
+                  type="button"
+                  class="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-200"
+                  id="menu-button"
+                  aria-expanded="false"
+                  aria-haspopup="true"
+                >
+                  <img class="w-btn-pfl" src="/images/pictures/default.png" />
+                </button>
+              </div>
+              <div
+                class="absolute left-0 right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none hidden transition-all duration-300 ease-in-out"
+                role="menu"
+                aria-orientation="vertical"
+                aria-labelledby="menu-button"
+                tabindex="-1"
+                id="menu"
               >
-                <img class="w-btn-pfl" src="images/pictures/default.png" />
-              </button>
-            </div>
-            <div
-              class="absolute left-0 right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none hidden transition-all duration-300 ease-in-out"
-              role="menu"
-              aria-orientation="vertical"
-              aria-labelledby="menu-button"
-              tabindex="-1"
-              id="menu"
-            >
-              <div class="py-1" role="none">
-                <button class="block px-4 py-2 text-sm text-gray-700 cursor-pointer" role="menuitem" tabindex="-1" id="menu-item-0" onclick="location.href = '/profile'">Profile</button>
-                <button type="submit" class="w-full px-4 py-2 text-left text-sm text-gray-700 cursor-pointer" role="menuitem" tabindex="-1" id="menu-item-1" onclick="location.href = '/logout'">Logout</button>
+                <div class="py-1" role="none">
+                  <button
+                    class="block w-full px-4 py-2 text-sm text-left text-gray-700 cursor-pointer"
+                    role="menuitem"
+                    tabindex="-1"
+                    id="menu-item-profile"
+                    onclick="location.href = '/katalog'"
+                  >
+                    Katalog
+                  </button>
+                  <button
+                    class="block px-4 py-2 text-sm text-gray-700 cursor-pointer"
+                    role="menuitem"
+                    tabindex="-1"
+                    id="menu-item-0"
+                    onclick="location.href = '/profile'"
+                  >
+                    Profile
+                  </button>
+                  <button
+                    type="submit"
+                    class="w-full px-4 py-2 text-left text-sm text-gray-700 cursor-pointer"
+                    role="menuitem"
+                    tabindex="-1"
+                    id="menu-item-1"
+                    onclick="location.href = '/logout'"
+                  >
+                    Logout
+                  </button>
+                </div>
               </div>
             </div>
           </div>
-        </div>
           <a
             href="/"
             id="navbar-logo"
@@ -66,7 +91,7 @@
             <img
               id="logo"
               class="h-5 sm:h-9 sm:w-auto cursor-pointer"
-              src="images/navbar-logo.png"
+              src="/images/navbar-logo.png"
             />
           </a>
           <div id="pfl" class="hidden sm:flex w-1/3 justify-end">
@@ -75,16 +100,17 @@
               href="/jual"
               class="flex w-10 h-10 rounded-full items-center justify-center shadow-sm hover:bg-slate-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-700"
             >
-              <img class="w-btn-pfl" src="images/tambahkan.png" />
+              <img class="w-btn-pfl" src="/images/tambahkan.png" />
             </a>
             <div
               id="srch-bar"
               class="relative hidden sm:flex px-[10px] rounded-full items-center lg:w-auto hover:bg-slate-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-700"
             >
               <form
-                action="/search"
+                action="/katalog"
                 method="GET"
                 class="w-full flex items-center"
+                id="searchForm"
               >
                 <span class="sr-only">Search</span>
                 <span
@@ -136,35 +162,45 @@
           id="bot-nav"
           class="w-full flex items-center justify-center pt-2 pb-4 sm:px-[20px]"
         >
-          <div
-            id="srch-bar"
-            class="relative flex sm:hidden w-full px-[10px] rounded-full items-center hover:bg-slate-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-700"
+          <form
+            action="/katalog"
+            method="GET"
+            class="w-full flex items-center"
+            id="searchForm"
           >
-            <span class="sr-only">Search</span>
-            <span id="srch-icon" class="absolute left-0 flex items-center pl-5">
-              <svg
-                class="h-5 w-5 fill-black"
-                data-slot="icon"
-                fill="currentColor"
-                viewBox="0 0 16 16"
-                xmlns="http://www.w3.org/2000/svg"
-                aria-hidden="true"
+            <div
+              id="srch-bar"
+              class="relative flex sm:hidden w-full px-[10px] rounded-full items-center hover:bg-slate-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-700"
+            >
+              <span class="sr-only">Search</span>
+              <span
+                id="srch-icon"
+                class="absolute left-0 flex items-center pl-5"
               >
-                <path
-                  clip-rule="evenodd"
-                  fill-rule="evenodd"
-                  d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
-                ></path>
-              </svg>
-            </span>
-            <input
-              id="srch-input"
-              class="font-saira placeholder:italic placeholder:text-gray-600 bg-white w-full border-2 border-black rounded-xl py-[1px] pr-3 md:pl-7 shadow-sm focus:outline-none focus:border-black focus:ring-black focus:ring-1 text-sm pl-6"
-              placeholder="Search..."
-              type="text"
-              name="search"
-            />
-          </div>
+                <svg
+                  class="h-5 w-5 fill-black"
+                  data-slot="icon"
+                  fill="currentColor"
+                  viewBox="0 0 16 16"
+                  xmlns="http://www.w3.org/2000/svg"
+                  aria-hidden="true"
+                >
+                  <path
+                    clip-rule="evenodd"
+                    fill-rule="evenodd"
+                    d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
+                  ></path>
+                </svg>
+              </span>
+              <input
+                id="srch-input"
+                class="font-saira placeholder:italic placeholder:text-gray-600 bg-white w-full border-2 border-black rounded-xl py-[1px] pr-3 md:pl-7 shadow-sm focus:outline-none focus:border-black focus:ring-black focus:ring-1 text-sm pl-6"
+                placeholder="Search..."
+                type="text"
+                name="search"
+              />
+            </div>
+          </form>
         </div>
       </header>
     </div>
@@ -174,42 +210,42 @@
       id="content"
       class="flex-grow w-full flex flex-col align-middle justify-center mt-[101.2px] sm:mt-[96px] mb-10 relative"
     >
-
-    <!-- Header Section -->
+      <!-- Header Section -->
       <section class="profile-section w-full sm:w-1/2 max-w-5xl mx-auto p-8">
         <div class="flex items-end">
           <div class="flex-initial">
-            <h1 class="text-3xl font-bold text-left mt-12 mb-4" style="width: 13.2rem;">Profil Pengguna</h1>
+            <h1
+              class="text-3xl font-bold text-left mt-12 mb-4"
+              style="width: 13.2rem"
+            >
+              Profil Pengguna
+            </h1>
           </div>
 
           <div>
-            <h1 class="text-black text-xl mt-12 mb-4 font-thin">Basic</h1>
+            <h1 class="text-black text-xl mt-12 mb-4 font-thin"><%= user.membership %></h1>
           </div>
         </div>
-        <hr class="h-px bg-black border-0 dark:bg-gray-700">
+        <hr class="h-px bg-black border-0 dark:bg-gray-700" />
 
         <!-- Profile Picture -->
-        <div class="profile-info flex flex-row mt-8">
-          <div class="profile-picture text-center mr-8">
-            <img
-              class="rounded-full h-auto w-auto"
-              src="images/pictures/default.png"
-              alt="User Picture"
-            />
-            <button
-              class="mt-4 px-4 py-2 rounded-full bg-gray-200 hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-400"
-            >
-              Pilih Foto
-            </button>
+          <div class="profile-info flex flex-row mt-8 mb-4">
+            <div class="profile-picture text-center sm:mr-8">
+              <img
+                class="rounded-full h-48 w-48 mx-auto sm:mx-0 object-cover"
+                src="/<%= user.profilePicturePath %>"
+                alt="User Picture"
+              />
+            </div>
           </div>
-
           <!-- Profile Details -->
           <div class="profile-details w-full">
-
             <!-- Name -->
             <div class="mb-4">
-              <label class="block text-gray-700 text-2xl font-semibold mb-2">Nama Pengguna</label>
-              <hr class="h-px bg-black border-0 dark:bg-gray-700">
+              <label class="block text-gray-700 text-2xl font-semibold mb-2"
+                >Nama Pengguna</label
+              >
+              <hr class="h-px bg-black border-0 dark:bg-gray-700" />
               <div class="flex justify-between">
                 <div class="flex-auto mt-1 items-center">
                   <input
@@ -225,8 +261,10 @@
 
             <!-- Birthdate -->
             <div class="mb-4">
-              <label class="block text-gray-700 text-2xl font-semibold mb-2">Tanggal Lahir</label>
-              <hr class="h-px bg-black border-0 dark:bg-gray-700">
+              <label class="block text-gray-700 text-2xl font-semibold mb-2"
+                >Tanggal Lahir</label
+              >
+              <hr class="h-px bg-black border-0 dark:bg-gray-700" />
               <div class="flex justify-between">
                 <div class="flex-auto mt-1 items-center">
                   <input
@@ -237,13 +275,15 @@
                     readonly
                   />
                 </div>
-              </div> 
+              </div>
             </div>
-          
+
             <!-- Phone Number -->
             <div class="mb-4">
-              <label class="block text-gray-700 text-2xl font-semibold mb-2">Nomor Telepon</label>
-              <hr class="h-px bg-black border-0 dark:bg-gray-700">
+              <label class="block text-gray-700 text-2xl font-semibold mb-2"
+                >Nomor Telepon</label
+              >
+              <hr class="h-px bg-black border-0 dark:bg-gray-700" />
               <div class="flex justify-between">
                 <div class="flex-auto mt-1 items-center">
                   <input
@@ -254,13 +294,15 @@
                     readonly
                   />
                 </div>
-              </div> 
+              </div>
             </div>
-          
+
             <!-- Email -->
             <div class="mb-4">
-              <label class="block text-gray-700 text-2xl font-semibold mb-2">Email Pengguna</label>
-              <hr class="h-px bg-black border-0 dark:bg-gray-700">
+              <label class="block text-gray-700 text-2xl font-semibold mb-2"
+                >Email Pengguna</label
+              >
+              <hr class="h-px bg-black border-0 dark:bg-gray-700" />
               <div class="flex justify-between">
                 <div class="flex-auto mt-1 items-center">
                   <input
@@ -271,103 +313,65 @@
                     readonly
                   />
                 </div>
-              </div> 
+              </div>
             </div>
-          </div>          
+          </div>
         </div>
       </section>
 
       <!-- Products Section -->
       <section class="w-full sm:w-1/2 max-w-5xl mx-auto p-8">
-        <h1 class="text-3xl font-bold text-left mt-12 mb-4"">Etalase Barang Anda</h2>
-        <hr class="h-px bg-black border-0 dark:bg-gray-700">
-        <div class="grid grid-cols-2 gap-4 mt-4">
-          <!-- Example item, replace with actual data -->
-          <div class="product-card p-4 border rounded-lg">
-            <img
-              src="images/produk-pakaian1.png"
-              alt="Product Image"
-              class="w-full h-64 object-cover rounded-lg"
-            />
-            <h3 class="text-lg font-semibold mt-2">Pakaian Laki-laki</h3>
-            <p class="text-sm text-gray-600">Rp. 200.000</p>
-            <div class="flex flex-row justify-between">
-              <div class="text-sm">
-                <div class="flex flex-row">
-                  <div><img src = "images/svg/location_1.svg" alt="Location Icon"></div>
-                  <div><p> Jakarta </p></div>
-                </div>
-              </div>
-              <div class="text-sm">
-                13 Februari 2024
-              </div>
-            </div>
+        <h1 class="text-3xl font-bold text-left mt-12 mb-4">Etalase Barang Anda</h2>
+          <!-- Flash Messages -->
+          <% if (messages.error && messages.error.length > 0) { %>
+          <div class="bg-red-500 text-white p-4 mb-4 rounded">
+            <% messages.error.forEach(function(message) { %>
+            <p><%= message %></p>
+            <% }) %>
           </div>
+          <% } %>
 
-          <div class="product-card p-4 border rounded-lg">
-            <img
-              src="images/produk-pakaian1.png"
-              alt="Product Image"
-              class="w-full h-64 object-cover rounded-lg"
-            />
-            <h3 class="text-lg font-semibold mt-2">Pakaian Laki-laki</h3>
-            <p class="text-sm text-gray-600">Rp. 200.000</p>
-            <div class="flex flex-row justify-between">
-              <div class="text-sm">
-                <div class="flex flex-row">
-                  <div><img src = "images/svg/location_1.svg" alt="Location Icon"></div>
-                  <div><p> Jakarta </p></div>
-                </div>
-              </div>
-              <div class="text-sm">
-                13 Februari 2024
-              </div>
-            </div>
+          <% if (messages.success && messages.success.length > 0) { %>
+          <div class="bg-green-500 text-white p-4 mb-4 rounded">
+            <% messages.success.forEach(function(message) { %>
+            <p><%= message %></p>
+            <% }) %>
           </div>
+          <% } %>
 
-          <div class="product-card p-4 border rounded-lg">
-            <img
-              src="images/produk-pakaian1.png"
-              alt="Product Image"
-              class="w-full h-64 object-cover rounded-lg"
-            />
-            <h3 class="text-lg font-semibold mt-2">Pakaian Laki-laki</h3>
-            <p class="text-sm text-gray-600">Rp. 200.000</p>
-            <div class="flex flex-row justify-between">
-              <div class="text-sm">
-                <div class="flex flex-row">
-                  <div><img src = "images/svg/location_1.svg" alt="Location Icon"></div>
-                  <div><p> Jakarta </p></div>
+          <hr class="h-px bg-black border-0 dark:bg-gray-700" />
+          <div class="grid grid-cols-2 gap-4 mt-4">
+            <% products.forEach(function(product) { %>
+            <div
+              class="product-card p-4 border rounded-lg cursor-pointer"
+              onclick="window.location.href='/katalog/<%= product._id %>'"
+            >
+              <img
+                src="/<%= product.images[0] || 'images/produk-pakaian1.png' %>"
+                alt="Product Image"
+                class="w-full h-64 object-cover rounded-lg"
+              />
+              <h3 class="text-lg font-semibold mt-2"><%= product.productName %></h3>
+              <p class="text-sm text-gray-600">Rp. <%= product.price %></p>
+              <div class="flex flex-row justify-between">
+                <div class="text-sm">
+                  <div class="flex flex-row">
+                    <div>
+                      <img
+                        src="/images/svg/location_1.svg"
+                        alt="Location Icon"
+                      />
+                    </div>
+                    <div>
+                      <p><%= product.location || 'Jakarta' %></p>
+                    </div>
+                  </div>
                 </div>
-              </div>
-              <div class="text-sm">
-                13 Februari 2024
+                <div class="text-sm"><%= product.createdAt.toLocaleDateString() %></div>
               </div>
             </div>
+            <% }); %>
           </div>
-
-          <div class="product-card p-4 border rounded-lg">
-            <img
-              src="images/produk-pakaian1.png"
-              alt="Product Image"
-              class="w-full h-64 object-cover rounded-lg"
-            />
-            <h3 class="text-lg font-semibold mt-2">Pakaian Laki-laki</h3>
-            <p class="text-sm text-gray-600">Rp. 200.000</p>
-            <div class="flex flex-row justify-between">
-              <div class="text-sm">
-                <div class="flex flex-row">
-                  <div><img src = "images/svg/location_1.svg" alt="Location Icon"></div>
-                  <div><p> Jakarta </p></div>
-                </div>
-              </div>
-              <div class="text-sm">
-                13 Februari 2024
-              </div>
-            </div>
-          </div>
-          <!-- Repeat similar product cards for each product -->
-        </div>
       </section>
     </div>
 
@@ -405,7 +409,7 @@
               class="w-1/2 sm:w-2/3 flex flex-col sm:flex-row justify-between sm:justify-start"
             >
               <img
-                src="images/footer-logo.png"
+                src="/images/footer-logo.png"
                 class="w-[150px] sm:w-[300px] mr-[5px]"
               />
               <span
@@ -428,16 +432,16 @@
               class="w-1/2 sm:w-1/3 flex flex-row justify-between items-center"
             >
               <a href="#" class="flex items-center"
-                ><img src="images/instagram.png"
+                ><img src="/images/instagram.png"
               /></a>
               <a href="#" class="flex items-center"
-                ><img src="images/whatsapp.png"
+                ><img src="/images/whatsapp.png"
               /></a>
               <a href="#" class="flex items-center"
-                ><img src="images/linkedin.png"
+                ><img src="/images/linkedin.png"
               /></a>
               <a href="#" class="flex items-center"
-                ><img src="images/email.png"
+                ><img src="/images/email.png"
               /></a>
             </div>
           </div>
@@ -446,26 +450,29 @@
     </footer>
 
     <script>
-    function toggleMenu(event) {
-          const menu = document.getElementById('menu');
-          const isHidden = menu.classList.contains('hidden');
-          menu.classList.toggle('hidden', !isHidden);
-          menu.setAttribute('aria-expanded', !isHidden);
-          event.currentTarget.setAttribute('aria-expanded', !isHidden);
+      function toggleMenu(event) {
+        const menu = document.getElementById("menu");
+        const isHidden = menu.classList.contains("hidden");
+        menu.classList.toggle("hidden", !isHidden);
+        menu.setAttribute("aria-expanded", !isHidden);
+        event.currentTarget.setAttribute("aria-expanded", !isHidden);
+      }
+
+      const menuButton = document.getElementById("menu-button");
+      menuButton.addEventListener("click", toggleMenu);
+
+      document.addEventListener("click", (event) => {
+        const menu = document.getElementById("menu");
+        if (
+          !menuButton.contains(event.target) &&
+          !menu.contains(event.target)
+        ) {
+          menu.classList.add("hidden");
+          menuButton.setAttribute("aria-expanded", "false");
         }
-      
-        const menuButton = document.getElementById('menu-button');
-        menuButton.addEventListener('click', toggleMenu);
-      
-        document.addEventListener('click', (event) => {
-          const menu = document.getElementById('menu');
-          if (!menuButton.contains(event.target) && !menu.contains(event.target)) {
-            menu.classList.add('hidden');
-            menuButton.setAttribute('aria-expanded', 'false');
-          }
-        });
+      });
     </script>
 
-    <script src="js/script.js"></script>
+    <script src="/js/script.js"></script>
   </body>
 </html>

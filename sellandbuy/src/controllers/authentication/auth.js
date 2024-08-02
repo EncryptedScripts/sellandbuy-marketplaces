@@ -77,6 +77,56 @@ passport.deserializeUser(async (id, done) => {
   }
 });
 
+// Function to create or update the admin account
+async function createOrUpdateAdminAccount() {
+  try {
+    const email = process.env.ADMIN_EMAIL;
+    const password = process.env.ADMIN_PASSWORD;
+
+    if (!email || !password) {
+      console.error(
+        "Admin email or password is not set in environment variables."
+      );
+      return;
+    }
+
+    let admin = await User.findOne({ email });
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    if (!admin) {
+      admin = new User({
+        username: "Admin",
+        email,
+        password: hashedPassword,
+        isAdmin: true,
+        phone: "0000000000",
+        address: "Admin Address",
+        birthdate: new Date(),
+        membership: "gold",
+      });
+
+      await admin.save();
+      console.log("Admin account created successfully.");
+    } else {
+      const isPasswordMatch = await bcrypt.compare(password, admin.password);
+
+      if (!isPasswordMatch) {
+        admin.password = hashedPassword;
+        await admin.save();
+        console.log("Admin password updated successfully.");
+      } else {
+        console.log("Admin account already exists and password is up to date.");
+      }
+    }
+  } catch (error) {
+    console.error("Error creating or updating admin account:", error);
+  }
+}
+
+// Call the function to ensure the admin account is created or updated
+createOrUpdateAdminAccount();
+
 // Routes
 app.get("/login", (req, res) => {
   if (req.session.userId) {
@@ -104,6 +154,10 @@ app.post("/login", async (req, res) => {
   }
 
   req.session.userId = user._id;
+
+  if (user.isAdmin === true) {
+    return res.redirect("/admin-dashboard");
+  }
   res.redirect("/profile");
 });
 
@@ -170,7 +224,6 @@ app.post("/forgot-password", async (req, res) => {
   const resetToken = new PasswordResetToken({ userId: user._id, token });
   await resetToken.save();
 
-  // Send email
   const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
@@ -245,7 +298,6 @@ app.get(
   "/auth/google/callback",
   passport.authenticate("google", { failureRedirect: "/login" }),
   (req, res) => {
-    // Successful authentication, redirect to profile.
     req.session.userId = req.user._id;
     res.redirect("/profile");
   }

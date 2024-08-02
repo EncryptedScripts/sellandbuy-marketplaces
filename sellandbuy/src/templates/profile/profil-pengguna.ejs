@@ -52,6 +52,15 @@
                 id="menu"
               >
                 <div class="py-1" role="none">
+                  <button
+                    class="block w-full px-4 py-2 text-sm text-left text-gray-700 cursor-pointer"
+                    role="menuitem"
+                    tabindex="-1"
+                    id="menu-item-profile"
+                    onclick="location.href = '/katalog'"
+                  >
+                    Katalog
+                  </button>
                   <button class="block w-full px-4 py-2 text-sm text-left text-gray-700 cursor-pointer" role="menuitem" tabindex="-1" id="menu-item-0" onclick="location.href = '/profile'">Profile</button>
                   <button class="block w-full px-4 py-2 text-left text-sm text-gray-700 cursor-pointer" role="menuitem" tabindex="-1" id="menu-item-0" onclick="location.href = '/membership'">Jadi Member</button>
                   <button type="submit" class="w-full px-4 py-2 text-left text-sm text-gray-700 cursor-pointer" role="menuitem" tabindex="-1" id="menu-item-1" onclick="location.href = '/logout'">Logout</button>
@@ -83,9 +92,10 @@
               class="relative hidden sm:flex px-[10px] rounded-full items-center lg:w-auto hover:bg-slate-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-700"
             >
               <form
-                action="/search"
+                action="/katalog"
                 method="GET"
                 class="w-full flex items-center"
+                id="searchForm"
               >
                 <span class="sr-only">Search</span>
                 <span
@@ -122,35 +132,45 @@
           id="bot-nav"
           class="w-full flex items-center justify-center pt-2 pb-4 sm:px-[20px]"
         >
-          <div
-            id="srch-bar"
-            class="relative flex sm:hidden w-full px-[10px] rounded-full items-center hover:bg-slate-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-700 transition delay-100"
+          <form
+            action="/katalog"
+            method="GET"
+            class="w-full flex items-center"
+            id="searchForm"
           >
-            <span class="sr-only">Search</span>
-            <span id="srch-icon" class="absolute left-0 flex items-center pl-5">
-              <svg
-                class="h-5 w-5 fill-black"
-                data-slot="icon"
-                fill="currentColor"
-                viewBox="0 0 16 16"
-                xmlns="http://www.w3.org/2000/svg"
-                aria-hidden="true"
+            <div
+              id="srch-bar"
+              class="relative flex sm:hidden w-full px-[10px] rounded-full items-center hover:bg-slate-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-700"
+            >
+              <span class="sr-only">Search</span>
+              <span
+                id="srch-icon"
+                class="absolute left-0 flex items-center pl-5"
               >
-                <path
-                  clip-rule="evenodd"
-                  fill-rule="evenodd"
-                  d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
-                ></path>
-              </svg>
-            </span>
-            <input
-              id="srch-input"
-              class="font-saira placeholder:italic placeholder:text-gray-600 bg-white w-full border-2 border-black rounded-xl py-[1px] pr-3 md:pl-7 shadow-sm focus:outline-none focus:border-black focus:ring-black focus:ring-1 text-sm pl-6"
-              placeholder="Search..."
-              type="text"
-              name="search"
-            />
-          </div>
+                <svg
+                  class="h-5 w-5 fill-black"
+                  data-slot="icon"
+                  fill="currentColor"
+                  viewBox="0 0 16 16"
+                  xmlns="http://www.w3.org/2000/svg"
+                  aria-hidden="true"
+                >
+                  <path
+                    clip-rule="evenodd"
+                    fill-rule="evenodd"
+                    d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
+                  ></path>
+                </svg>
+              </span>
+              <input
+                id="srch-input"
+                class="font-saira placeholder:italic placeholder:text-gray-600 bg-white w-full border-2 border-black rounded-xl py-[1px] pr-3 md:pl-7 shadow-sm focus:outline-none focus:border-black focus:ring-black focus:ring-1 text-sm pl-6"
+                placeholder="Search..."
+                type="text"
+                name="search"
+              />
+            </div>
+          </form>
         </div>
       </header>
     </div>
@@ -163,13 +183,28 @@
 
     <!-- Header Section -->
       <section class="profile-section flex flex-col sm:flex-none w-full sm:w-1/2 max-w-5xl mx-auto p-8">
+        <% if (messages.error && messages.error.length > 0) { %>
+          <div class="bg-red-500 text-white p-4 mb-4 rounded">
+            <% messages.error.forEach(function(message) { %>
+              <p><%= message %></p>
+            <% }) %>
+          </div>
+        <% } %>
+        
+        <% if (messages.success && messages.success.length > 0) { %>
+          <div class="bg-green-500 text-white p-4 mb-4 rounded">
+            <% messages.success.forEach(function(message) { %>
+              <p><%= message %></p>
+            <% }) %>
+          </div>
+        <% } %>
         <div class="flex items-end">
           <div class="flex-initial">
             <h1 class="text-3xl font-bold text-left mt-12 mb-4" style="width: 13.2rem;">Profil Pengguna</h1>
           </div>
 
           <div>
-            <h1 class="text-black text-xl mt-12 mb-4 font-thin">Basic</h1>
+            <h1 class="text-black text-xl mt-12 mb-4 font-thin"><%= user.membership %></h1>
           </div>
         </div>
         <hr class="h-px bg-black border-0 dark:bg-gray-700">
@@ -337,7 +372,7 @@
 
       <!-- Products Section -->
       <section class="w-full sm:w-1/2 max-w-5xl mx-auto p-8">
-        <h1 class="text-3xl font-bold text-left mt-12 mb-4"">Etalase Barang Anda</h2>
+        <h1 class="text-3xl font-bold text-left mt-12 mb-4">Etalase Barang Anda</h2>
         <hr class="h-px bg-black border-0 dark:bg-gray-700">
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
           <% products.forEach(product => { %>

@@ -34,6 +34,11 @@ const ProductSchema = new Schema({
     type: String,
     required: true,
   },
+  condition: {
+    type: String,
+    enum: ["Baru", "Bekas"],
+    required: true,
+  },
   description: {
     type: String,
     required: true,

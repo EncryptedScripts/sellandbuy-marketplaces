@@ -20,6 +20,7 @@ const profile = require("../controllers/profile/profile");
 const formJual = require("../controllers/form-jual/jual");
 const membership = require("../controllers/membership/member");
 const katalog = require("../controllers/market/katalog");
+const admin = require("../controllers/admin-dashboard/admin");
 
 app.set("view engine", "ejs");
 app.set("views", viewsPath);
@@ -48,6 +49,7 @@ app.use(profile);
 app.use(formJual);
 app.use(membership);
 app.use(katalog);
+app.use(admin);
 
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);

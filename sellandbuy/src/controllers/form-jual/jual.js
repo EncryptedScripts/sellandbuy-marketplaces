@@ -53,22 +53,6 @@ const upload = multer({
   limits: { fileSize: 10 * 1024 * 1024 },
 });
 
-// app.get("/create-category", async (req, res) => {
-//   try {
-//     const name = "Testing1";
-//     if (!name) {
-//       return res.status(400).send("Category name is required.");
-//     }
-
-//     const newCategory = new Category({ name });
-//     await newCategory.save();
-//     res.status(201).send(`Category "${name}" created successfully.`);
-//   } catch (error) {
-//     console.error("Error creating category:", error);
-//     res.status(500).send("An error occurred while creating the category.");
-//   }
-// });
-
 app.get("/jual", authenticateSession, async (req, res) => {
   try {
     const user = await User.findById(req.session.userId);
@@ -109,6 +93,7 @@ app.post(
         productName: req.body.productName,
         category: req.body.category,
         price: req.body.price,
+        condition: req.body.condition,
         reasonForSelling: req.body.reasonForSelling,
         description: req.body.description,
         location: req.body.location,

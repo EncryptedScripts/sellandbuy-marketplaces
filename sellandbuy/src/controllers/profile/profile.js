@@ -10,7 +10,9 @@ const fs = require("fs");
 const { User } = require("../../database/auth");
 const { Product } = require("../../database/product");
 const { Offer } = require("../../database/offer");
+const { Category } = require("../../database/category");
 const { authenticateSession } = require("../middleware/middleware");
+
 const app = express();
 
 const publicDirectoryPath = path.join(__dirname, "../../../public");
@@ -29,13 +31,13 @@ app.use(
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: true,
-    cookie: { maxAge: 7 * 24 * 60 * 60 * 1000 }, // 1 week
+    cookie: { maxAge: 7 * 24 * 60 * 60 * 1000 },
   })
 );
 
 app.use(flash());
 
-const storage = multer.diskStorage({
+const storagePictures = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, "public/images/pictures");
   },
@@ -44,9 +46,23 @@ const storage = multer.diskStorage({
   },
 });
 
-const upload = multer({
-  storage: storage,
-  limits: { fileSize: 10 * 1024 * 1024 }, // 10MB
+const storageProducts = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "public/images/products");
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + "-" + file.originalname);
+  },
+});
+
+const uploadPictures = multer({
+  storage: storagePictures,
+  limits: { fileSize: 10 * 1024 * 1024 },
+});
+
+const uploadProducts = multer({
+  storage: storageProducts,
+  limits: { fileSize: 10 * 1024 * 1024 },
 });
 
 app.get("/profile", authenticateSession, async (req, res) => {
@@ -56,8 +72,12 @@ app.get("/profile", authenticateSession, async (req, res) => {
       req.flash("error", "User not found");
       return res.redirect("/login");
     }
-    const products = await Product.find({ user: user._id });
-    res.render("profile/profil-pengguna", { user, products });
+    const products = await Product.find({ userId: user._id });
+    res.render("profile/profil-pengguna", {
+      user,
+      products,
+      messages: req.flash(),
+    });
   } catch (error) {
     req.flash("error", "An error occurred");
     res.redirect("/login");
@@ -71,8 +91,12 @@ app.get("/profile/:id", authenticateSession, async (req, res) => {
       req.flash("error", "User not found");
       return res.redirect("/profile");
     }
-    const products = await Product.find({ user: user._id });
-    res.render("profile/profil-pengguna-lain", { user, products });
+    const products = await Product.find({ userId: user._id });
+    res.render("profile/profil-pengguna-lain", {
+      user,
+      products,
+      messages: req.flash(),
+    });
   } catch (error) {
     req.flash("error", "An error occurred");
     res.redirect("/profile");
@@ -81,9 +105,7 @@ app.get("/profile/:id", authenticateSession, async (req, res) => {
 
 app.post("/profile/update", authenticateSession, async (req, res) => {
   try {
-    const user = await User.findByIdAndUpdate(req.session.userId, req.body, {
-      new: true,
-    });
+    await User.findByIdAndUpdate(req.session.userId, req.body, { new: true });
     req.flash("success", "Profile updated successfully");
     res.redirect("/profile");
   } catch (error) {
@@ -95,19 +117,34 @@ app.post("/profile/update", authenticateSession, async (req, res) => {
 app.post(
   "/profile/update-picture",
   authenticateSession,
-  upload.single("profilePicture"),
+  uploadPictures.single("profilePicture"),
   async (req, res) => {
     try {
       const user = await User.findById(req.session.userId);
-      if (user.profilePicturePath !== "images/pictures/default.png") {
-        // remove the old picture if it's not the default
-        fs.unlinkSync(path.join(publicDirectoryPath, user.profilePicturePath));
+      if (!user) {
+        req.flash("error", "User not found");
+        return res.redirect("/profile");
       }
+
+      const oldPicturePath = path.join(
+        publicDirectoryPath,
+        user.profilePicturePath
+      );
+
+      if (
+        user.profilePicturePath &&
+        user.profilePicturePath !== "images/pictures/default.png" &&
+        fs.existsSync(oldPicturePath)
+      ) {
+        fs.unlinkSync(oldPicturePath);
+      }
+
       user.profilePicturePath = path.join("images/pictures", req.file.filename);
       await user.save();
       req.flash("success", "Profile picture updated successfully");
       res.redirect("/profile");
     } catch (error) {
+      console.error(error);
       req.flash("error", "An error occurred");
       res.redirect("/profile");
     }
@@ -121,19 +158,24 @@ app.get("/profile/product/:id", authenticateSession, async (req, res) => {
       req.flash("error", "User not found");
       return res.redirect("/login");
     }
-    const product = await Product.findById(req.params.id);
+    const product = await Product.findById(req.params.id).populate("category");
     if (!product) {
       req.flash("error", "Product not found");
       return res.redirect("/profile");
     }
 
-    if (product.user.toString() !== user._id.toString()) {
+    if (product.userId.toString() !== user._id.toString()) {
       req.flash("error", "You do not have permission to access this product");
       return res.redirect("/profile");
     }
 
-    res.render("profile/item/detail-item", { product });
+    res.render("profile/item/detail-item", {
+      product,
+      user,
+      messages: req.flash(),
+    });
   } catch (error) {
+    console.log(error);
     req.flash("error", "An error occurred");
     res.redirect("/profile");
   }
@@ -146,16 +188,25 @@ app.get("/profile/product/edit/:id", authenticateSession, async (req, res) => {
       req.flash("error", "User not found");
       return res.redirect("/login");
     }
-    const product = await Product.findById(req.params.id);
+
+    const product = await Product.findById(req.params.id).populate("category");
     if (!product) {
       req.flash("error", "Product not found");
       return res.redirect("/profile");
     }
-    if (product.user.toString() !== user._id.toString()) {
+
+    if (product.userId.toString() !== user._id.toString()) {
       req.flash("error", "You do not have permission to access this product");
       return res.redirect("/profile");
     }
-    res.render("profile/item/edit-item", { product });
+
+    const categories = await Category.find();
+
+    res.render("profile/item/edit-item", {
+      product,
+      categories,
+      messages: req.flash(),
+    });
   } catch (error) {
     req.flash("error", "An error occurred");
     res.redirect("/profile");
@@ -165,7 +216,7 @@ app.get("/profile/product/edit/:id", authenticateSession, async (req, res) => {
 app.post(
   "/profile/product/edit/:id",
   authenticateSession,
-  upload.array("productImages", 4),
+  uploadProducts.array("productImages", 4),
   async (req, res) => {
     try {
       const user = await User.findById(req.session.userId);
@@ -178,22 +229,29 @@ app.post(
         req.flash("error", "Product not found");
         return res.redirect("/profile");
       }
-      if (product.user.toString() !== user._id.toString()) {
+      if (product.userId.toString() !== user._id.toString()) {
         req.flash("error", "You do not have permission to access this product");
         return res.redirect("/profile");
       }
 
       if (req.files && req.files.length > 0) {
         product.images.forEach((image) => {
-          if (image !== "public/images/pictures/default.png") {
-            fs.unlinkSync(image);
+          const filePath = path.join(publicDirectoryPath, image);
+          if (
+            fs.existsSync(filePath) &&
+            image !== "images/products/default.png"
+          ) {
+            fs.unlinkSync(filePath);
           }
         });
-        product.images = req.files.map((file) => file.path);
+        product.images = req.files.map((file) =>
+          path.join("images/products", path.basename(file.path))
+        );
       }
 
-      product.productName = req.body.productName;
       product.category = req.body.category;
+      product.condition = req.body.condition;
+      product.productName = req.body.productName;
       product.price = req.body.price;
       product.reasonForSelling = req.body.reasonForSelling;
       product.description = req.body.description;
@@ -202,51 +260,54 @@ app.post(
       req.flash("success", "Product updated successfully");
       res.redirect(`/profile/product/${product._id}`);
     } catch (error) {
+      console.log(error);
       req.flash("error", "An error occurred");
       res.redirect("/profile");
     }
   }
 );
 
-app.get("/profile/daftar-penawaran", authenticateSession, async (req, res) => {
-  try {
-    const user = await User.findById(req.session.userId);
-    if (!user) {
-      req.flash("error", "User not found");
-      return res.redirect("/login");
-    }
-    const products = await Product.find({ user: user._id });
-    const offers = await Offer.find({
-      product: { $in: products.map((p) => p._id) },
-    })
-      .populate("user")
-      .populate("product");
-    res.render("profile/daftar-penawaran", { user, offers });
-  } catch (error) {
-    req.flash("error", "An error occurred");
-    res.redirect("/profile");
-  }
-});
+app.get(
+  "/profile/product/:id/daftar-penawaran",
+  authenticateSession,
+  async (req, res) => {
+    try {
+      const user = await User.findById(req.session.userId);
+      if (!user) {
+        req.flash("error", "User not found");
+        return res.redirect("/login");
+      }
 
-app.post("/product/:id/offer", authenticateSession, async (req, res) => {
-  try {
-    const product = await Product.findById(req.params.id);
-    if (!product) {
-      req.flash("error", "Product not found");
-      return res.redirect("/profile");
+      const product = await Product.findById(req.params.id);
+
+      if (!product) {
+        req.flash("error", "Product not found");
+        return res.redirect("/profile");
+      }
+
+      if (product.userId.toString() !== user._id.toString()) {
+        req.flash("error", "You do not have permission to access this product");
+        return res.redirect("/profile");
+      }
+
+      const offers = await Offer.find({
+        product: product._id,
+      })
+        .populate("user", "username profilePicturePath phone")
+        .populate("product", "productName");
+
+      res.render("profile/item/penawaran", {
+        user,
+        product,
+        offers,
+        messages: req.flash(),
+      });
+    } catch (error) {
+      console.log(error);
+      req.flash("error", "An error occurred");
+      res.redirect("/profile");
     }
-    const newOffer = new Offer({
-      user: req.session.userId,
-      product: product._id,
-      offerPrice: req.body.offerPrice,
-    });
-    await newOffer.save();
-    req.flash("success", "Offer made successfully");
-    res.redirect(`/profile/product/${product._id}`);
-  } catch (error) {
-    req.flash("error", "An error occurred");
-    res.redirect(`/profile/product/${req.params.id}`);
   }
-});
+);
 
 module.exports = app;

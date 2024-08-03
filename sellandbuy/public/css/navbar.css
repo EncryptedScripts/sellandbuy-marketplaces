@@ -1,5 +1,10 @@
 /* A whole damn css file to fix the stupid nav bar in the landing page */
 
+#top-nav {
+    justify-content: space-between;
+}
+
+
 .dropdown-before{
     border: solid 0.5px;
     border-color: rgb(199, 199, 199);

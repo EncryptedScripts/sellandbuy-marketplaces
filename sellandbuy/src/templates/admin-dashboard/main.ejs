@@ -16,14 +16,16 @@
           <div class="relative flex items-center justify-between h-16">
             <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
               <button
+                id="mobile-menu-button"
                 type="button"
-                class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+                class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-900 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-gray-300"
                 aria-controls="mobile-menu"
                 aria-expanded="false"
               >
                 <span class="sr-only">Open main menu</span>
                 <svg
                   class="block h-6 w-6"
+                  id="menu-open-icon"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
@@ -39,6 +41,7 @@
                 </svg>
                 <svg
                   class="hidden h-6 w-6"
+                  id="menu-close-icon"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
@@ -92,7 +95,7 @@
             </div>
           </div>
         </div>
-        <div class="sm:hidden" id="mobile-menu">
+        <div class="sm:hidden" id="mobile-menu" style="display: none;">
           <div class="px-2 pt-2 pb-3 space-y-1">
             <a
               href="/admin-dashboard/products"
@@ -121,7 +124,7 @@
             >
           </div>
         </div>
-      </nav>
+      </nav>            
 
       <div class="py-12">
         <h1 class="text-4xl font-bold text-center text-gray-800">
@@ -132,5 +135,24 @@
         </p>
       </div>
     </div>
+
+
+    <script>
+      document.getElementById('mobile-menu-button').addEventListener('click', function () {
+        var menu = document.getElementById('mobile-menu');
+        var menuOpenIcon = document.getElementById('menu-open-icon');
+        var menuCloseIcon = document.getElementById('menu-close-icon');
+    
+        if (menu.style.display === 'none' || menu.style.display === '') {
+          menu.style.display = 'block';
+          menuOpenIcon.classList.add('hidden');
+          menuCloseIcon.classList.remove('hidden');
+        } else {
+          menu.style.display = 'none';
+          menuOpenIcon.classList.remove('hidden');
+          menuCloseIcon.classList.add('hidden');
+        }
+      });
+    </script>
   </body>
 </html>

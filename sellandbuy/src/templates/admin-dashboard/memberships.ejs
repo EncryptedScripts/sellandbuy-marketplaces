@@ -16,14 +16,16 @@
           <div class="relative flex items-center justify-between h-16">
             <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
               <button
+                id="mobile-menu-button"
                 type="button"
-                class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+                class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-900 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-gray-300"
                 aria-controls="mobile-menu"
                 aria-expanded="false"
               >
                 <span class="sr-only">Open main menu</span>
                 <svg
                   class="block h-6 w-6"
+                  id="menu-open-icon"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
@@ -39,6 +41,7 @@
                 </svg>
                 <svg
                   class="hidden h-6 w-6"
+                  id="menu-close-icon"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
@@ -69,8 +72,7 @@
                   >
                   <a
                     href="/admin-dashboard/memberships"
-                    class="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium"
-                    aria-current="page"
+                    class="text-gray-900 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                     >Memberships</a
                   >
                   <a
@@ -93,7 +95,7 @@
             </div>
           </div>
         </div>
-        <div class="sm:hidden" id="mobile-menu">
+        <div class="sm:hidden" id="mobile-menu" style="display: none;">
           <div class="px-2 pt-2 pb-3 space-y-1">
             <a
               href="/admin-dashboard/products"
@@ -102,8 +104,7 @@
             >
             <a
               href="/admin-dashboard/memberships"
-              class="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium"
-              aria-current="page"
+              class="text-gray-900 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
               >Memberships</a
             >
             <a
@@ -123,9 +124,9 @@
             >
           </div>
         </div>
-      </nav>
+      </nav>     
       <div class="py-4">
-        <h1 class="text-3xl font-bold">Admin Dashboard - Memberships</h1>
+        <h1 class="text-3xl font-bold text-center sm:text-left">Admin Dashboard - Memberships</h1>
         <hr class="my-4" />
         <% if (messages.error && messages.error.length > 0) { %>
         <div class="bg-red-500 text-white p-4 mb-4 rounded">
@@ -140,78 +141,82 @@
           <% }) %>
         </div>
         <% } %>
-        <table class="min-w-full bg-white">
-          <thead>
-            <tr>
-              <th class="w-1/6 py-2">User</th>
-              <th class="w-1/6 py-2">Product Name</th>
-              <th class="w-1/6 py-2">Phone</th>
-              <th class="w-1/6 py-2">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            <% memberships.forEach(function (membership) { %>
-            <tr>
-              <td class="border px-4 py-2">
-                <%= membership.userId.username %>
-              </td>
-              <td class="border px-4 py-2"><%= membership.productName %></td>
-              <td class="border px-4 py-2"><%= membership.nomorTelepon %></td>
-              <td class="border px-4 py-2">
-                <form
-                  action="/admin-dashboard/memberships/approve/<%= membership._id %>"
-                  method="POST"
-                  class="inline"
-                >
-                  <select
-                    name="membershipType"
-                    class="border px-2 py-1 rounded mr-2"
-                    required
+        <div class="overflow-x-auto mx-3">
+          <table class="min-w-full bg-white">
+            <thead>
+              <tr>
+                <th class="w-1/6 py-2">User</th>
+                <th class="w-1/6 py-2">Product Name</th>
+                <th class="w-1/6 py-2">Phone</th>
+                <th class="w-1/6 py-2">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% memberships.forEach(function (membership) { %>
+              <tr>
+                <td class="border px-4 py-2">
+                  <%= membership.userId.username %>
+                </td>
+                <td class="border px-4 py-2"><%= membership.productName %></td>
+                <td class="border px-4 py-2"><%= membership.nomorTelepon %></td>
+                <td class="border px-4 py-2">
+                  <form
+                    action="/admin-dashboard/memberships/approve/<%= membership._id %>"
+                    method="POST"
+                    class="text-center sm:inline"
                   >
-                    <option value="" disabled selected>Choose Type</option>
-                    <option value="bronze">Bronze</option>
-                    <option value="silver">Silver</option>
-                    <option value="gold">Gold</option>
-                  </select>
-                  <!-- <select
-                    name="duration"
-                    class="border px-2 py-1 rounded mr-2"
-                    required
+                    <select
+                      name="membershipType"
+                      class="border px-2 py-1 rounded mr-2"
+                      required
+                    >
+                      <option value="" disabled selected>Choose Type</option>
+                      <option value="bronze">Bronze</option>
+                      <option value="silver">Silver</option>
+                      <option value="gold">Gold</option>
+                    </select>
+                    <!-- <select
+                      name="duration"
+                      class="border px-2 py-1 rounded mr-2"
+                      required
+                    >
+                      <option value="" disabled selected>Choose Duration</option>
+                      <option value="1 month">1 Month</option>
+                      <option value="permanent">Permanent</option>
+                    </select> -->
+                    <button
+                      type="submit"
+                      class="bg-blue-500 text-white px-4 py-2 rounded"
+                    >
+                      Approve
+                    </button>
+                  </form>
+                  <form
+                    action="/admin-dashboard/memberships/delete/<%= membership._id %>"
+                    method="POST"
+                    class="text-center sm:inline"
                   >
-                    <option value="" disabled selected>Choose Duration</option>
-                    <option value="1 month">1 Month</option>
-                    <option value="permanent">Permanent</option>
-                  </select> -->
-                  <button
-                    type="submit"
-                    class="bg-blue-500 text-white px-4 py-2 rounded"
-                  >
-                    Approve
-                  </button>
-                </form>
-                <form
-                  action="/admin-dashboard/memberships/delete/<%= membership._id %>"
-                  method="POST"
-                  class="inline"
-                >
-                  <button
-                    type="submit"
-                    class="bg-red-500 text-white px-4 py-2 rounded"
-                  >
-                    Delete
-                  </button>
-                </form>
-                <button
-                  class="bg-green-500 text-white px-4 py-2 rounded"
-                  onclick="showPaymentProofModal('<%= membership.paymentProof.replace(/\\/g, '/') %>')"
-                >
-                  View Payment Proof
-                </button>
-              </td>
-            </tr>
-            <% }) %>
-          </tbody>
-        </table>
+                    <button
+                      type="submit"
+                      class="bg-red-500 text-white px-4 py-2 rounded"
+                    >
+                      Delete
+                    </button>
+                  </form>
+                  <div class="text-center sm:inline">
+                    <button
+                      class="bg-green-500 text-white px-4 py-2 rounded"
+                      onclick="showPaymentProofModal('<%= membership.paymentProof.replace(/\\/g, '/') %>')"
+                    >
+                      View Payment Proof
+                    </button>
+                  </div>
+                </td>
+              </tr>
+              <% }) %>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
     <div
@@ -245,6 +250,22 @@
         const modal = document.getElementById("paymentProofModal");
         modal.classList.add("hidden");
       }
+
+      document.getElementById('mobile-menu-button').addEventListener('click', function () {
+        var menu = document.getElementById('mobile-menu');
+        var menuOpenIcon = document.getElementById('menu-open-icon');
+        var menuCloseIcon = document.getElementById('menu-close-icon');
+    
+        if (menu.style.display === 'none' || menu.style.display === '') {
+          menu.style.display = 'block';
+          menuOpenIcon.classList.add('hidden');
+          menuCloseIcon.classList.remove('hidden');
+        } else {
+          menu.style.display = 'none';
+          menuOpenIcon.classList.remove('hidden');
+          menuCloseIcon.classList.add('hidden');
+        }
+      });
     </script>
   </body>
 </html>
